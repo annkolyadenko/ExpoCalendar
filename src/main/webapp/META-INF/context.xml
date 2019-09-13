@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/expo_schema"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="32"
+              maxIdle="8" maxWaitMillis="10000"
+              username="root"
+              password="root"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              defaultTransactionIsolation="SERIALIZABLE"
+              url="jdbc:mysql://localhost:3306/expo_schema?useSSL=false"
+    />
+</Context>
