@@ -1,4 +1,4 @@
-package ua.com.expo.model.connection;
+package ua.com.expo.persistence.connection;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import ua.com.expo.files.DataBaseSchema;

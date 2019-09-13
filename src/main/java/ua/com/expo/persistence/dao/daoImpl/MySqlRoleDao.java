@@ -1,7 +1,7 @@
-package ua.com.expo.model.dao.daoImpl;
+package ua.com.expo.persistence.dao.daoImpl;
 
 import ua.com.expo.entity.Role;
-import ua.com.expo.model.dao.interfaces.IRoleDao;
+import ua.com.expo.persistence.dao.interfaces.IRoleDao;
 
 import java.util.List;
 

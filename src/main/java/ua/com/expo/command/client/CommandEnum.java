@@ -7,10 +7,12 @@ import ua.com.expo.command.*;
  */
 public enum CommandEnum {
 
+    BUY_TICKET(new BuyTicketCommand()),
     GET_ALL_THEMES(new GetAllThemesCommand()),
-    GET_ALL_EXPO_BY_THEME_ID(new GetAllExpoCommand()),
+    GET_ALL_EXPO_BY_THEME_ID_AND_DATE(new GetAllExpoCommand()),
     LOGIN(new LoginCommand()),
-    LOGOUT(new LogoutCommand());
+    LOGOUT(new LogoutCommand()),
+    RETURN_TO_HOMEPAGE(new ReturnToHomePageCommand());
 
     private Command command;
 

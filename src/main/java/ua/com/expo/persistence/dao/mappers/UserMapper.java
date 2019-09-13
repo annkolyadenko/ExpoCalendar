@@ -1,4 +1,4 @@
-package ua.com.expo.model.dao.mappers;
+package ua.com.expo.persistence.dao.mappers;
 
 import ua.com.expo.entity.Role;
 import ua.com.expo.entity.User;

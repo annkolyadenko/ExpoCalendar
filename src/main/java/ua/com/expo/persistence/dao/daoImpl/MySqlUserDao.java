@@ -1,10 +1,10 @@
-package ua.com.expo.model.dao.daoImpl;
+package ua.com.expo.persistence.dao.daoImpl;
 
 import ua.com.expo.entity.Role;
 import ua.com.expo.entity.User;
-import ua.com.expo.model.connection.ConnectionPool;
-import ua.com.expo.model.connection.ConnectionPoolManager;
-import ua.com.expo.model.dao.interfaces.IUserDao;
+import ua.com.expo.persistence.connection.ConnectionPool;
+import ua.com.expo.persistence.connection.ConnectionPoolManager;
+import ua.com.expo.persistence.dao.interfaces.IUserDao;
 import ua.com.expo.utils.resource.ConfigurationManager;
 
 import java.io.IOException;

@@ -1,18 +1,15 @@
-package ua.com.expo.model.dao.daoImpl;
+package ua.com.expo.persistence.dao.daoImpl;
 
 import ua.com.expo.entity.Expo;
 import ua.com.expo.entity.Showroom;
 import ua.com.expo.entity.Theme;
-import ua.com.expo.model.connection.ConnectionPoolManager;
-import ua.com.expo.model.dao.interfaces.IExpoDao;
+import ua.com.expo.persistence.connection.ConnectionPoolManager;
+import ua.com.expo.persistence.dao.interfaces.IExpoDao;
 import ua.com.expo.utils.resource.ConfigurationManager;
 import ua.com.expo.utils.time.TimeConverter;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,15 +66,16 @@ public class MySqlExpoDao implements IExpoDao {
     }
 
     @Override
-    public List<Expo> findAllExpoByThemeId(Long id) throws SQLException, IOException, ClassNotFoundException {
+    public List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) throws SQLException, IOException, ClassNotFoundException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Expo> expoList = new ArrayList<>();
         try {
             cw = ConnectionPoolManager.getSimpleConnection();
-            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findAllByThemeId");
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findAllByThemeIdAndDate");
             ps = cw.prepareStatement(sql);
             ps.setLong(1, id);
+            ps.setTimestamp(2, time);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Expo expo = new Expo();

@@ -1,4 +1,4 @@
-package ua.com.expo.model.connection;
+package ua.com.expo.persistence.connection;
 
 import ua.com.expo.exceptions.RuntimeSqlException;
 import ua.com.expo.files.DataBaseSchema;

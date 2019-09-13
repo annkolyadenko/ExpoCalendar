@@ -16,7 +16,6 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ctg:if-user role="empty">
             <ul class="navbar-nav mr-auto">
@@ -72,7 +71,8 @@
         <ctg:if-user role="visitor">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<c:url value="/controller?command=RETURN_TO_HOMEPAGE" />">Home<span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_THEMES" />">Calendar</a>

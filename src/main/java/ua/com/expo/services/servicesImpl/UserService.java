@@ -4,9 +4,9 @@ import org.modelmapper.ModelMapper;
 import ua.com.expo.dto.RoleDto;
 import ua.com.expo.dto.UserDto;
 import ua.com.expo.entity.User;
-import ua.com.expo.model.dao.interfaces.IUserDao;
-import ua.com.expo.model.dao.factory.AbstractDaoFactory;
-import ua.com.expo.model.dao.factory.MySqlDaoFactory;
+import ua.com.expo.persistence.dao.interfaces.IUserDao;
+import ua.com.expo.persistence.dao.factory.AbstractDaoFactory;
+import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
 import ua.com.expo.services.IUserService;
 
 import java.sql.SQLException;

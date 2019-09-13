@@ -1,4 +1,4 @@
-package ua.com.expo.model.connection;
+package ua.com.expo.persistence.connection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

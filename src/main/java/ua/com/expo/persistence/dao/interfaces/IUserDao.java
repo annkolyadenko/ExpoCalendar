@@ -1,4 +1,4 @@
-package ua.com.expo.model.dao.interfaces;
+package ua.com.expo.persistence.dao.interfaces;
 
 import ua.com.expo.entity.User;
 

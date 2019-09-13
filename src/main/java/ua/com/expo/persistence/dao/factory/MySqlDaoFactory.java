@@ -1,9 +1,7 @@
-package ua.com.expo.model.dao.factory;
+package ua.com.expo.persistence.dao.factory;
 
-import ua.com.expo.model.dao.daoImpl.*;
-import ua.com.expo.model.dao.interfaces.*;
-
-import java.io.Serializable;
+import ua.com.expo.persistence.dao.daoImpl.*;
+import ua.com.expo.persistence.dao.interfaces.*;
 
 /**
  * Initialization-on-demand holder idiom Singleton

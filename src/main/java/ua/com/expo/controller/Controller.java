@@ -2,16 +2,14 @@ package ua.com.expo.controller;
 
 import ua.com.expo.command.Command;
 import ua.com.expo.command.client.CommandEnum;
-import ua.com.expo.model.connection.ConnectionPool;
+import ua.com.expo.persistence.connection.ConnectionPool;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
 
 public class Controller extends HttpServlet {

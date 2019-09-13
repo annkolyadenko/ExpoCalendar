@@ -1,7 +1,7 @@
 package ua.com.expo.transaction_draft;
 
-import ua.com.expo.model.connection.ConnectionPool;
-import ua.com.expo.model.connection.ConnectionWrapper;
+import ua.com.expo.persistence.connection.ConnectionPool;
+import ua.com.expo.persistence.connection.ConnectionWrapper;
 import ua.com.expo.exceptions.RuntimeSqlException;
 
 import java.sql.Connection;

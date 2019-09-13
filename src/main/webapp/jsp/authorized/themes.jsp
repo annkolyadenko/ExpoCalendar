@@ -20,13 +20,18 @@
         <form action="${pageContext.request.contextPath}/controller" method="GET">
             <label>
                 <select class="custom-select custom-select-lg mb-3" name="themeId">
-                    <option selected>Please select desirable theme</option>
-                    <c:forEach var="i" begin="0" end="${size-1}" varStatus="loop">
-                        <option value="${requestScope.themes[i].id}">${requestScope.themes[i].name}</option>
+                    <label>Select your theme</label>
+                    <c:forEach var="theme" items="${themes}" varStatus="loop">
+                        <option value="${theme.id}">${theme.name}</option>
                     </c:forEach>
                 </select>
-                <input type="hidden" name="command" value="GET_ALL_EXPO_BY_THEME_ID">
-                <button type="submit" class="btn btn-secondary">Submit
+                <p>
+                    <label for="date">Select your date</label>
+                    <input class="form-control" type="date" id="date" name="chosenDate" value=""
+                           min="${today}">
+                </p>
+                <input type="hidden" name="command" value="GET_ALL_EXPO_BY_THEME_ID_AND_DATE">
+                <button type="submit" class="btn btn-dark">Submit
                 </button>
             </label>
         </form>

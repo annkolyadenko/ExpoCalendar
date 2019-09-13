@@ -17,38 +17,44 @@
 <body>
 <div class="container" style="height: 100%">
     <h1>Calendar</h1>
-    <table class="table table-sm table-hover table-bordered text-center">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-
+    <h5>Chosen date: ${chosenDate}</h5>
+    <c:if test="${requestScope.expos!=null}">
+        <table class="table table-sm table-hover table-bordered text-center">
+            <thead>
+            <tr>
+                <th scope="col">Showroom</th>
+                <th scope="col">Price</th>
+                <th scope="col">Info</th>
+                <th scope="col">Purchase ticket</th>
+            </tr>
+            </thead>
+            <tbody>
+            <form action="controller" method="POST">
+                <c:forEach var="expo" items="${expos}" varStatus="loop">
+                    <tr>
+                        <td>${expo.showroom.name}</td>
+                        <td>${expo.price}</td>
+                        <td>${expo.info}</td>
+                        <td>
+                            <input type="hidden" name="command" value="BUY_TICKET">
+                            <button class="btn btn-dark" type="submit">
+                                Purchase
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </form>
+            </tbody>
+        </table>
+    </c:if>
+    <c:if test="${requestScope.expos==null}">
+        <h5>No expos found for date:${chosenDate}</h5>
+    </c:if>
+    <form action="${pageContext.request.contextPath}/controller" method="GET">
+        <input type="hidden" name="command" value="GET_ALL_THEMES">
+        <button class="btn btn-dark" type="submit">New search
+        </button>
+    </form>
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>

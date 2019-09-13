@@ -1,4 +1,4 @@
-package ua.com.expo.model.dao.mappers;
+package ua.com.expo.persistence.dao.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

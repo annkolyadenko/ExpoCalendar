@@ -2,13 +2,14 @@ package ua.com.expo.services.servicesImpl;
 
 import org.modelmapper.ModelMapper;
 import ua.com.expo.entity.Expo;
-import ua.com.expo.model.dao.factory.AbstractDaoFactory;
-import ua.com.expo.model.dao.factory.MySqlDaoFactory;
-import ua.com.expo.model.dao.interfaces.IExpoDao;
+import ua.com.expo.persistence.dao.factory.AbstractDaoFactory;
+import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
+import ua.com.expo.persistence.dao.interfaces.IExpoDao;
 import ua.com.expo.services.IExpoService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ExpoService implements IExpoService {
@@ -18,8 +19,8 @@ public class ExpoService implements IExpoService {
     private IExpoDao dao;
 
     @Override
-    public List<Expo> findAllExpoByThemeId(Long id) throws SQLException, IOException, ClassNotFoundException {
+    public List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) throws SQLException, IOException, ClassNotFoundException {
         dao = factory.getExpoDao();
-        return dao.findAllExpoByThemeId(id);
+        return dao.findAllExpoByThemeIdAndDate(id, time);
     }
 }

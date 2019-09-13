@@ -1,10 +1,9 @@
-package ua.com.expo.model.dao.daoImpl;
+package ua.com.expo.persistence.dao.daoImpl;
 
 import ua.com.expo.entity.Theme;
-import ua.com.expo.entity.User;
-import ua.com.expo.model.connection.ConnectionPool;
-import ua.com.expo.model.connection.ConnectionPoolManager;
-import ua.com.expo.model.dao.interfaces.IThemeDao;
+import ua.com.expo.persistence.connection.ConnectionPool;
+import ua.com.expo.persistence.connection.ConnectionPoolManager;
+import ua.com.expo.persistence.dao.interfaces.IThemeDao;
 import ua.com.expo.utils.resource.ConfigurationManager;
 
 import java.io.IOException;
