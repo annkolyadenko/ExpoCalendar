@@ -15,7 +15,7 @@ public interface InterfaceDao<K, T extends Entity> {
 
     List<T> findAll() throws SQLException;
 
-    T findEntityById(K id);
+    T findEntityById(K id) throws SQLException, IOException, ClassNotFoundException;
 
     boolean delete(K id);
 

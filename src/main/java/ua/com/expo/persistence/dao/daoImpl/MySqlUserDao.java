@@ -5,7 +5,7 @@ import ua.com.expo.entity.User;
 import ua.com.expo.persistence.connection.ConnectionPool;
 import ua.com.expo.persistence.connection.ConnectionPoolManager;
 import ua.com.expo.persistence.dao.interfaces.IUserDao;
-import ua.com.expo.utils.resource.ConfigurationManager;
+import ua.com.expo.util.resource.ConfigurationManager;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -36,10 +36,36 @@ public class MySqlUserDao implements IUserDao {
     }
 
     @Override
-    public User findEntityById(Long id) {
-        return null;
-    }
+    public User findEntityById(Long id) throws SQLException {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        User user = new User();
+        try {
+            /*ConnectionWrapper cw = transactionUtil.getConnection();*/
 
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.findById");
+            /*ps = cw.createPreparedStatement(sql);*/
+            ps = cw.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user.setId(rs.getLong("user_id"));
+                user.setRole(new Role(rs.getLong("role_id"), rs.getString("role_name")));
+                user.setName(rs.getString("user_name"));
+                user.setEmail(rs.getString("user_email"));
+                user.setPassword(rs.getBytes("user_password"));
+                user.setSalt(rs.getBytes("user_salt"));
+            }
+            return user;
+            /*if (rs.next()) {
+                return UserMapper.getInstance().extractFromResultSet(rs);
+            }*/
+        } finally {
+            //TODO
+            close(ps);
+            close(rs);
+        }
+    }
 
     @Override
     public boolean delete(Long id) {
@@ -113,11 +139,9 @@ public class MySqlUserDao implements IUserDao {
                 return UserMapper.getInstance().extractFromResultSet(rs);
             }*/
         } finally {
-            //TO DO!!!
+            //TODO
             close(ps);
             close(rs);
         }
-        //TO DO!!!
-        /*return null;*/
     }
 }

@@ -1,10 +1,9 @@
 package ua.com.expo.persistence.dao.daoImpl;
 
 import ua.com.expo.entity.Showroom;
-import ua.com.expo.entity.Theme;
 import ua.com.expo.persistence.connection.ConnectionPoolManager;
 import ua.com.expo.persistence.dao.interfaces.IShowroomDao;
-import ua.com.expo.utils.resource.ConfigurationManager;
+import ua.com.expo.util.resource.ConfigurationManager;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

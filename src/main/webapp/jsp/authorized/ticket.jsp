@@ -15,6 +15,7 @@
 </head>
 <body>
 <div class="container" style="height: 100%">
+    <h1>Tickets</h1>
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>

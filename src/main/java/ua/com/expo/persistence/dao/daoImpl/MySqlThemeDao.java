@@ -4,7 +4,7 @@ import ua.com.expo.entity.Theme;
 import ua.com.expo.persistence.connection.ConnectionPool;
 import ua.com.expo.persistence.connection.ConnectionPoolManager;
 import ua.com.expo.persistence.dao.interfaces.IThemeDao;
-import ua.com.expo.utils.resource.ConfigurationManager;
+import ua.com.expo.util.resource.ConfigurationManager;
 
 import java.io.IOException;
 import java.sql.Connection;

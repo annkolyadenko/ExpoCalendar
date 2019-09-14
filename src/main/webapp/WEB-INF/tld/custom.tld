@@ -8,7 +8,7 @@
     <uri>customtags</uri>
     <tag>
         <name>if-user</name>
-        <tag-class>ua.com.expo.tags.UserRoleTag</tag-class>
+        <tag-class>ua.com.expo.tag.UserRoleTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>role</name>

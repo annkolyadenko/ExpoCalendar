@@ -46,5 +46,13 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
         return new MySqlShowroomDao();
     }
 
+    @Override
+    public IPaymentDao getPaymentDao() {
+        return new MySqlPaymentDao();
+    }
 
+    @Override
+    public ITicketDao getTicketDao() {
+        return new MySqlTicketDao();
+    }
 }

@@ -4,25 +4,25 @@ public enum ShowroomEnum {
 
     BLACK {
         @Override
-        public String getName() {
+        public String toString() {
             return "black";
         }
     }, WHITE {
         @Override
-        public String getName() {
+        public String toString() {
             return "white";
         }
     }, RED {
         @Override
-        public String getName() {
+        public String toString() {
             return "red";
         }
     }, TURQUOISE {
         @Override
-        public String getName() {
+        public String toString() {
             return "turquoise";
         }
     };
 
-    public abstract String getName();
+    public abstract String toString();
 }

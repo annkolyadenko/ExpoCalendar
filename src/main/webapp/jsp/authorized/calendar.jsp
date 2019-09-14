@@ -25,6 +25,8 @@
                 <th scope="col">Showroom</th>
                 <th scope="col">Price</th>
                 <th scope="col">Info</th>
+                <th scope="col">Available tickets</th>
+                <th scope="col">Tickets amount</th>
                 <th scope="col">Purchase ticket</th>
             </tr>
             </thead>
@@ -35,11 +37,26 @@
                         <td>${expo.showroom.name}</td>
                         <td>${expo.price}</td>
                         <td>${expo.info}</td>
+                        <td>TODO!!!</td>
                         <td>
-                            <input type="hidden" name="command" value="BUY_TICKET">
+                            <div class="form-group">
+                                <label>
+                                    <select class="form-control" name="ticketsAmount">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="hidden" name="expoId" value="${expo.id}">
+                            <input type="hidden" name="command" value="PURCHASE_TICKET">
                             <button class="btn btn-dark" type="submit">
                                 Purchase
                             </button>
+
                         </td>
                     </tr>
                 </c:forEach>

@@ -1,8 +1,8 @@
 package ua.com.expo.persistence.connection;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import ua.com.expo.files.DataBaseSchema;
-import ua.com.expo.utils.resource.ConfigurationManager;
+import ua.com.expo.file.DataBaseSchema;
+import ua.com.expo.util.resource.ConfigurationManager;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

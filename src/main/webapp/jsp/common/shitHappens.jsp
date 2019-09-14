@@ -14,8 +14,10 @@
     <c:import url="/jsp/components/navbar.jsp"></c:import>
 </head>
 <body>
-<h1>Сталася халепа!</h1>
-<a href="<c:url value="/index.jsp" />">Повернутися</a>
+<div class="container" style="height: 100%">
+    <h1>Сталася халепа!</h1>
+    <a href="<c:url value="/index.jsp" />">Повернутися</a>
+</div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>
 </html>

@@ -30,7 +30,7 @@
     </jsp-config>
     <filter>
         <filter-name>CharsetFilter</filter-name>
-        <filter-class>ua.com.expo.filters.CharsetFilter</filter-class>
+        <filter-class>ua.com.expo.filter.CharsetFilter</filter-class>
         <init-param>
             <param-name>requestEncoding</param-name>
             <param-value>UTF-8</param-value>

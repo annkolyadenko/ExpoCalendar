@@ -14,4 +14,8 @@ public abstract class AbstractDaoFactory {
     public abstract IExpoDao getExpoDao();
 
     public abstract IShowroomDao getShowroomDao();
+
+    public abstract IPaymentDao getPaymentDao();
+
+    public abstract ITicketDao getTicketDao();
 }

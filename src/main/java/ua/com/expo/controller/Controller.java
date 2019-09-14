@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 
@@ -29,7 +31,7 @@ public class Controller extends HttpServlet {
         try {
             String s = req.getParameter("command");
             path = handler(req, resp);
-        } catch (SQLException | ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException | IOException | InvalidKeySpecException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         req.getRequestDispatcher(path).forward(req, resp);
@@ -57,7 +59,7 @@ public class Controller extends HttpServlet {
         try {
             path = handler(req, resp);
             resp.sendRedirect(req.getContextPath() + path);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | InvalidKeySpecException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
     }
@@ -69,7 +71,7 @@ public class Controller extends HttpServlet {
     }
 
     //TO DO!!!
-    private String handler(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ClassNotFoundException {
+    private String handler(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
         String action = req.getParameter("command");
         Command command = CommandEnum.valueOf(action.toUpperCase()).getCommand();
         return command.execute(req, resp);

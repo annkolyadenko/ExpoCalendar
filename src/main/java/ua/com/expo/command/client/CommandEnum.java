@@ -1,13 +1,14 @@
 package ua.com.expo.command.client;
 
 import ua.com.expo.command.*;
+import ua.com.expo.command.commandImpl.*;
 
 /**
  * Enum Singleton Command factory
  */
 public enum CommandEnum {
 
-    BUY_TICKET(new BuyTicketCommand()),
+    PURCHASE_TICKET(new PurchaseTicketCommand()),
     GET_ALL_THEMES(new GetAllThemesCommand()),
     GET_ALL_EXPO_BY_THEME_ID_AND_DATE(new GetAllExpoCommand()),
     LOGIN(new LoginCommand()),

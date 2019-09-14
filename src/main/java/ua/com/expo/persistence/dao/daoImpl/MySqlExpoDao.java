@@ -5,8 +5,8 @@ import ua.com.expo.entity.Showroom;
 import ua.com.expo.entity.Theme;
 import ua.com.expo.persistence.connection.ConnectionPoolManager;
 import ua.com.expo.persistence.dao.interfaces.IExpoDao;
-import ua.com.expo.utils.resource.ConfigurationManager;
-import ua.com.expo.utils.time.TimeConverter;
+import ua.com.expo.util.resource.ConfigurationManager;
+import ua.com.expo.util.time.TimeConverter;
 
 import java.io.IOException;
 import java.sql.*;
@@ -24,8 +24,30 @@ public class MySqlExpoDao implements IExpoDao {
     }
 
     @Override
-    public Expo findEntityById(Long id) {
-        return null;
+    public Expo findEntityById(Long id) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Expo expo = new Expo();
+        try {
+            cw = ConnectionPoolManager.getSimpleConnection();
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findById");
+            ps = cw.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                expo.setId(rs.getLong("expo_id"));
+                expo.setShowroom(new Showroom(rs.getLong("showroom_id"), rs.getString("showroom_name"), rs.getString("showroom_info")));
+                expo.setTheme(new Theme(rs.getLong("theme_id"), rs.getString("theme_name")));
+                expo.setDate(timeConverter.convertToEntity(rs.getTimestamp("expo_date")));
+                expo.setPrice(rs.getBigDecimal("expo_ticket_price"));
+                expo.setTicketsAmount(rs.getLong("expo_total_tickets_amount"));
+                expo.setInfo(rs.getString("expo_info"));
+            }
+            return expo;
+        } finally {
+            close(ps);
+            close(rs);
+        }
     }
 
     @Override
