@@ -2,7 +2,8 @@ package ua.com.expo.util.validator;
 
 import ua.com.expo.entity.User;
 import ua.com.expo.file.Regex;
-import ua.com.expo.util.security.PasswordHashing;
+import ua.com.expo.util.security.IPasswordHashing;
+import ua.com.expo.util.security.PasswordHashingImpl;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -10,13 +11,14 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//TO DO!!!
-//All static utils rewrite!!!
-public class Valid {
+//TODO!!! All static utils rewrite!!!
+
+public class Validator {
+    private static IPasswordHashing hashing = new PasswordHashingImpl();
 
     public static boolean passwordValidator(String password, User user) throws InvalidKeySpecException, NoSuchAlgorithmException {
         byte[] salt = user.getSalt();
-        return Arrays.equals(PasswordHashing.hashGenerator(password, salt), (user.getPassword()));
+        return Arrays.equals(hashing.hashGenerator(password, salt), (user.getPassword()));
     }
 
     public static boolean requestParametersValidator(String email, String password) {

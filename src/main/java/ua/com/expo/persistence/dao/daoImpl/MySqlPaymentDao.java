@@ -81,7 +81,6 @@ public class MySqlPaymentDao implements IPaymentDao {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            System.out.println(cw);
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("payment.create");
             ps = cw.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             //STUB!!!!

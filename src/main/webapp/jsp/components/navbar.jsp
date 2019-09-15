@@ -23,36 +23,53 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarLogin" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Sign in
                     </a>
                     <form class="dropdown-menu p-1" action="controller" method="POST">
-                        <input type="hidden" name="command" value="login"/>
+                        <input type="hidden" name="command" value="LOGIN"/>
                         <div class="form-group">
-                            <label for="dropdownFormEmail">Email address</label>
-                            <input type="email" class="form-control" id="dropdownFormEmail" name="email"
+                            <label for="loginFormEmail">Email address</label>
+                            <input type="email" class="form-control" id="loginFormEmail" name="email"
                                    placeholder="email@example.com">
                         </div>
                         <div class="form-group">
-                            <label for="dropdownFormPassword">Password</label>
-                            <input type="password" class="form-control" id="dropdownFormPassword" name="password"
+                            <label for="loginFormPassword">Password</label>
+                            <input type="password" class="form-control" id="loginFormPassword" name="password"
                                    placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    Remember me
-                                </label>
-                            </div>
                         </div>
                         <button type="submit" class="btn btn-dark">Sign in</button>
                     </form>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign up</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Sign up
+                    </a>
+                    <form class="dropdown-menu p-1" action="controller" method="POST">
+                        <input type="hidden" name="command" value="REGISTRATION"/>
+                        <div class="form-group">
+                            <label for="signUpName">Your name</label>
+                            <input type="text" class="form-control" id="signUpName" name="userName"
+                                   placeholder="your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpFormEmail">Email address</label>
+                            <input type="email" class="form-control" id="signUpFormEmail" name="email"
+                                   placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpFormPassword">Password</label>
+                            <input type="password" class="form-control" id="signUpFormPassword" name="password"
+                                   placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-dark">Sign up</button>
+                    </form>
+                </li>
+                <a class="nav-link" href="#">Something else</a>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">

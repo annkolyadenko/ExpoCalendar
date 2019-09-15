@@ -10,13 +10,13 @@ import ua.com.expo.util.resource.ConfigurationManager;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MySqlUserDao implements IUserDao {
+
+    private static final Logger LOGGER = Logger.getLogger(MySqlUserDao.class.getName());
 
     /*private final TransactionUtil transactionUtil = Mapper.getTransactionUtil();*/
     Connection cw;
@@ -29,7 +29,7 @@ public class MySqlUserDao implements IUserDao {
         }
     }
 
-    //TO DO!!!
+    //TODO
     @Override
     public List<User> findAll() throws SQLException {
         return null;
@@ -89,23 +89,50 @@ public class MySqlUserDao implements IUserDao {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            System.out.println(cw);
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.create");
-            ps = cw.prepareStatement(sql);
             //STUB!!!!
             ps.setLong(1, 2);
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmail());
             ps.setBytes(4, user.getPassword());
             ps.setBytes(5, user.getSalt());
-            //TO DO!!! Нужно передавать char []
-            /*ps.setBytes(4, PasswordHashing.hashGenerator(entity.getPassword()));*/
             ps.executeUpdate();
             flag = true;
         } finally {
             close(ps);
         }
         return flag;
+    }
+
+    public Long createUserWithGeneratedKey(User user) throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Long primaryKey = null;
+        boolean flag = false;
+        try {
+            /*Connection cw = ConnectionPool.getInstance().getConnection();*/
+            Connection cw = null;
+            try {
+                cw = ConnectionPoolManager.getSimpleConnection();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.create");
+            ps = cw.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            //STUB!!!!
+            ps.setLong(1, 2);
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getEmail());
+            ps.setBytes(4, user.getPassword());
+            ps.setBytes(5, user.getSalt());
+            ps.execute();
+            rs = ps.getGeneratedKeys();
+            rs.next();
+            primaryKey = rs.getLong(1);
+        } finally {
+            close(ps);
+        }
+        return primaryKey;
     }
 
     @Override
@@ -125,19 +152,23 @@ public class MySqlUserDao implements IUserDao {
             /*ps = cw.createPreparedStatement(sql);*/
             ps = cw.prepareStatement(sql);
             ps.setString(1, email);
+            System.out.println("Executed");
             rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 user.setId(rs.getLong("user_id"));
+                System.out.println(user.getId());
                 user.setRole(new Role(rs.getLong("role_id"), rs.getString("role_name")));
                 user.setName(rs.getString("user_name"));
                 user.setEmail(rs.getString("user_email"));
                 user.setPassword(rs.getBytes("user_password"));
                 user.setSalt(rs.getBytes("user_salt"));
+            } else {
+                user = null;
             }
-            return user;
             /*if (rs.next()) {
                 return UserMapper.getInstance().extractFromResultSet(rs);
             }*/
+            return user;
         } finally {
             //TODO
             close(ps);

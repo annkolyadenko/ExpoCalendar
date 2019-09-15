@@ -11,9 +11,10 @@ public enum CommandEnum {
     PURCHASE_TICKET(new PurchaseTicketCommand()),
     GET_ALL_THEMES(new GetAllThemesCommand()),
     GET_ALL_EXPO_BY_THEME_ID_AND_DATE(new GetAllExpoCommand()),
-    LOGIN(new LoginCommand()),
-    LOGOUT(new LogoutCommand()),
-    RETURN_TO_HOMEPAGE(new ReturnToHomePageCommand());
+    LOGIN(new SignInCommand()),
+    LOGOUT(new SignOutCommand()),
+    RETURN_TO_HOMEPAGE(new ReturnToHomePageCommand()),
+    REGISTRATION(new SignUpCommand());
 
     private Command command;
 

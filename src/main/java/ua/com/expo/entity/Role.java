@@ -41,6 +41,10 @@ public class Role extends Entity {
             this.type = type;
             return this;
         }
+
+        public Role build() {
+            return new Role(this);
+        }
     }
 
     @Override

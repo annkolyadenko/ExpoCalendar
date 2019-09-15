@@ -16,6 +16,10 @@
 <body>
 <div class="container" style="height: 100%">
     <h1>Tickets</h1>
+    Thank you for purchasing tickets!
+    Expo info: ${ticket.expo.info}
+    Time: ${ticket.time}
+    Ticket amount: ${ticket.amount}
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>
