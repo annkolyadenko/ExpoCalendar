@@ -2,7 +2,6 @@ package ua.com.expo.controller;
 
 import ua.com.expo.command.Command;
 import ua.com.expo.command.client.CommandEnum;
-import ua.com.expo.persistence.connection.ConnectionPool;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,18 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 
 public class Controller extends HttpServlet {
 
+    private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
+
     @Override
     public void init() throws ServletException {
-        //how to put init parameters
-        //TO DO!!!
-        /*LOGGER.info("Test");*/
-        ConnectionPool.getInstance();
+        //TODO!!! how to put init parameters
+        LOGGER.info("Servlet successfully initialized");
+        /*ConnectionPool.getInstance();*/
     }
 
     //TO DO!!!
@@ -52,7 +53,7 @@ public class Controller extends HttpServlet {
      * if a web user refreshes before the initial submission has completed because of server lag,
      * a duplicate POST request will occur in certain user agents.
      */
-    //TO DO!!!
+    //TODO!!!
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String path = null;
@@ -66,15 +67,14 @@ public class Controller extends HttpServlet {
 
     @Override
     public void destroy() {
-        //TO DO!!!
+        //TODO!!!
         super.destroy();
     }
 
-    //TO DO!!!
+    //TODO!!!
     private String handler(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
         String action = req.getParameter("command");
         Command command = CommandEnum.valueOf(action.toUpperCase()).getCommand();
         return command.execute(req, resp);
     }
-
 }

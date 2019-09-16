@@ -14,28 +14,30 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
-public class PurchaseTicketCommand implements Command {
+public class GetAllTicketsCommand implements Command {
 
+    private static final Logger LOGGER = Logger.getLogger(GetAllTicketsCommand.class.getName());
     private TicketService ticketService;
-    private static final Logger LOGGER = Logger.getLogger(PurchaseTicketCommand.class.getName());
 
-    public PurchaseTicketCommand() {
+    public GetAllTicketsCommand() {
         this.ticketService = ServiceFactory.getTicketService();
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
-        LOGGER.info("PurchaseTicketCommand started execute");
         HttpSession session = request.getSession();
+        //TODO CHECK IF EXIST
         User user = (User) session.getAttribute("authorizedUser");
         Long userId = user.getId();
-        Long expoId = Long.valueOf(request.getParameter("expoId"));
-        Long ticketsAmount = Long.valueOf(request.getParameter("ticketsAmount"));
-        Ticket ticket = ticketService.purchaseTicket(userId, expoId, ticketsAmount);
-        request.setAttribute("ticket", ticket);
-        LOGGER.info("ticket purchased");
-        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.ticket");
+        List<Ticket> tickets = ticketService.findAllTicketsByUserId(userId);
+        if (!tickets.isEmpty()) {
+            request.setAttribute("tickets", tickets);
+            return ConfigurationManager.PATH_MANAGER.getProperty("path.page.tickets");
+        }
+        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
     }
 }

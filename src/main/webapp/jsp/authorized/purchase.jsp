@@ -9,17 +9,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Ticket</title>
+    <title>Purchase</title>
     <c:import url="/jsp/components/dependencies.jsp"></c:import>
     <c:import url="/jsp/components/navbar.jsp"></c:import>
 </head>
 <body>
 <div class="container" style="height: 100%">
-    <h1>Tickets</h1>
+    <h1>Purchase</h1>
     Thank you for purchasing tickets!
-    Expo info: ${ticket.expo.info}
-    Time: ${ticket.time}
-    Ticket amount: ${ticket.amount}
+    Expo info: ${requestScope.ticket}
+    Time: ${requestScope.ticket}
+    Ticket amount: ${requestScope.ticket}
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>

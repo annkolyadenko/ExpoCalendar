@@ -40,7 +40,6 @@ public class MySqlExpoDao implements IExpoDao {
                 expo.setTheme(new Theme(rs.getLong("theme_id"), rs.getString("theme_name")));
                 expo.setDate(timeConverter.convertToEntity(rs.getTimestamp("expo_date")));
                 expo.setPrice(rs.getBigDecimal("expo_ticket_price"));
-                expo.setTicketsAmount(rs.getLong("expo_total_tickets_amount"));
                 expo.setInfo(rs.getString("expo_info"));
             }
             return expo;
@@ -72,7 +71,6 @@ public class MySqlExpoDao implements IExpoDao {
             ps.setLong(2, expo.getTheme().getId());
             ps.setTimestamp(3, timeConverter.convertToDatabase(expo.getDate()));
             ps.setBigDecimal(4, expo.getPrice());
-            ps.setLong(5, expo.getTicketsAmount());
             ps.setString(6, expo.getInfo());
             ps.executeUpdate();
             flag = true;
@@ -106,7 +104,6 @@ public class MySqlExpoDao implements IExpoDao {
                 expo.setTheme(new Theme(rs.getLong("theme_id"), rs.getString("theme_name")));
                 expo.setDate(timeConverter.convertToEntity(rs.getTimestamp("expo_date")));
                 expo.setPrice(rs.getBigDecimal("expo_ticket_price"));
-                expo.setTicketsAmount(rs.getLong("expo_total_tickets_amount"));
                 expo.setInfo(rs.getString("expo_info"));
                 expoList.add(expo);
             }

@@ -25,7 +25,6 @@
                 <th scope="col">Showroom</th>
                 <th scope="col">Price</th>
                 <th scope="col">Info</th>
-                <th scope="col">Available tickets</th>
                 <th scope="col">Tickets amount</th>
                 <th scope="col">Purchase ticket</th>
             </tr>
@@ -37,7 +36,6 @@
                         <td>${expo.showroom.name}</td>
                         <td>${expo.price}</td>
                         <td>${expo.info}</td>
-                        <td>TODO!!!</td>
                         <td>
                             <div class="form-group">
                                 <label>

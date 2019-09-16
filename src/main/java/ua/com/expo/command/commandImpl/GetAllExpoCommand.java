@@ -30,6 +30,7 @@ public class GetAllExpoCommand implements Command {
         String chosenDate = request.getParameter("chosenDate");
         List<Expo> list = expoService.findAllExpoByThemeIdAndDate(themeId, timeConverter.convertStringToDatabase(chosenDate));
         if (Objects.nonNull(list) && !list.isEmpty()) {
+
             request.setAttribute("expos", list);
             request.setAttribute("chosenDate", chosenDate);
             return ConfigurationManager.PATH_MANAGER.getProperty("path.page.calendar");

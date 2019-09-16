@@ -2,7 +2,6 @@ package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
 import ua.com.expo.entity.User;
-import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
 import ua.com.expo.service.factory.ServiceFactory;
 import ua.com.expo.service.serviceImpl.UserService;
 import ua.com.expo.util.resource.ConfigurationManager;

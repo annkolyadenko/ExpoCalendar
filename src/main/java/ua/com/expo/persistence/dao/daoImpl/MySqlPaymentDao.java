@@ -30,8 +30,30 @@ public class MySqlPaymentDao implements IPaymentDao {
     }
 
     @Override
-    public Payment findEntityById(Long id) {
-        return null;
+    public Payment findEntityById(Long id) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Payment payment = new Payment();
+        try {
+            /*ConnectionWrapper cw = transactionUtil.getConnection();*/
+            cw = ConnectionPoolManager.getSimpleConnection();
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("payment.findById");
+            ps = cw.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                payment.setId(rs.getLong("payment_id"));
+                payment.setValue(rs.getBigDecimal("payment_value"));
+            }
+            return payment;
+            /*if (rs.next()) {
+                return UserMapper.getInstance().extractFromResultSet(rs);
+            }*/
+        } finally {
+            //TODO
+            close(ps);
+            close(rs);
+        }
     }
 
     @Override
@@ -60,8 +82,6 @@ public class MySqlPaymentDao implements IPaymentDao {
             ps = cw.prepareStatement(sql);
             //STUB!!!!
             ps.setBigDecimal(1, payment.getValue());
-            ps.setString(2, payment.getType());
-            ps.setString(3, payment.getStatus());
             ps.executeUpdate();
             flag = true;
         } finally {
@@ -85,8 +105,6 @@ public class MySqlPaymentDao implements IPaymentDao {
             ps = cw.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             //STUB!!!!
             ps.setBigDecimal(1, payment.getValue());
-            ps.setString(2, payment.getType());
-            ps.setString(3, payment.getStatus());
             ps.execute();
             rs = ps.getGeneratedKeys();
             rs.next();

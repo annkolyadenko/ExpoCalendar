@@ -30,6 +30,7 @@ public class SignInCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        LOGGER.info("Log in command started executing");
         //TODO
         if (Validator.requestParametersValidator(email, password)) {
             //TODO Optional

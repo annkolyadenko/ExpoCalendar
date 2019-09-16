@@ -95,7 +95,7 @@
                     <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_THEMES" />">Calendar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My tickets</a>
+                    <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_TICKETS_BY_USER_ID" />">My tickets</a>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">

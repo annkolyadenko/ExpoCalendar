@@ -12,18 +12,16 @@ public class Expo extends Entity {
     //TO DO!
     /*this.expoTicketPrice.setScale(3, RoundingMode.HALF_UP);*/
     private BigDecimal price;
-    private Long ticketsAmount;
     private String info;
 
     public Expo() {
     }
 
-    public Expo(Showroom showroom, Theme theme, Instant date, BigDecimal price, Long ticketsAmount, String info) {
+    public Expo(Showroom showroom, Theme theme, Instant date, BigDecimal price, String info) {
         this.showroom = showroom;
         this.theme = theme;
         this.date = date;
         this.price = price;
-        this.ticketsAmount = ticketsAmount;
         this.info = info;
     }
 
@@ -33,7 +31,6 @@ public class Expo extends Entity {
         this.theme = builder.theme;
         this.date = builder.date;
         this.price = builder.price;
-        this.ticketsAmount = builder.ticketsAmount;
         this.info = builder.info;
     }
 
@@ -69,14 +66,6 @@ public class Expo extends Entity {
         this.price = price;
     }
 
-    public Long getTicketsAmount() {
-        return ticketsAmount;
-    }
-
-    public void setTicketsAmount(Long ticketsAmount) {
-        this.ticketsAmount = ticketsAmount;
-    }
-
     public String getInfo() {
         return info;
     }
@@ -93,7 +82,6 @@ public class Expo extends Entity {
         //TO DO!
         /*this.expoTicketPrice.setScale(3, RoundingMode.HALF_UP);*/
         private BigDecimal price;
-        private Long ticketsAmount;
         private String info;
 
         public Builder id(Long id) {
@@ -121,11 +109,6 @@ public class Expo extends Entity {
             return this;
         }
 
-        public Builder ticketsAmount(Long ticketsAmount) {
-            this.ticketsAmount = ticketsAmount;
-            return this;
-        }
-
         public Builder info(String info) {
             this.info = info;
             return this;
@@ -147,8 +130,6 @@ public class Expo extends Entity {
         if (!Objects.equals(theme, expo.theme)) return false;
         if (!Objects.equals(date, expo.date)) return false;
         if (!Objects.equals(price, expo.price)) return false;
-        if (!Objects.equals(ticketsAmount, expo.ticketsAmount))
-            return false;
         return Objects.equals(info, expo.info);
     }
 
@@ -159,7 +140,6 @@ public class Expo extends Entity {
         result = 31 * result + (theme != null ? theme.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (ticketsAmount != null ? ticketsAmount.hashCode() : 0);
         result = 31 * result + (info != null ? info.hashCode() : 0);
         return result;
     }
@@ -178,7 +158,6 @@ public class Expo extends Entity {
         sb.append(", theme: " + theme);
         sb.append(", date: " + date);
         sb.append(", price: " + price);
-        sb.append(", ticketsAmount: " + ticketsAmount);
         sb.append(", info: " + info);
         return sb.toString();
     }

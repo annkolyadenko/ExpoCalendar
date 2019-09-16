@@ -5,24 +5,18 @@ import java.util.Objects;
 
 public class Payment extends Entity {
     private BigDecimal value;
-    private String type;
-    private String status;
 
     public Payment() {
     }
 
-    public Payment(Long id, BigDecimal value, String type, String status) {
+    public Payment(Long id, BigDecimal value) {
         super(id);
         this.value = value;
-        this.type = type;
-        this.status = status;
     }
 
     public Payment(Builder builder) {
         super(builder.id);
         this.value = builder.value;
-        this.type = builder.type;
-        this.status = builder.status;
     }
 
     public BigDecimal getValue() {
@@ -33,27 +27,9 @@ public class Payment extends Entity {
         this.value = value;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public static class Builder {
         private Long id;
         private BigDecimal value;
-        private String type;
-        private String status;
 
 
         public Builder id(Long id) {
@@ -63,16 +39,6 @@ public class Payment extends Entity {
 
         public Builder value(BigDecimal value) {
             this.value = value;
-            return this;
-        }
-
-        public Builder type(String type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder status(String status) {
-            this.status = status;
             return this;
         }
 
@@ -88,17 +54,13 @@ public class Payment extends Entity {
 
         Payment payment = (Payment) o;
 
-        if (!Objects.equals(value, payment.value)) return false;
-        if (!Objects.equals(type, payment.type)) return false;
-        return Objects.equals(status, payment.status);
+        return Objects.equals(value, payment.value);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (value != null ? value.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 
@@ -106,9 +68,6 @@ public class Payment extends Entity {
     @Override
     public String toString() {
         return "Payment{" +
-                "value=" + value +
-                ", type='" + type + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+                "value=" + value + '}';
     }
 }
