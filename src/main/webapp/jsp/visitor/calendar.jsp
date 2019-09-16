@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: Hp
@@ -7,12 +5,13 @@
   Time: 14:46
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Calendar</title>
     <c:import url="/jsp/components/dependencies.jsp"></c:import>
     <c:import url="/jsp/components/navbar.jsp"></c:import>
-
 </head>
 <body>
 <div class="container" style="height: 100%">
@@ -61,9 +60,6 @@
             </form>
             </tbody>
         </table>
-    </c:if>
-    <c:if test="${requestScope.expos==null}">
-        <h5>No expos found for date:${chosenDate}</h5>
     </c:if>
     <form action="${pageContext.request.contextPath}/controller" method="GET">
         <input type="hidden" name="command" value="GET_ALL_THEMES">

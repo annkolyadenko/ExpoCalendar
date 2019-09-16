@@ -113,4 +113,32 @@ public class MySqlExpoDao implements IExpoDao {
             close(rs);
         }
     }
+
+    @Override
+    public List<Expo> findAllExpoByShowroomId(Long id) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Expo> expoList = new ArrayList<>();
+        try {
+            cw = ConnectionPoolManager.getSimpleConnection();
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findAllExpoByShowroomId");
+            ps = cw.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Expo expo = new Expo();
+                expo.setId(rs.getLong("expo_id"));
+                expo.setShowroom(new Showroom(rs.getLong("showroom_id"), rs.getString("showroom_name"), rs.getString("showroom_info")));
+                expo.setTheme(new Theme(rs.getLong("theme_id"), rs.getString("theme_name")));
+                expo.setDate(timeConverter.convertToEntity(rs.getTimestamp("expo_date")));
+                expo.setPrice(rs.getBigDecimal("expo_ticket_price"));
+                expo.setInfo(rs.getString("expo_info"));
+                expoList.add(expo);
+            }
+            return expoList;
+        } finally {
+            close(ps);
+            close(rs);
+        }
+    }
 }

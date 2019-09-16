@@ -95,7 +95,8 @@
                     <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_THEMES" />">Calendar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_TICKETS_BY_USER_ID" />">My tickets</a>
+                    <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_TICKETS_BY_USER_ID" />">My
+                        tickets</a>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
@@ -123,13 +124,13 @@
                     <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Statistics</a>
+                    <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_SHOWROOM" />">Statistics</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Create expo</a>
+                    <a class="nav-link" href="#">Edit expo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Create theme</a>
+                    <a class="nav-link" href="#">Edit theme</a>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">

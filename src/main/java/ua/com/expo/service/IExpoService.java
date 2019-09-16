@@ -10,4 +10,6 @@ import java.util.List;
 public interface IExpoService {
 
     List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) throws SQLException, IOException, ClassNotFoundException;
+
+    List<Expo> findAllExpoByShowroomId(Long id) throws SQLException, IOException, ClassNotFoundException;
 }

@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public class GetAllExpoCommand implements Command {
+public class GetAllExpoByThemeCommand implements Command {
     private ExpoService expoService;
     private static final Logger LOGGER = Logger.getLogger(GetAllThemesCommand.class.getName());
     private TimeConverter timeConverter = new TimeConverter();
 
-    public GetAllExpoCommand() {
+    public GetAllExpoByThemeCommand() {
         this.expoService = ServiceFactory.getExpoService();
     }
 

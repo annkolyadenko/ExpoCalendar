@@ -27,12 +27,15 @@ public class MySqlShowroomDao implements IShowroomDao {
         ResultSet rs = null;
         String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("showroom.findAll");
         ps = cw.prepareStatement(sql);
+        System.out.println(ps);
         rs = ps.executeQuery();
+        System.out.println(rs);
         while (rs.next()) {
             Showroom showroom = new Showroom();
             showroom.setId(rs.getLong("showroom_id"));
             showroom.setName(rs.getString("showroom_name"));
             showroom.setInfo(rs.getString("showroom_info"));
+            System.out.println(list.size() + "Check");
             list.add(showroom);
         }
         return list;

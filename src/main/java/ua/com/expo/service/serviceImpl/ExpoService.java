@@ -28,5 +28,9 @@ public class ExpoService implements IExpoService {
         return expoDao.findAllExpoByThemeIdAndDate(id, time);
     }
 
-
+    @Override
+    public List<Expo> findAllExpoByShowroomId(Long id) throws SQLException, IOException, ClassNotFoundException {
+        expoDao = factory.getExpoDao();
+        return expoDao.findAllExpoByShowroomId(id);
+    }
 }

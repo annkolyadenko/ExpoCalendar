@@ -36,6 +36,6 @@ public class PurchaseTicketCommand implements Command {
         Ticket ticket = ticketService.purchaseTicket(userId, expoId, ticketsAmount);
         request.setAttribute("ticket", ticket);
         LOGGER.info("ticket purchased");
-        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.ticket");
+        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.purchase");
     }
 }
