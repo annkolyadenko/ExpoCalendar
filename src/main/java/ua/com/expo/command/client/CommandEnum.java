@@ -7,8 +7,8 @@ import ua.com.expo.command.commandImpl.*;
  * Enum Singleton Command factory
  */
 public enum CommandEnum {
-
-    PURCHASE_TICKET(new PurchaseTicketCommand()),
+    ADD_NEW_THEME(new AddNewThemeCommand()),
+    ADD_NEW_EXPO(new AddNewExpoCommand()),
     GET_ALL_THEMES(new GetAllThemesCommand()),
     GET_ALL_EXPO_BY_THEME_ID_AND_DATE(new GetAllExpoByThemeCommand()),
     GET_ALL_TICKETS_BY_USER_ID(new GetAllTicketsCommand()),
@@ -16,9 +16,10 @@ public enum CommandEnum {
     GET_ALL_EXPO_BY_SHOWROOM_ID(new GetAllExpoByShowroomCommand()),
     LOGIN(new SignInCommand()),
     LOGOUT(new SignOutCommand()),
-    SUM_ALL_TICKETS_BY_EXPO_ID(new SumAllTicketsCommand()),
+    PURCHASE_TICKET(new PurchaseTicketCommand()),
     RETURN_TO_HOMEPAGE(new ReturnToHomePageCommand()),
-    REGISTRATION(new SignUpCommand());
+    REGISTRATION(new SignUpCommand()),
+    SUM_ALL_TICKETS_BY_EXPO_ID(new SumAllTicketsCommand());
 
     private Command command;
 

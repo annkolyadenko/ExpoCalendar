@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Temporal: connection solving problem!
  */
@@ -36,7 +37,7 @@ public class MySqlThemeDao implements IThemeDao {
         String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("theme.findAll");
         ps = cw.prepareStatement(sql);
         rs = ps.executeQuery();
-        while(rs.next()) {
+        while (rs.next()) {
             Theme theme = new Theme();
             theme.setId(rs.getLong("theme_id"));
             theme.setName(rs.getString("theme_name"));

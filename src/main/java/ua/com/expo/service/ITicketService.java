@@ -13,7 +13,7 @@ public interface ITicketService {
 
     Ticket purchaseTicket(Long userId, Long expoId, Long ticketsAmount) throws NoSuchAlgorithmException, SQLException, ClassNotFoundException, InvalidKeySpecException, IOException;
 
-    Long sumPurchasedTicketsByExpoId(List<Expo> expos);
+    Long sumPurchasedTicketsByExpoId(Long expoId) throws SQLException, IOException, ClassNotFoundException;
 
     List<Ticket> findAllTicketsByUserId(Long userId) throws SQLException, IOException, ClassNotFoundException;
 }

@@ -12,11 +12,14 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MySqlExpoDao implements IExpoDao {
 
     Connection cw;
     private TimeConverter timeConverter = new TimeConverter();
+    private static final Logger LOGGER = Logger.getLogger(MySqlExpoDao.class.getName());
 
     @Override
     public List<Expo> findAll() throws SQLException {
@@ -121,11 +124,12 @@ public class MySqlExpoDao implements IExpoDao {
         List<Expo> expoList = new ArrayList<>();
         try {
             cw = ConnectionPoolManager.getSimpleConnection();
-            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findAllExpoByShowroomId");
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findAllByShowroomId");
             ps = cw.prepareStatement(sql);
             ps.setLong(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
+                LOGGER.log(Level.FINEST, "Inside findAllExpoByShowroomId");
                 Expo expo = new Expo();
                 expo.setId(rs.getLong("expo_id"));
                 expo.setShowroom(new Showroom(rs.getLong("showroom_id"), rs.getString("showroom_name"), rs.getString("showroom_info")));

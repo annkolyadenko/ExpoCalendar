@@ -127,10 +127,10 @@
                     <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_SHOWROOM" />">Statistics</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Edit expo</a>
+                    <a class="nav-link" href="<c:url value="/controller?command=ADD_NEW_EXPO" />">New expo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Edit theme</a>
+                    <a class="nav-link" href="<c:url value="/controller?command=ADD_NEW_THEME" />">New theme</a>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
@@ -142,6 +142,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Слава Україні</a>
                         <a class="dropdown-item" href="#">Glory to Ukraine</a>
+                        <a class="dropdown-item" href="#">Слава Украине</a>
                     </div>
                 </li>
                 <li class="nav-item">

@@ -31,8 +31,8 @@ public class GetAllExpoByShowroomCommand implements Command {
         Long showroomId = Long.valueOf(request.getParameter("showroomId"));
         List<Expo> expos = expoService.findAllExpoByShowroomId(showroomId);
         if (Objects.nonNull(expos) && !expos.isEmpty()) {
-            request.setAttribute("showrooms", expos);
-            return ConfigurationManager.PATH_MANAGER.getProperty("path.page.showrooms");
+            request.setAttribute("expos", expos);
+            return ConfigurationManager.PATH_MANAGER.getProperty("path.page.expos");
         }
         //STUB!!!
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.shitHappens");

@@ -24,18 +24,17 @@
                 <th scope="col">Showroom</th>
                 <th scope="col">Price</th>
                 <th scope="col">Info</th>
-                <th scope="col">Tickets amount</th>
-                <th scope="col">Purchase ticket</th>
+                <th scope="col">Purchase</th>
             </tr>
             </thead>
             <tbody>
-            <form action="controller" method="POST">
-                <c:forEach var="expo" items="${expos}" varStatus="loop">
-                    <tr>
-                        <td>${expo.showroom.name}</td>
-                        <td>${expo.price}</td>
-                        <td>${expo.info}</td>
-                        <td>
+            <c:forEach var="expo" items="${expos}" varStatus="loop">
+                <tr>
+                    <td>${expo.showroom.name}</td>
+                    <td>${expo.price}</td>
+                    <td>${expo.info}</td>
+                    <td>
+                        <form action="controller" method="POST">
                             <div class="form-group">
                                 <label>
                                     <select class="form-control" name="ticketsAmount">
@@ -46,18 +45,15 @@
                                     </select>
                                 </label>
                             </div>
-                        </td>
-                        <td>
                             <input type="hidden" name="expoId" value="${expo.id}">
                             <input type="hidden" name="command" value="PURCHASE_TICKET">
                             <button class="btn btn-dark" type="submit">
                                 Purchase
                             </button>
-
-                        </td>
-                    </tr>
-                </c:forEach>
-            </form>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </c:if>

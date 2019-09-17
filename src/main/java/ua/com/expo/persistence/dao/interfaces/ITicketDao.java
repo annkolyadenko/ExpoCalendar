@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface ITicketDao extends InterfaceDao<Long, Ticket> {
 
-    Map<Long, Long> sumPurchasedTicketsByExpoId(Long expoId);
+    Long sumPurchasedTicketsByExpoId(Long expoId) throws SQLException, IOException, ClassNotFoundException;
 
     List<Ticket> findAllTicketsByUserId(Long id) throws SQLException, IOException, ClassNotFoundException;
 

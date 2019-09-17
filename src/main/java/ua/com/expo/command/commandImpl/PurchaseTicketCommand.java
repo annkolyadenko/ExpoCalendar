@@ -32,8 +32,10 @@ public class PurchaseTicketCommand implements Command {
         User user = (User) session.getAttribute("authorizedUser");
         Long userId = user.getId();
         Long expoId = Long.valueOf(request.getParameter("expoId"));
+        LOGGER.info("Expo id: " + expoId);
         Long ticketsAmount = Long.valueOf(request.getParameter("ticketsAmount"));
         Ticket ticket = ticketService.purchaseTicket(userId, expoId, ticketsAmount);
+        LOGGER.info(ticket.toString());
         request.setAttribute("ticket", ticket);
         LOGGER.info("ticket purchased");
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.purchase");

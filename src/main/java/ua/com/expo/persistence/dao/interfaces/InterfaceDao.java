@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public interface InterfaceDao<K, T extends Entity> {
 
-    List<T> findAll() throws SQLException;
+    List<T> findAll() throws SQLException, IOException, ClassNotFoundException;
 
     T findEntityById(K id) throws SQLException, IOException, ClassNotFoundException;
 

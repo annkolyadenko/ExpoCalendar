@@ -61,10 +61,10 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public Long sumPurchasedTicketsByExpoId(List<Expo> expos) {
+    public Long sumPurchasedTicketsByExpoId(Long expoId) throws SQLException, IOException, ClassNotFoundException {
         //TODO REWRITE TO ONE INITIALIZATION
         ticketDao = factory.getTicketDao();
-        return null;
+        return ticketDao.sumPurchasedTicketsByExpoId(expoId);
     }
 
     @Override

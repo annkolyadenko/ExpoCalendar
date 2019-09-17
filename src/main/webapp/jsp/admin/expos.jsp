@@ -25,28 +25,28 @@
                 <th scope="col">Date</th>
                 <th scope="col">Expo info</th>
                 <th scope="col">Ticket price</th>
+                <th scope="col">Stats</th>
             </tr>
             </thead>
             <tbody>
-            <form action="controller" method="POST">
-                <c:forEach var="expo" items="${expos}" varStatus="loop">
-                    <tr>
-                        <td>${expo.showroom.name}</td>
-                        <td>${expo.theme}</td>
-                        <td>${expo.date}</td>
-                        <td>${expo.price}</td>
-                        <td>${expo.info}</td>
-                        <td>
+            <c:forEach var="expo" items="${expos}" varStatus="loop">
+                <tr>
+                    <td>${expo.showroom.name}</td>
+                    <td>${expo.theme}</td>
+                    <td>${expo.date}</td>
+                    <td>${expo.info}</td>
+                    <td>${expo.price}</td>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/controller" method="GET" name="expoId">
                             <input type="hidden" name="expoId" value="${expo.id}">
-                            <input type="hidden" name="command" value="PURCHASE_TICKET">
+                            <input type="hidden" name="command" value="SUM_ALL_TICKETS_BY_EXPO_ID">
                             <button class="btn btn-dark" type="submit">
-                                Purchase
+                                Check
                             </button>
-
-                        </td>
-                    </tr>
-                </c:forEach>
-            </form>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </c:if>

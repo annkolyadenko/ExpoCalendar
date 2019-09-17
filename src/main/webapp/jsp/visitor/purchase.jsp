@@ -17,9 +17,8 @@
 <div class="container" style="height: 100%">
     <h1>Purchase</h1>
     Thank you for purchasing tickets!
-    Expo info: ${requestScope.ticket}
-    Time: ${requestScope.ticket}
-    Ticket amount: ${requestScope.ticket}
+    TODO!!! Ticket doesn't display
+    ${ticket.expo}
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>

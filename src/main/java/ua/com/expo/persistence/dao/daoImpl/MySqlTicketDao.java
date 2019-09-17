@@ -80,8 +80,23 @@ public class MySqlTicketDao implements ITicketDao {
 
 
     @Override
-    public Map<Long, Long> sumPurchasedTicketsByExpoId(Long expoId) {
-        return null;
+    public Long sumPurchasedTicketsByExpoId(Long expoId) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Long result = null;
+        try {
+            cw = ConnectionPoolManager.getSimpleConnection();
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.sumPurchasedTicketsByExpoId");
+            ps = cw.prepareStatement(sql);
+            ps.setLong(1, expoId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getLong("ticket_sum");
+            }
+        } finally {
+            close(rs);
+        }
+        return result;
     }
 
     @Override
@@ -135,7 +150,6 @@ public class MySqlTicketDao implements ITicketDao {
 
         } finally {
             close(ps);
-            close(rs);
         }
     }
 }
