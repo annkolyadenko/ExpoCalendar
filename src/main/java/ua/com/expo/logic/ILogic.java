@@ -1,7 +1,11 @@
 package ua.com.expo.logic;
 
+import ua.com.expo.entity.Theme;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface ILogic {
-    public BigDecimal totalValue(BigDecimal value, Long ticketAmount);
+    BigDecimal totalValue(BigDecimal value, Long ticketAmount);
+    boolean ifExist(String theme, List<Theme> themes);
 }

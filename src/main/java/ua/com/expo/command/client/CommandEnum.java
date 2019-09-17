@@ -9,6 +9,8 @@ import ua.com.expo.command.commandImpl.*;
 public enum CommandEnum {
     ADD_NEW_THEME(new AddNewThemeCommand()),
     ADD_NEW_EXPO(new AddNewExpoCommand()),
+    APPROVE_NEW_THEME(new ApproveNewThemeCommand()),
+    APPROVE_NEW_EXPO(new ApproveNewExpoCommand()),
     GET_ALL_THEMES(new GetAllThemesCommand()),
     GET_ALL_EXPO_BY_THEME_ID_AND_DATE(new GetAllExpoByThemeCommand()),
     GET_ALL_TICKETS_BY_USER_ID(new GetAllTicketsCommand()),

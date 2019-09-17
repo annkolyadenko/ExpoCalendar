@@ -16,6 +16,7 @@
 <body>
 <div class="container" style="height: 100%">
     <h1>Expos</h1>
+    <br>
     <c:if test="${requestScope.expos!=null}">
         <table class="table table-sm table-hover table-bordered text-center">
             <thead>
@@ -49,6 +50,9 @@
             </c:forEach>
             </tbody>
         </table>
+    </c:if>
+    <c:if test="${requestScope.amount!=null}">
+        <h4>Total amount: ${requestScope.amount}</h4>
     </c:if>
 </div>
 </body>

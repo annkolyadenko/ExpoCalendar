@@ -1,5 +1,7 @@
 package ua.com.expo.controller;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import ua.com.expo.command.Command;
 import ua.com.expo.command.client.CommandEnum;
 
@@ -11,12 +13,12 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
-import java.util.logging.Logger;
+import java.util.Enumeration;
 
 
 public class Controller extends HttpServlet {
 
-    private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(Controller.class.getName());
 
     @Override
     public void init() throws ServletException {

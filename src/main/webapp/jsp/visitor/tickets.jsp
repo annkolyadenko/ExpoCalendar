@@ -16,6 +16,7 @@
 <body>
 <div class="container" style="height: 100%">
     <h1>Purchase</h1>
+    <br>
     <c:if test="${requestScope.tickets!=null}">
         <table class="table table-sm table-hover table-bordered text-center">
             <thead>

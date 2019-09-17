@@ -38,7 +38,7 @@ public class SignUpCommand implements Command {
                 if (Objects.nonNull(user)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("authorizedUser", user);
-                    return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
+                    return ConfigurationManager.PATH_MANAGER.getProperty("path.page.approveTheme");
                 }
             }
         }
