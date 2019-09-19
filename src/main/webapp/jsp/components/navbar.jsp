@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="<c:url value="/jsp/common/shitHappens.jsp" />"><img
+    <a class="navbar-brand" href="#"><img
             src="<c:url value="/resources/images/navbar.jpeg" />"
             width="140" height="100" alt="fibonacci drawing"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -69,6 +69,7 @@
                         <button type="submit" class="btn btn-dark">Sign up</button>
                     </form>
                 </li>
+                <li>
                 <a class="nav-link" href="#">Something else</a>
                 </li>
             </ul>
@@ -79,9 +80,9 @@
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Слава Україні</a>
-                        <a class="dropdown-item" href="#">Glory to Ukraine</a>
-                        <a class="dropdown-item" href="#">Слава Украине</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian" />">Слава Україні</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=English" />">Glory to Ukraine</a>
+                        <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
             </ul>
@@ -107,9 +108,9 @@
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Слава Україні</a>
-                        <a class="dropdown-item" href="#">Glory to Ukraine</a>
-                        <a class="dropdown-item" href="#">Слава Украине</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian" />">Слава Україні</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=English" />">Glory to Ukraine</a>
+                        <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -123,7 +124,8 @@
         <ctg:if-user role="administrator">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<c:url value="/controller?command=RETURN_TO_HOMEPAGE" />">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<c:url value="/controller?command=RETURN_TO_HOMEPAGE" />">Home<span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_SHOWROOM" />">Statistics</a>
@@ -148,9 +150,9 @@
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Слава Україні</a>
-                        <a class="dropdown-item" href="#">Glory to Ukraine</a>
-                        <a class="dropdown-item" href="#">Слава Украине</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian" />">Слава Україні</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=English" />">Glory to Ukraine</a>
+                        <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
                 <li class="nav-item">

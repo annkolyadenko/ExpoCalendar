@@ -1,5 +1,7 @@
 package ua.com.expo.command.commandImpl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.com.expo.command.Command;
 import ua.com.expo.entity.Showroom;
 import ua.com.expo.service.factory.ServiceFactory;
@@ -14,12 +16,11 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class GetAllShowroomCommand implements Command {
 
     private ShowroomService showroomService;
-    private static final Logger LOGGER = Logger.getLogger(GetAllShowroomCommand.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(GetAllShowroomCommand.class.getName());
 
     public GetAllShowroomCommand() {
         this.showroomService = ServiceFactory.getShowroomService();
@@ -28,8 +29,8 @@ public class GetAllShowroomCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
         List<Showroom> showrooms = showroomService.findAllShowroom();
-        System.out.println(showrooms.size());
-        if (Objects.nonNull(showrooms) && !showrooms.isEmpty()) {
+        LOGGER.debug(showrooms.size());
+        if (!showrooms.isEmpty()) {
             request.setAttribute("showrooms", showrooms);
             return ConfigurationManager.PATH_MANAGER.getProperty("path.page.showrooms");
         }

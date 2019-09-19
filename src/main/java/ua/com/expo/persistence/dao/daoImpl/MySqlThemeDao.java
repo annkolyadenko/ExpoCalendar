@@ -47,10 +47,31 @@ public class MySqlThemeDao implements IThemeDao {
     }
 
     @Override
-    public Theme findEntityById(Long id) {
+    public Theme findEntityById(Long id) throws SQLException, IOException, ClassNotFoundException {
+        ResultSet rs = null;
         PreparedStatement ps = null;
-        ResultSet resultSet = null;
-        return null;
+        Theme theme = new Theme();
+        try {
+            /*ConnectionWrapper cw = transactionUtil.getConnection();*/
+
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("theme.findById");
+            /*ps = cw.createPreparedStatement(sql);*/
+            cw = ConnectionPoolManager.getSimpleConnection();
+            ps = cw.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                theme.setId(rs.getLong("theme_id"));
+                theme.setName(rs.getString("theme_name"));
+            }
+            return theme;
+            /*if (rs.next()) {
+                return UserMapper.getInstance().extractFromResultSet(rs);
+            }*/
+        } finally {
+            //TODO
+            close(ps);
+        }
     }
 
     @Override

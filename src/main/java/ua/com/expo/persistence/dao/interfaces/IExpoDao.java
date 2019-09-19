@@ -12,4 +12,7 @@ public interface IExpoDao extends InterfaceDao<Long, Expo> {
     List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) throws SQLException, IOException, ClassNotFoundException;
 
     List<Expo> findAllExpoByShowroomId(Long id) throws SQLException, IOException, ClassNotFoundException;
+
+    List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp time) throws SQLException, IOException, ClassNotFoundException;
+
 }

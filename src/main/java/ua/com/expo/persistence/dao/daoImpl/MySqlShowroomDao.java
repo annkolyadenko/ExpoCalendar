@@ -47,8 +47,33 @@ public class MySqlShowroomDao implements IShowroomDao {
     }
 
     @Override
-    public Showroom findEntityById(Long id) {
-        return null;
+    public Showroom findEntityById(Long id) throws SQLException, IOException, ClassNotFoundException {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Showroom showroom = new Showroom();
+        try {
+            /*ConnectionWrapper cw = transactionUtil.getConnection();*/
+
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("showroom.findById");
+            /*ps = cw.createPreparedStatement(sql);*/
+            cw = ConnectionPoolManager.getSimpleConnection();
+            ps = cw.prepareStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                showroom.setId(rs.getLong("showroom_id"));
+                showroom.setName(rs.getString("showroom_name"));
+                showroom.setInfo(rs.getString("showroom_info"));
+
+            }
+            return showroom;
+            /*if (rs.next()) {
+                return UserMapper.getInstance().extractFromResultSet(rs);
+            }*/
+        } finally {
+            //TODO
+            close(ps);
+        }
     }
 
     @Override

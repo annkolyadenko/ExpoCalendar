@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/jsp/components/i18n.jsp" %>
 <html>
 <head>
     <title>New Theme</title>
@@ -15,7 +16,7 @@
 </head>
 <body>
 <div class="container" style="height: 100%">
-    <h1>New Theme</h1>
+    <h1><fmt:message key="status.newTheme" bundle="${rb}"/></h1>
     <form action="controller" method="POST">
         <label>
             <input class="form-control" type="text" placeholder="Enter new theme" name="theme" value="">

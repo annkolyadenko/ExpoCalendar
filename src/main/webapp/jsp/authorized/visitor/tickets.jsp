@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/jsp/components/i18n.jsp" %>
 <html>
 <head>
     <title>Tickets</title>
@@ -15,7 +16,7 @@
 </head>
 <body>
 <div class="container" style="height: 100%">
-    <h1>Purchase</h1>
+    <h1><fmt:message key="status.tickets" bundle="${rb}"/></h1>
     <br>
     <c:if test="${requestScope.tickets!=null}">
         <table class="table table-sm table-hover table-bordered text-center">

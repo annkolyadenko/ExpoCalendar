@@ -15,12 +15,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class SignInCommand implements Command {
     private UserService userService;
-    private static final Logger LOGGER = Logger.getLogger(SignInCommand.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(SignInCommand.class.getName());
 
     public SignInCommand() {
         this.userService = ServiceFactory.getUserService();

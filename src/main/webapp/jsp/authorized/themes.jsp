@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
+<%@ include file="/jsp/components/i18n.jsp" %>
 <html>
 <head>
     <title>Themes</title>
@@ -16,7 +17,7 @@
 </head>
 <body>
 <div class="container" style="height: 100%">
-    <h1>Themes</h1>
+    <h1><fmt:message key="status.themes" bundle="${rb}"/></h1>
     <br>
     <c:if test="${requestScope.themes!=null}">
         <ctg:if-user role="visitor">

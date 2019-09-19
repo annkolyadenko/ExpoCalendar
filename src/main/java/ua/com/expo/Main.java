@@ -1,49 +1,41 @@
 package ua.com.expo;
 
-import ua.com.expo.entity.Expo;
-import ua.com.expo.entity.Showroom;
-import ua.com.expo.entity.Ticket;
-import ua.com.expo.persistence.dao.daoImpl.MySqlExpoDao;
-import ua.com.expo.persistence.dao.daoImpl.MySqlShowroomDao;
-import ua.com.expo.persistence.dao.daoImpl.MySqlTicketDao;
+import ua.com.expo.util.time.Formatter;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.text.ParseException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
+
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException, ParseException {
+        String date = "2016-02-16";
+        ZoneId zone = ZoneId.of("Europe/Kiev");
+        LocalDate localDate = LocalDate.parse(date);
+        System.out.println(localDate);
+        /*Instant instant1 = localDate.atZone(zone).toInstant();
+        System.out.println(instant1);*/
+        Instant instant = Instant.now();
+        Instant instant2 = Instant.from(localDate);
+        System.out.println(instant2+"localDate");
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, zone);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        TemporalAccessor ta = formatter.parse(date);
+        System.out.println(ta);
 
-       /* MySqlTicketDao dao = new MySqlTicketDao();
-        try {
-            List<Ticket> tickets = dao.findAllTicketsByUserId(7L);
-            System.out.println(tickets);
-            for (Ticket ticket : tickets) {
-                System.out.println(ticket);
-            }
-        } catch (SQLException | IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        MySqlShowroomDao dao1 = new MySqlShowroomDao();
-        try {
-            List<Showroom> showrooms = dao1.findAll();
-            for (Showroom showroom : showrooms) {
-                System.out.println(showroom);
-            }
-        } catch (SQLException | ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-        }*/
-       /* MySqlExpoDao dao2 = new MySqlExpoDao();
-        List<Expo> expos = dao2.findAllExpoByShowroomId(3L);
-        for (Expo expo : expos) {
-            System.out.println(expo);
-        }*/
-       MySqlTicketDao mySqlTicketDao = new MySqlTicketDao();
-       Long result = mySqlTicketDao.sumPurchasedTicketsByExpoId(1L);
-        System.out.println(result);
+
+        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = "2016-02-16 11:00:02";
+        TemporalAccessor temporalAccessor = formatter.parse(timestamp);
+        LocalDateTime localDateTime = LocalDateTime.from(temporalAccessor);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
+        Instant result = Instant.from(zonedDateTime);
+        System.out.println(result);*/
+
     }
 }
 

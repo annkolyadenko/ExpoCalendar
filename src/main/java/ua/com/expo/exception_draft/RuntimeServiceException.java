@@ -1,4 +1,4 @@
-package ua.com.expo.exception;
+package ua.com.expo.exception_draft;
 
 public class RuntimeServiceException extends RuntimeException {
 

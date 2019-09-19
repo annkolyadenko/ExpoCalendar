@@ -1,6 +1,6 @@
 package ua.com.expo.persistence.connection;
 
-import ua.com.expo.exception.RuntimeSqlException;
+import ua.com.expo.exception_draft.RuntimeSqlException;
 import ua.com.expo.file.DataBaseSchema;
 
 import javax.naming.Context;
