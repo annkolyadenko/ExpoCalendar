@@ -12,6 +12,8 @@ public interface IUserService {
 
     User findUserByEmail(String email) throws SQLException;
 
-    User signUpUser(String name, String email, String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException, IOException, ClassNotFoundException;
+    User signUpUser(String name, String email, String language, String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException, IOException, ClassNotFoundException;
+
+    boolean updateLang(Long userId, String language) throws SQLException, IOException, ClassNotFoundException;
 
 }

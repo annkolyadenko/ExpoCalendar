@@ -1,6 +1,5 @@
 package ua.com.expo.entity;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class User extends Entity {
@@ -8,17 +7,19 @@ public class User extends Entity {
     private Role role;
     private String name;
     private String email;
+    private String language;
     private byte[] password;
     private byte[] salt;
 
     public User() {
     }
 
-    public User(Long id, Role role, String name, String email, byte[] password, byte[] salt) {
+    public User(Long id, Role role, String name, String email, String language, byte[] password, byte[] salt) {
         super(id);
         this.role = role;
         this.name = name;
         this.email = email;
+        this.language = language;
         this.password = password;
         this.salt = salt;
     }
@@ -28,6 +29,7 @@ public class User extends Entity {
         this.role = builder.role;
         this.name = builder.name;
         this.email = builder.email;
+        this.language = builder.language;
         this.password = builder.password;
         this.salt = builder.salt;
     }
@@ -56,6 +58,14 @@ public class User extends Entity {
         this.email = email;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
@@ -77,6 +87,7 @@ public class User extends Entity {
         private Role role;
         private String name;
         private String email;
+        private String language;
         private byte[] password;
         private byte[] salt;
 
@@ -97,6 +108,11 @@ public class User extends Entity {
 
         public Builder email(String email) {
             this.email = email;
+            return this;
+        }
+
+        public Builder language(String language) {
+            this.language = language;
             return this;
         }
 
@@ -124,9 +140,7 @@ public class User extends Entity {
 
         if (!Objects.equals(role, user.role)) return false;
         if (!Objects.equals(name, user.name)) return false;
-        if (!Objects.equals(email, user.email)) return false;
-        if (!Arrays.equals(password, user.password)) return false;
-        return Arrays.equals(salt, user.salt);
+        return Objects.equals(email, user.email);
     }
 
     @Override
@@ -135,8 +149,6 @@ public class User extends Entity {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(password);
-        result = 31 * result + Arrays.hashCode(salt);
         return result;
     }
 
@@ -145,7 +157,7 @@ public class User extends Entity {
         return super.clone();
     }
 
-    //TO DO!!!
+    //TODO!!!
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -153,6 +165,7 @@ public class User extends Entity {
         sb.append(", id: " + this.getId());
         sb.append(", role: " + role);
         sb.append(", login: " + email);
+        sb.append(", language: " + language);
         return sb.toString();
     }
 }

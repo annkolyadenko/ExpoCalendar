@@ -33,7 +33,7 @@
                 </c:forEach>
             </select>
             <%--<label for="date">Select your date</label>--%>
-            <input class="form-control" type="datetime-local" id="datetime" name="chosenDate" value=""
+            <input class="form-control" type="datetime-local" id="date" name="chosenDate" value=""
                    min="${today}">
             <br>
             <%--<label>--%>

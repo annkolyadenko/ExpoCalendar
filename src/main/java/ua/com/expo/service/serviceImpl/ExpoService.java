@@ -12,6 +12,8 @@ import ua.com.expo.persistence.dao.interfaces.IExpoDao;
 import ua.com.expo.persistence.dao.interfaces.IShowroomDao;
 import ua.com.expo.persistence.dao.interfaces.IThemeDao;
 import ua.com.expo.service.IExpoService;
+import ua.com.expo.util.time.IConverter;
+import ua.com.expo.util.time.TimeConverter;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,6 +22,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -28,6 +31,7 @@ public class ExpoService implements IExpoService {
     private static final Logger LOGGER = LogManager.getLogger(ExpoService.class.getName());
     private static AbstractDaoFactory factory = MySqlDaoFactory.getInstance();
     private static ModelMapper modelMapper = new ModelMapper();
+    private static IConverter converter = new TimeConverter();
     private IExpoDao expoDao;
     private IShowroomDao showroomDao;
     private IThemeDao themeDao;
@@ -59,8 +63,15 @@ public class ExpoService implements IExpoService {
         themeDao = factory.getThemeDao();
         Showroom showroom = showroomDao.findEntityById(showroomId);
         Theme theme = themeDao.findEntityById(themeId);
-        Expo expo = new Expo.Builder().showroom(showroom).theme(theme).date(Instant.parse(date)).price(new BigDecimal(price)).info(info).build();
+        Expo expo = new Expo.Builder().showroom(showroom).theme(theme).date((Instant) converter.convertLocalDateTimeToInstant(LocalDateTime.parse(date))).price(new BigDecimal(price)).info(info).build();
         LOGGER.debug(expo);
         return expoDao.create(expo);
+    }
+
+    public static void main(String[] args) {
+        String date = "2016-08-16";
+        LocalDateTime local = LocalDateTime.parse(date);
+        System.out.println(local);
+
     }
 }

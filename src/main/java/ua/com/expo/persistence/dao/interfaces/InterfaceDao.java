@@ -17,21 +17,17 @@ public interface InterfaceDao<K, T extends Entity> {
 
     T findEntityById(K id) throws SQLException, IOException, ClassNotFoundException;
 
-    boolean delete(K id);
-
-    boolean delete(T entity);
-
     boolean create(T entity) throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException, IOException, ClassNotFoundException;
 
     T update(T entity);
 
-    //TO DO!
+    //TODO!
     default void close(Statement st) throws SQLException {
         if (Objects.nonNull(st))
             st.close();
     }
 
-    //TO DO!
+    //TODO!
     default void close(ResultSet rs) throws SQLException {
         if (Objects.nonNull(rs))
             rs.close();

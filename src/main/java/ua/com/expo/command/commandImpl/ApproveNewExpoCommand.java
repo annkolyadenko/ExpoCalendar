@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ApproveNewExpoCommand implements Command {

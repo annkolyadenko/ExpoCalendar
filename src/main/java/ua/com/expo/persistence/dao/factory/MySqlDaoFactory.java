@@ -14,6 +14,7 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     }
 
     private static class MySqlDaoFactoryHolder {
+
         public static MySqlDaoFactory mySqlFactory = new MySqlDaoFactory();
     }
 

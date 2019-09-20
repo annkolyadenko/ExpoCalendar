@@ -18,7 +18,7 @@
     <h1>Сталася халепа!</h1>
     <h1>Нажаль, ця мова не підтримується </h1>
     <br>
-    <a href="<c:url value="/controller?command=LOCALIZATION" />">Українська</a>
+    <a href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian" />">Українська</a>
     <br>
     <a href="<c:url value="/controller?command=LOCALIZATION&language=English" />">English</a>
 </div>

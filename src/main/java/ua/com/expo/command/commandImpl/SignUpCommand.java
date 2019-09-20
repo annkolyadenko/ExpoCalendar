@@ -15,11 +15,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class SignUpCommand implements Command {
     private UserService userService;
-    private static final Logger LOGGER = Logger.getLogger(SignUpCommand.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(SignUpCommand.class.getName());
 
     public SignUpCommand() {
         userService = ServiceFactory.getUserService();
@@ -27,21 +30,23 @@ public class SignUpCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+        HttpSession session = request.getSession();
         String name = request.getParameter("userName");
         String email = request.getParameter("email");
+        String language = (String) session.getAttribute("locale");
+        LOGGER.debug("LOCALE :" + language);
         String password = request.getParameter("password");
         if (Validator.requestParametersValidator(email, password)) {
             //TODO Optional
             User user = userService.findUserByEmail(email);
             if (Objects.isNull(user)) {
-                user = userService.signUpUser(name, email, password);
+                user = userService.signUpUser(name, email, language, password);
                 if (Objects.nonNull(user)) {
-                    HttpSession session = request.getSession();
                     session.setAttribute("authorizedUser", user);
-                    return ConfigurationManager.PATH_MANAGER.getProperty("path.page.approveTheme");
+                    return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
                 }
             }
         }
-        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.login");
+        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.index");
     }
 }

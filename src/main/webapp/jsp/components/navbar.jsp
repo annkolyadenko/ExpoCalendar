@@ -70,7 +70,7 @@
                     </form>
                 </li>
                 <li>
-                <a class="nav-link" href="#">Something else</a>
+                    <a class="nav-link" href="#">Something else</a>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
@@ -80,8 +80,12 @@
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian" />">Слава Україні</a>
-                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=English" />">Glory to Ukraine</a>
+                        <a class="dropdown-item"
+                           href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian&path=${pageContext.request.servletPath}" />">Слава
+                            Україні</a>
+                        <a class="dropdown-item"
+                           href="<c:url value="/controller?command=LOCALIZATION&language=English&path=${pageContext.request.servletPath}" />">Glory
+                            to Ukraine</a>
                         <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
@@ -108,8 +112,12 @@
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian" />">Слава Україні</a>
-                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=English" />">Glory to Ukraine</a>
+                        <a class="dropdown-item"
+                           href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian&path=${pageContext.request.servletPath}" />">Слава
+                            Україні</a>
+                        <a class="dropdown-item"
+                           href="<c:url value="/controller?command=LOCALIZATION&language=English&path=${pageContext.request.servletPath}" />">Glory
+                            to Ukraine</a>
                         <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
@@ -150,8 +158,12 @@
                         Language
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian" />">Слава Україні</a>
-                        <a class="dropdown-item" href="<c:url value="/controller?command=LOCALIZATION&language=English" />">Glory to Ukraine</a>
+                        <a class="dropdown-item"
+                           href="<c:url value="/controller?command=LOCALIZATION&language=Ukrainian&path=${pageContext.request.servletPath}" />">Слава
+                            Україні</a>
+                        <a class="dropdown-item"
+                           href="<c:url value="/controller?command=LOCALIZATION&language=English&path=${pageContext.request.servletPath}" />">Glory
+                            to Ukraine</a>
                         <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>

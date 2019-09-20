@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MySqlTicketDao implements ITicketDao {
 
@@ -134,6 +133,7 @@ public class MySqlTicketDao implements ITicketDao {
                 user.setRole(new Role(rs.getLong("role_id"), rs.getString("role_name")));
                 user.setName(rs.getString("user_name"));
                 user.setEmail(rs.getString("user_email"));
+                user.setLanguage(rs.getString("user_lang"));
                 user.setPassword(rs.getBytes("user_password"));
                 user.setSalt(rs.getBytes("user_salt"));
                 ticket.setUser(user);

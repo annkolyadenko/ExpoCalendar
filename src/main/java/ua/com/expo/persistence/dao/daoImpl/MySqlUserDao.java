@@ -53,6 +53,7 @@ public class MySqlUserDao implements IUserDao {
                 user.setRole(new Role(rs.getLong("role_id"), rs.getString("role_name")));
                 user.setName(rs.getString("user_name"));
                 user.setEmail(rs.getString("user_email"));
+                user.setLanguage(rs.getString("user_lang"));
                 user.setPassword(rs.getBytes("user_password"));
                 user.setSalt(rs.getBytes("user_salt"));
             }
@@ -94,8 +95,9 @@ public class MySqlUserDao implements IUserDao {
             ps.setLong(1, 2);
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmail());
-            ps.setBytes(4, user.getPassword());
-            ps.setBytes(5, user.getSalt());
+            ps.setString(4, user.getLanguage());
+            ps.setBytes(5, user.getPassword());
+            ps.setBytes(6, user.getSalt());
             ps.executeUpdate();
             flag = true;
         } finally {
@@ -123,8 +125,9 @@ public class MySqlUserDao implements IUserDao {
             ps.setLong(1, 2);
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmail());
-            ps.setBytes(4, user.getPassword());
-            ps.setBytes(5, user.getSalt());
+            ps.setString(4, user.getLanguage());
+            ps.setBytes(5, user.getPassword());
+            ps.setBytes(6, user.getSalt());
             ps.execute();
             rs = ps.getGeneratedKeys();
             rs.next();
@@ -136,7 +139,29 @@ public class MySqlUserDao implements IUserDao {
     }
 
     @Override
+    public boolean updateLanguage(Long userId, String language) throws SQLException, IOException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        boolean flag = false;
+        try {
+            cw = ConnectionPoolManager.getSimpleConnection();
+            ps = cw.prepareStatement(ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.updateLang"));
+            ps.setString(1, language);
+            ps.setLong(2, userId);
+            System.out.println(ps);
+            ps.executeUpdate();
+            flag = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(ps);
+        }
+        return flag;
+    }
+
+
+    @Override
     public User update(User entity) {
+
         return null;
     }
 
@@ -160,6 +185,7 @@ public class MySqlUserDao implements IUserDao {
                 user.setRole(new Role(rs.getLong("role_id"), rs.getString("role_name")));
                 user.setName(rs.getString("user_name"));
                 user.setEmail(rs.getString("user_email"));
+                user.setLanguage(rs.getString("user_lang"));
                 user.setPassword(rs.getBytes("user_password"));
                 user.setSalt(rs.getBytes("user_salt"));
             } else {

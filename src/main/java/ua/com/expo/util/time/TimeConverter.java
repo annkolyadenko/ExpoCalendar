@@ -17,6 +17,8 @@ import java.time.*;
 
 public class TimeConverter implements IConverter<Instant, Timestamp> {
 
+    ZoneId zone = ZoneId.of("Europe/Kiev");
+
     @Override
     public Timestamp convertToDatabase(Instant instant) {
         return Timestamp.from(instant);
@@ -29,7 +31,12 @@ public class TimeConverter implements IConverter<Instant, Timestamp> {
 
     @Override
     public Timestamp convertStringToDatabase(String str) {
-        return Timestamp.valueOf(str + " 00:00:00");
+        return Timestamp.valueOf(LocalDateTime.parse(str));
+    }
+
+    @Override
+    public Instant convertLocalDateTimeToInstant(LocalDateTime localDateTime) {
+        return localDateTime.atZone(zone).toInstant();
     }
 
     public static void main(String[] args) {
@@ -48,6 +55,10 @@ public class TimeConverter implements IConverter<Instant, Timestamp> {
 
         LocalDateTime localDateTime = LocalDateTime.of(2019, Month.SEPTEMBER, 21, 9, 0);
         Instant instant2 = localDateTime.atZone(zone).toInstant();
-
+        LocalDateTime localDateTime3 = LocalDateTime.now();
+        Instant instant3 = localDateTime3.atZone(zone).toInstant();
+        System.out.println(instant3);
+        Timestamp timestamp1 = converter.convertToDatabase(instant3);
+        System.out.println(timestamp1);
     }
 }

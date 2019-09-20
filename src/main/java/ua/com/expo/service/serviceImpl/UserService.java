@@ -33,19 +33,24 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User signUpUser(String name, String email, String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException, IOException, ClassNotFoundException {
+    public User signUpUser(String name, String email, String language, String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException, IOException, ClassNotFoundException {
         Role role = new Role.Builder().id(RoleEnum.VISITOR.getId()).role(RoleEnum.VISITOR.toString()).build();
         byte[] salt = hashing.saltGenerator();
         byte[] pass = hashing.hashGenerator(password, salt);
-        User user = new User.Builder().role(role).name(name).email(email).password(pass).salt(salt).build();
+        User user = new User.Builder().role(role).name(name).email(email).language(language).password(pass).salt(salt).build();
         //TODO user id return
         Long id = userDao.createUserWithGeneratedKey(user);
         if (Objects.nonNull(id))
             user.setId(id);
-         else {
+        else {
             user = null;
         }
         return user;
+    }
+
+    @Override
+    public boolean updateLang(Long userId, String language) throws SQLException, IOException, ClassNotFoundException {
+        return userDao.updateLanguage(userId, language);
     }
 
     private static UserDto convertToDto(User user) {

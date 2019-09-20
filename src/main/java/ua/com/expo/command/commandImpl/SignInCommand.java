@@ -15,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.Objects;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,6 +43,8 @@ public class SignInCommand implements Command {
                     //TODO!!! logIn add
                     HttpSession session = request.getSession();
                     session.setAttribute("authorizedUser", user);
+                    session.setAttribute("locale", user.getLanguage());
+                    LOGGER.debug("LOCALE: " + user.getLanguage());
                     return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
                 }
             } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {

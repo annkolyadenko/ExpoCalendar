@@ -12,14 +12,14 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MySqlExpoDao implements IExpoDao {
 
     Connection cw;
     private TimeConverter timeConverter = new TimeConverter();
-    private static final Logger LOGGER = Logger.getLogger(MySqlExpoDao.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(MySqlExpoDao.class.getName());
 
     @Override
     public List<Expo> findAll() throws SQLException {
@@ -74,7 +74,7 @@ public class MySqlExpoDao implements IExpoDao {
             ps.setLong(2, expo.getTheme().getId());
             ps.setTimestamp(3, timeConverter.convertToDatabase(expo.getDate()));
             ps.setBigDecimal(4, expo.getPrice());
-            ps.setString(6, expo.getInfo());
+            ps.setString(5, expo.getInfo());
             ps.executeUpdate();
             flag = true;
         } finally {
@@ -129,7 +129,6 @@ public class MySqlExpoDao implements IExpoDao {
             ps.setLong(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                LOGGER.log(Level.FINEST, "Inside findAllExpoByShowroomId");
                 Expo expo = new Expo();
                 expo.setId(rs.getLong("expo_id"));
                 expo.setShowroom(new Showroom(rs.getLong("showroom_id"), rs.getString("showroom_name"), rs.getString("showroom_info")));
