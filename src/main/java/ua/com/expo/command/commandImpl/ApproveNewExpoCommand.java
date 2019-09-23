@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 
 public class ApproveNewExpoCommand implements Command {
@@ -41,7 +40,7 @@ public class ApproveNewExpoCommand implements Command {
         LOGGER.debug(price);
         String info = request.getParameter("info");
         LOGGER.debug(info);
-        List<Expo> expos = expoService.findAllExpoByShowroomIdAndDate(showroomId, timeConverter.convertStringToDatabase(chosenDate));
+        List<Expo> expos = expoService.findAllExpoByShowroomIdAndDate(showroomId, timeConverter.convertStringDateTimeToDatabase(chosenDate));
         LOGGER.debug(expos);
         if (expos.isEmpty()) {
             result = expoService.createExpo(showroomId, themeId, chosenDate, price, info);

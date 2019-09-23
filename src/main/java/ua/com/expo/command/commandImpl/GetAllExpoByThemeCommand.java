@@ -30,18 +30,11 @@ public class GetAllExpoByThemeCommand implements Command {
         String chosenDate = request.getParameter("chosenDate");
         List<Expo> list = expoService.findAllExpoByThemeIdAndDate(themeId, timeConverter.convertStringDateToDatabase(chosenDate));
         if (Objects.nonNull(list) && !list.isEmpty()) {
-
             request.setAttribute("expos", list);
             request.setAttribute("chosenDate", chosenDate);
             return ConfigurationManager.PATH_MANAGER.getProperty("path.page.calendar");
         }
         ///STUB
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.shitHappens");
-    }
-
-    public static void main(String[] args) {
-        TimeConverter timeConverter = new TimeConverter();
-        String s = "2019-09-28";
-        System.out.println(timeConverter.convertStringDateToDatabase(s));
     }
 }

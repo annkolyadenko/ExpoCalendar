@@ -1,5 +1,8 @@
 package ua.com.expo.util.time;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,6 +11,8 @@ import java.time.*;
 import java.util.Date;
 
 public class TimeConverter implements IConverter<Instant, Timestamp> {
+
+    private static final Logger LOGGER = LogManager.getLogger(TimeConverter.class.getName());
 
     ZoneId zone = ZoneId.of("Europe/Kiev");
 
@@ -22,7 +27,7 @@ public class TimeConverter implements IConverter<Instant, Timestamp> {
     }
 
     @Override
-    public Timestamp convertStringToDatabase(String str) {
+    public Timestamp convertStringDateTimeToDatabase(String str) {
         return Timestamp.valueOf(LocalDateTime.parse(str));
     }
 
@@ -30,16 +35,14 @@ public class TimeConverter implements IConverter<Instant, Timestamp> {
     @Override
     public Timestamp convertStringDateToDatabase(String str) {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        //TODO STUB
         Date date = null;
         try {
             date = formatter.parse(str);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
+            throw new RuntimeException(e);
         }
-
-        Timestamp timestamp = new Timestamp(date.getTime());
-        return timestamp;
+        return new Timestamp(date.getTime());
     }
 
     @Override
@@ -50,7 +53,7 @@ public class TimeConverter implements IConverter<Instant, Timestamp> {
     public static void main(String[] args) {
 
         TimeConverter converter = new TimeConverter();
-        Timestamp timestamp = converter.convertStringToDatabase("2019-09-13");
+        Timestamp timestamp = converter.convertStringDateTimeToDatabase("2019-09-13");
         System.out.println(timestamp);
 
         ZoneId zone = ZoneId.of("Europe/Kiev");

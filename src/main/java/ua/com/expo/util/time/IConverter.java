@@ -22,7 +22,7 @@ public interface IConverter <Instant, TimeStamp> {
 
     Instant convertToEntity(TimeStamp timeStamp);
 
-    Timestamp convertStringToDatabase(String str);
+    Timestamp convertStringDateTimeToDatabase(String str);
 
     Timestamp convertStringDateToDatabase(String str);
 
