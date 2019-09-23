@@ -1,6 +1,6 @@
 package ua.com.expo.persistence.dao.factory;
 
-import ua.com.expo.persistence.dao.interfaces.*;
+import ua.com.expo.persistence.dao.*;
 
 
 public abstract class AbstractDaoFactory {

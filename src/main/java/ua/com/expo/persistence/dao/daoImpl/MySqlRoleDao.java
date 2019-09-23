@@ -1,39 +1,22 @@
 package ua.com.expo.persistence.dao.daoImpl;
 
 import ua.com.expo.entity.Role;
-import ua.com.expo.persistence.dao.interfaces.IRoleDao;
+import ua.com.expo.persistence.dao.IRoleDao;
 
 import java.util.List;
 
 public class MySqlRoleDao implements IRoleDao {
 
-    @Override
     public List<Role> findAll() {
         return null;
     }
 
-    @Override
-    public Role findEntityById(Long id) {
+    public Role findRoleById(Long id) {
         return null;
     }
 
-    @Override
-    public boolean delete(Long id) {
+    public boolean save(Role role) {
         return false;
     }
 
-    @Override
-    public boolean delete(Role entity) {
-        return false;
-    }
-
-    @Override
-    public boolean create(Role entity) {
-        return false;
-    }
-
-    @Override
-    public Role update(Role entity) {
-        return null;
-    }
 }

@@ -3,7 +3,7 @@ package ua.com.expo.service.serviceImpl;
 import ua.com.expo.entity.Showroom;
 import ua.com.expo.persistence.dao.factory.AbstractDaoFactory;
 import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
-import ua.com.expo.persistence.dao.interfaces.IShowroomDao;
+import ua.com.expo.persistence.dao.IShowroomDao;
 import ua.com.expo.service.IShowroomService;
 
 import java.io.IOException;

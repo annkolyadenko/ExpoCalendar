@@ -1,124 +1,90 @@
 package ua.com.expo.persistence.dao.daoImpl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.com.expo.entity.Payment;
-import ua.com.expo.persistence.connection.ConnectionPool;
-import ua.com.expo.persistence.connection.ConnectionPoolManager;
-import ua.com.expo.persistence.dao.interfaces.IPaymentDao;
+import ua.com.expo.exception_draft.RuntimeSqlException;
+import ua.com.expo.persistence.connection.ConnectionWrapper;
+import ua.com.expo.persistence.dao.IPaymentDao;
+import ua.com.expo.persistence.dao.mapper.Mapper;
+import ua.com.expo.transaction_draft.TransactionUtil;
 import ua.com.expo.util.resource.ConfigurationManager;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
-import java.util.List;
+import java.util.Optional;
 
 public class MySqlPaymentDao implements IPaymentDao {
 
-    Connection cw;
+    private static final Logger LOGGER = LogManager.getLogger(MySqlPaymentDao.class.getName());
+    private static final TransactionUtil transactionUtil = TransactionUtil.getInstance();
 
-    {
-        try {
-            cw = ConnectionPool.getInstance().getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public List<Payment> findAll() throws SQLException {
-        return null;
-    }
-
-    @Override
-    public Payment findEntityById(Long id) throws SQLException, IOException, ClassNotFoundException {
+    public Optional<Payment> findPaymentById(Long id) {
+        ConnectionWrapper con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Payment payment = new Payment();
         try {
-            /*ConnectionWrapper cw = transactionUtil.getConnection();*/
-            cw = ConnectionPoolManager.getSimpleConnection();
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("payment.findById");
-            ps = cw.prepareStatement(sql);
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
             ps.setLong(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                payment.setId(rs.getLong("payment_id"));
-                payment.setValue(rs.getBigDecimal("payment_value"));
+            if (rs.next()) {
+                return Optional.of((Payment) Mapper.PAYMENT.extractFromResultSet(rs));
             }
-            return payment;
-            /*if (rs.next()) {
-                return UserMapper.getInstance().extractFromResultSet(rs);
-            }*/
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
         } finally {
-            //TODO
-            close(ps);
-            close(rs);
+            con.closePreparedStatement(ps);
+            con.closeConnection();
         }
+        return Optional.empty();
     }
 
-    @Override
-    public boolean delete(Long id) {
-        return false;
-    }
 
-    @Override
-    public boolean delete(Payment entity) {
-        return false;
-    }
-
-    @Override
-    public boolean create(Payment payment) throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException, IOException, ClassNotFoundException {
+    public boolean save(Payment payment) {
+        ConnectionWrapper con = null;
         PreparedStatement ps = null;
         boolean flag = false;
         try {
-            Connection cw = null;
-            try {
-                cw = ConnectionPoolManager.getSimpleConnection();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            System.out.println(cw);
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("payment.create");
-            ps = cw.prepareStatement(sql);
-            //STUB!!!!
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
             ps.setBigDecimal(1, payment.getValue());
             ps.executeUpdate();
             flag = true;
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
         } finally {
-            close(ps);
+            con.closePreparedStatement(ps);
+            con.closeConnection();
         }
         return flag;
     }
 
-    public Long createPaymentWithGeneratedKey(Payment payment) throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException, IOException, ClassNotFoundException {
+
+    public Long savePaymentWithGeneratedKey(Payment payment) {
+        ConnectionWrapper con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Long primaryKey = null;
         try {
-            Connection cw = null;
-            try {
-                cw = ConnectionPoolManager.getSimpleConnection();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("payment.create");
-            ps = cw.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            //STUB!!!!
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatementWithGeneratedKey(sql);
             ps.setBigDecimal(1, payment.getValue());
             ps.execute();
             rs = ps.getGeneratedKeys();
             rs.next();
             primaryKey = rs.getLong(1);
-
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
         } finally {
-            close(ps);
+            con.closePreparedStatement(ps);
+            con.closeConnection();
         }
         return primaryKey;
-    }
-
-
-    @Override
-    public Payment update(Payment entity) {
-        return null;
     }
 }

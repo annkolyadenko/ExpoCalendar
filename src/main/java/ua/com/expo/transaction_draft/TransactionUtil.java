@@ -4,6 +4,8 @@ import ua.com.expo.persistence.connection.ConnectionPool;
 import ua.com.expo.persistence.connection.ConnectionWrapper;
 import ua.com.expo.exception_draft.RuntimeSqlException;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -19,8 +21,16 @@ public class TransactionUtil {
     private static final ThreadLocal<ConnectionWrapper> threadLocalConnection = new ThreadLocal<>();
     private final ConnectionPool connectionPool;
 
-    public TransactionUtil() {
+    private TransactionUtil() {
         this.connectionPool = ConnectionPool.getInstance();
+    }
+
+    private static class Holder {
+        static final TransactionUtil INSTANCE = new TransactionUtil();
+    }
+
+    public static TransactionUtil getInstance() {
+        return Holder.INSTANCE;
     }
 
     public void startTransaction() {

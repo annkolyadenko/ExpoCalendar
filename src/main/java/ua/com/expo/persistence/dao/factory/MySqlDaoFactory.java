@@ -1,7 +1,7 @@
 package ua.com.expo.persistence.dao.factory;
 
+import ua.com.expo.persistence.dao.*;
 import ua.com.expo.persistence.dao.daoImpl.*;
-import ua.com.expo.persistence.dao.interfaces.*;
 
 /**
  * Initialization-on-demand holder idiom Singleton

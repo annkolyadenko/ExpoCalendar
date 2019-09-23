@@ -8,9 +8,9 @@ import ua.com.expo.entity.Showroom;
 import ua.com.expo.entity.Theme;
 import ua.com.expo.persistence.dao.factory.AbstractDaoFactory;
 import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
-import ua.com.expo.persistence.dao.interfaces.IExpoDao;
-import ua.com.expo.persistence.dao.interfaces.IShowroomDao;
-import ua.com.expo.persistence.dao.interfaces.IThemeDao;
+import ua.com.expo.persistence.dao.IExpoDao;
+import ua.com.expo.persistence.dao.IShowroomDao;
+import ua.com.expo.persistence.dao.IThemeDao;
 import ua.com.expo.service.IExpoService;
 import ua.com.expo.util.time.IConverter;
 import ua.com.expo.util.time.TimeConverter;
@@ -24,6 +24,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 
 public class ExpoService implements IExpoService {
@@ -35,7 +36,6 @@ public class ExpoService implements IExpoService {
     private IExpoDao expoDao;
     private IShowroomDao showroomDao;
     private IThemeDao themeDao;
-
 
 
     @Override
@@ -61,17 +61,12 @@ public class ExpoService implements IExpoService {
         expoDao = factory.getExpoDao();
         showroomDao = factory.getShowroomDao();
         themeDao = factory.getThemeDao();
-        Showroom showroom = showroomDao.findEntityById(showroomId);
-        Theme theme = themeDao.findEntityById(themeId);
-        Expo expo = new Expo.Builder().showroom(showroom).theme(theme).date((Instant) converter.convertLocalDateTimeToInstant(LocalDateTime.parse(date))).price(new BigDecimal(price)).info(info).build();
+        Optional<Showroom> showroom = showroomDao.findShowroomById(showroomId);
+        Showroom show = showroom.orElseThrow(() -> new RuntimeException("Can't find showroom by id"));
+        Optional<Theme> theme = themeDao.findThemeById(themeId);
+        Theme the = theme.orElseThrow(() -> new RuntimeException("Can't find theme by id"));
+        Expo expo = new Expo.Builder().showroom(show).theme(the).date((Instant) converter.convertLocalDateTimeToInstant(LocalDateTime.parse(date))).price(new BigDecimal(price)).info(info).build();
         LOGGER.debug(expo);
-        return expoDao.create(expo);
-    }
-
-    public static void main(String[] args) {
-        String date = "2016-08-16";
-        LocalDateTime local = LocalDateTime.parse(date);
-        System.out.println(local);
-
+        return expoDao.save(expo);
     }
 }

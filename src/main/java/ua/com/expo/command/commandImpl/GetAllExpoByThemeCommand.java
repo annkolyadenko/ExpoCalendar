@@ -28,7 +28,7 @@ public class GetAllExpoByThemeCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException {
         Long themeId = Long.parseLong(request.getParameter("themeId"));
         String chosenDate = request.getParameter("chosenDate");
-        List<Expo> list = expoService.findAllExpoByThemeIdAndDate(themeId, timeConverter.convertStringToDatabase(chosenDate));
+        List<Expo> list = expoService.findAllExpoByThemeIdAndDate(themeId, timeConverter.convertStringDateToDatabase(chosenDate));
         if (Objects.nonNull(list) && !list.isEmpty()) {
 
             request.setAttribute("expos", list);
@@ -37,5 +37,11 @@ public class GetAllExpoByThemeCommand implements Command {
         }
         ///STUB
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.shitHappens");
+    }
+
+    public static void main(String[] args) {
+        TimeConverter timeConverter = new TimeConverter();
+        String s = "2019-09-28";
+        System.out.println(timeConverter.convertStringDateToDatabase(s));
     }
 }
