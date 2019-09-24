@@ -27,7 +27,7 @@ public class GetAllExpoByShowroomCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         Long showroomId = Long.valueOf(request.getParameter("showroomId"));
         List<Expo> expos = expoService.findAllExpoByShowroomId(showroomId);
         if (Objects.nonNull(expos) && !expos.isEmpty()) {

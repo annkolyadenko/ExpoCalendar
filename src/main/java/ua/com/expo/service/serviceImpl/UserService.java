@@ -9,56 +9,44 @@ import ua.com.expo.entity.User;
 import ua.com.expo.entity.enums.RoleEnum;
 import ua.com.expo.exception_draft.RuntimeServiceException;
 import ua.com.expo.persistence.dao.IUserDao;
-import ua.com.expo.persistence.dao.factory.AbstractDaoFactory;
 import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
-import ua.com.expo.service.IUserService;
 import ua.com.expo.util.security.IPasswordHashing;
-import ua.com.expo.util.security.PasswordHashingImpl;
+import ua.com.expo.util.security.impl.PasswordHashingImpl;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
-public class UserService implements IUserService {
+public class UserService {
 
-    //TODO HOW TO WIRE DAOFACTORY
     private static final Logger LOGGER = LogManager.getLogger(UserService.class.getName());
-    private static AbstractDaoFactory factory = MySqlDaoFactory.getInstance();
-    private static IPasswordHashing hashing = new PasswordHashingImpl();
-    private static ModelMapper modelMapper = new ModelMapper();
+    private static final ModelMapper modelMapper = new ModelMapper();
+    private final IPasswordHashing hashing;
+
     private IUserDao userDao;
 
-
-    //TODO DTO
-    @Override
-    public User findUserByEmail(String email) throws SQLException {
-        userDao = factory.getUserDao();
-        Optional<User> user = userDao.findUserByEmail(email);
-        User us = user.orElseThrow(() -> new RuntimeException("Can't find user by email"));
-        return us;
+    public UserService() {
+        userDao = MySqlDaoFactory.getInstance().getUserDao();
+        hashing = PasswordHashingImpl.getInstance();
     }
 
-    @Override
-    public User signUpUser(String name, String email, String language, String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException, IOException, ClassNotFoundException {
+    public User findUserByEmail(String email) {
+        Optional<User> optionalUser = userDao.findUserByEmail(email);
+        return optionalUser.orElseThrow(() -> new RuntimeServiceException("User with this email doesn't exist. Please, enter email again"));
+    }
+
+    public User signUpUser(String name, String email, String language, String password) {
+        User user = null;
         Role role = new Role.Builder().id(RoleEnum.VISITOR.getId()).role(RoleEnum.VISITOR.toString()).build();
         byte[] salt = hashing.saltGenerator();
         byte[] pass = hashing.hashGenerator(password, salt);
-        User user = new User.Builder().role(role).name(name).email(email).language(language).password(pass).salt(salt).build();
-        //TODO user id return
+        user = new User.Builder().role(role).name(name).email(email).language(language).password(pass).salt(salt).build();
         Long id = userDao.saveUserWithGeneratedKey(user);
         if (Objects.nonNull(id))
             user.setId(id);
-        else {
-            user = null;
-        }
         return user;
     }
 
-    @Override
-    public boolean updateLang(Long userId, String language) throws SQLException, IOException, ClassNotFoundException {
+    public boolean updateLang(Long userId, String language) {
         return userDao.updateLanguageByUserId(userId, language);
     }
 

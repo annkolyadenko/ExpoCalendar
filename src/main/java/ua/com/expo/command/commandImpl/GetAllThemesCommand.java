@@ -26,7 +26,7 @@ public class GetAllThemesCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         List<Theme> list = themeService.findAllThemes();
         if (Objects.nonNull(list) && !list.isEmpty()) {
             request.setAttribute("themes", list);

@@ -16,9 +16,8 @@ import ua.com.expo.persistence.dao.IExpoDao;
 import ua.com.expo.persistence.dao.IPaymentDao;
 import ua.com.expo.persistence.dao.ITicketDao;
 import ua.com.expo.persistence.dao.IUserDao;
-import ua.com.expo.service.ITicketService;
-import ua.com.expo.service.utils.TransactionExecutable;
-import ua.com.expo.service.utils.TransactionExecutor;
+import ua.com.expo.transaction.TransactionExecutable;
+import ua.com.expo.transaction.TransactionExecutor;
 import ua.com.expo.transaction.Transactional;
 
 import java.math.BigDecimal;
@@ -26,7 +25,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
-public class TicketService implements ITicketService {
+public class TicketService {
 
     //TODO
     private static final Logger LOGGER = LogManager.getLogger(TicketService.class.getName());
@@ -40,7 +39,6 @@ public class TicketService implements ITicketService {
     private ILogic logic;
 
 
-    @Override
     @Transactional
     public boolean purchaseTicket(Long userId, Long expoId, Long ticketsAmount) {
         expoDao = factory.getExpoDao();
@@ -74,14 +72,12 @@ public class TicketService implements ITicketService {
         return true;
     }
 
-    @Override
     public Long sumPurchasedTicketsByExpoId(Long expoId) {
         //TODO REWRITE TO ONE INITIALIZATION
         ticketDao = factory.getTicketDao();
         return ticketDao.sumPurchasedTicketsByExpoId(expoId);
     }
 
-    @Override
     public List<Ticket> findAllTicketsByUserId(Long userId) {
         //TODO REWRITE TO ONE INITIALIZATION
         ticketDao = factory.getTicketDao();

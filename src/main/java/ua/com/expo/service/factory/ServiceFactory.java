@@ -11,8 +11,6 @@ import ua.com.expo.service.serviceImpl.*;
  */
 public class ServiceFactory {
 
-    //TODO refactoring
-
     private static final UserService userService = new UserService();
     private static final ThemeService themeService = new ThemeService();
     private static final ExpoService expoService = new ExpoService();

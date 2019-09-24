@@ -27,7 +27,7 @@ public class LocalizationCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String ua = "uk_UA";
         String us = "en_US";
         boolean result = false;

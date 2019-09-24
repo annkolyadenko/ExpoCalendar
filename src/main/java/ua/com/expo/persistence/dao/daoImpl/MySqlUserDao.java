@@ -5,7 +5,7 @@ import ua.com.expo.exception_draft.RuntimeSqlException;
 import ua.com.expo.persistence.connection.ConnectionWrapper;
 import ua.com.expo.persistence.dao.IUserDao;
 import ua.com.expo.persistence.dao.mapper.Mapper;
-import ua.com.expo.transaction.TransactionUtil;
+import ua.com.expo.transaction.util.TransactionUtil;
 import ua.com.expo.util.resource.ConfigurationManager;
 
 import java.sql.*;

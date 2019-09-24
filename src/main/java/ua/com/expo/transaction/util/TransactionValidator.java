@@ -1,6 +1,8 @@
-package ua.com.expo.transaction;
+package ua.com.expo.transaction.util;
 
-import ua.com.expo.service.utils.TransactionExecutable;
+import ua.com.expo.transaction.TransactionExecutable;
+import ua.com.expo.transaction.Transactional;
+
 
 public class TransactionValidator {
 

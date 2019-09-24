@@ -11,15 +11,10 @@ import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
 import ua.com.expo.persistence.dao.IExpoDao;
 import ua.com.expo.persistence.dao.IShowroomDao;
 import ua.com.expo.persistence.dao.IThemeDao;
-import ua.com.expo.service.IExpoService;
 import ua.com.expo.util.time.IConverter;
 import ua.com.expo.util.time.TimeConverter;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -27,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class ExpoService implements IExpoService {
+public class ExpoService {
 
     private static final Logger LOGGER = LogManager.getLogger(ExpoService.class.getName());
     private static AbstractDaoFactory factory = MySqlDaoFactory.getInstance();
@@ -38,25 +33,21 @@ public class ExpoService implements IExpoService {
     private IThemeDao themeDao;
 
 
-    @Override
     public List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) {
         expoDao = factory.getExpoDao();
         return expoDao.findAllExpoByThemeIdAndDate(id, time);
     }
 
-    @Override
     public List<Expo> findAllExpoByShowroomId(Long id) {
         expoDao = factory.getExpoDao();
         return expoDao.findAllExpoByShowroomId(id);
     }
 
-    @Override
     public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp time) {
         expoDao = factory.getExpoDao();
         return expoDao.findAllExpoByShowroomIdAndDate(id, time);
     }
 
-    @Override
     public boolean createExpo(Long showroomId, Long themeId, String date, Long price, String info) {
         expoDao = factory.getExpoDao();
         showroomDao = factory.getShowroomDao();

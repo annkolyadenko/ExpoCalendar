@@ -28,7 +28,7 @@ public class GetAllTicketsCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         //TODO CHECK IF EXIST
         User user = (User) session.getAttribute("authorizedUser");

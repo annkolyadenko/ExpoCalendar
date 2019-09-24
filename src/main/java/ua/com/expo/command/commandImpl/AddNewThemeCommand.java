@@ -22,7 +22,7 @@ public class AddNewThemeCommand implements Command {
 
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.addTheme");
     }
 }

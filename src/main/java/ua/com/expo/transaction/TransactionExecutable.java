@@ -1,4 +1,4 @@
-package ua.com.expo.service.utils;
+package ua.com.expo.transaction;
 
 public interface TransactionExecutable {
 

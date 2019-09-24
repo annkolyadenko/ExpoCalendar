@@ -31,7 +31,7 @@ public class ApproveNewThemeCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String theme = request.getParameter("theme");
         boolean result = false;
         List<Theme> themes = null;

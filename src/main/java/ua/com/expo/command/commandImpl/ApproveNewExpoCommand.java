@@ -28,7 +28,7 @@ public class ApproveNewExpoCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         boolean result = false;
         Long showroomId = Long.valueOf(request.getParameter("showroomId"));
         LOGGER.debug(showroomId);

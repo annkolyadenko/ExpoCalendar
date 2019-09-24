@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class EmptyCommand implements Command {
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         throw new RuntimeException("Runtime exception");
     }
 }

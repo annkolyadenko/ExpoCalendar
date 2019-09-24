@@ -1,4 +1,4 @@
-package ua.com.expo.transaction;
+package ua.com.expo.transaction.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

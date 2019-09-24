@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class ReturnToHomePageCommand implements Command {
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
     }
 }

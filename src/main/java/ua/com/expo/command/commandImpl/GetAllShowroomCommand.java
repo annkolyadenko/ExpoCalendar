@@ -27,7 +27,7 @@ public class GetAllShowroomCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         List<Showroom> showrooms = showroomService.findAllShowroom();
         LOGGER.debug(showrooms.size());
         if (!showrooms.isEmpty()) {

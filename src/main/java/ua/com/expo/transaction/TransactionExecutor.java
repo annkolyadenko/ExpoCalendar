@@ -1,11 +1,12 @@
-package ua.com.expo.service.utils;
+package ua.com.expo.transaction;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.com.expo.exception_draft.RuntimeServiceException;
 import ua.com.expo.exception_draft.RuntimeSqlException;
-import ua.com.expo.transaction.TransactionUtil;
-import ua.com.expo.transaction.TransactionValidator;
+import ua.com.expo.transaction.util.TransactionUtil;
+import ua.com.expo.transaction.util.TransactionValidator;
+
 
 public class TransactionExecutor<T> {
 

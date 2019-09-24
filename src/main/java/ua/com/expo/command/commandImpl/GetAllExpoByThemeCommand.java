@@ -25,7 +25,7 @@ public class GetAllExpoByThemeCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         Long themeId = Long.parseLong(request.getParameter("themeId"));
         String chosenDate = request.getParameter("chosenDate");
         List<Expo> list = expoService.findAllExpoByThemeIdAndDate(themeId, timeConverter.convertStringDateToDatabase(chosenDate));
