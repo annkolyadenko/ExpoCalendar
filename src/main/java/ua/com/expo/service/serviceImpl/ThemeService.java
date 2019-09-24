@@ -21,13 +21,13 @@ public class ThemeService implements IThemeService {
     private IThemeDao dao;
 
     @Override
-    public List<Theme> findAllThemes() throws SQLException, IOException, ClassNotFoundException {
+    public List<Theme> findAllThemes() {
         dao = factory.getThemeDao();
         return dao.findAll();
     }
 
     @Override
-    public boolean createTheme(String theme) throws NoSuchAlgorithmException, SQLException, ClassNotFoundException, InvalidKeySpecException, IOException {
+    public boolean createTheme(String theme) {
         return dao.save(new Theme.Builder().name(theme).build());
     }
 }

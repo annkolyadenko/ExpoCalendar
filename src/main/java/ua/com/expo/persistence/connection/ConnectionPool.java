@@ -3,6 +3,9 @@ package ua.com.expo.persistence.connection;
 import ua.com.expo.exception_draft.RuntimeSqlException;
 import ua.com.expo.file.DataBaseSchema;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -16,6 +19,7 @@ import java.sql.SQLException;
 public enum ConnectionPool {
     INSTANCE;
     private DataSource dataSource;
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class.getName());
 
     ConnectionPool() {
         try {
@@ -24,7 +28,7 @@ public enum ConnectionPool {
             dataSource = (DataSource) envContext.lookup(DataBaseSchema.name);
         } catch (NamingException e) {
             e.printStackTrace();
-            throw new RuntimeSqlException("Якось так");
+            throw new RuntimeSqlException(e);
         }
     }
 
@@ -32,10 +36,15 @@ public enum ConnectionPool {
         return INSTANCE;
     }
 
-    public Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+    public Connection getConnection() {
+        try {
+            LOGGER.info("Connection established");
+            return dataSource.getConnection();
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
+        }
     }
-
 }
 
 

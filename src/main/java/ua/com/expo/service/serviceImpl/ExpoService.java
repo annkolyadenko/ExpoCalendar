@@ -39,25 +39,25 @@ public class ExpoService implements IExpoService {
 
 
     @Override
-    public List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) throws SQLException, IOException, ClassNotFoundException {
+    public List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) {
         expoDao = factory.getExpoDao();
         return expoDao.findAllExpoByThemeIdAndDate(id, time);
     }
 
     @Override
-    public List<Expo> findAllExpoByShowroomId(Long id) throws SQLException, IOException, ClassNotFoundException {
+    public List<Expo> findAllExpoByShowroomId(Long id) {
         expoDao = factory.getExpoDao();
         return expoDao.findAllExpoByShowroomId(id);
     }
 
     @Override
-    public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp time) throws SQLException, IOException, ClassNotFoundException {
+    public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp time) {
         expoDao = factory.getExpoDao();
         return expoDao.findAllExpoByShowroomIdAndDate(id, time);
     }
 
     @Override
-    public boolean createExpo(Long showroomId, Long themeId, String date, Long price, String info) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException {
+    public boolean createExpo(Long showroomId, Long themeId, String date, Long price, String info) {
         expoDao = factory.getExpoDao();
         showroomDao = factory.getShowroomDao();
         themeDao = factory.getThemeDao();

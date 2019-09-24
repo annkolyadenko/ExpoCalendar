@@ -6,8 +6,6 @@ import ua.com.expo.persistence.dao.factory.MySqlDaoFactory;
 import ua.com.expo.persistence.dao.IShowroomDao;
 import ua.com.expo.service.IShowroomService;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class ShowroomService implements IShowroomService {
@@ -15,7 +13,7 @@ public class ShowroomService implements IShowroomService {
     private IShowroomDao dao;
 
     @Override
-    public List<Showroom> findAllShowroom() throws SQLException, IOException, ClassNotFoundException {
+    public List<Showroom> findAllShowroom() {
         dao = MySqlDaoFactory.getInstance().getShowroomDao();
         return dao.findAll();
     }

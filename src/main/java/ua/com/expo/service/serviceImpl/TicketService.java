@@ -18,11 +18,7 @@ import ua.com.expo.persistence.dao.ITicketDao;
 import ua.com.expo.persistence.dao.IUserDao;
 import ua.com.expo.service.ITicketService;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;

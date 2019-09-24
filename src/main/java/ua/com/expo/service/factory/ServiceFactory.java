@@ -13,16 +13,12 @@ public class ServiceFactory {
 
     //TODO refactoring
 
-    private static final RoleService roleService = new RoleService();
     private static final UserService userService = new UserService();
     private static final ThemeService themeService = new ThemeService();
     private static final ExpoService expoService = new ExpoService();
     private static final TicketService ticketService = new TicketService();
     private static final ShowroomService showroomService = new ShowroomService();
 
-    public static RoleService getRoleService() {
-        return roleService;
-    }
 
     public static UserService getUserService() {
         return userService;
