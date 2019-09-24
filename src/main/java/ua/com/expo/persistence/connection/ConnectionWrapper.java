@@ -55,20 +55,20 @@ public class ConnectionWrapper {
             try {
                 ps.close();
             } catch (SQLException e) {
-                LOGGER.error("Can't close connection", e);
+                LOGGER.error("Can't close Prepared Statement", e);
                 throw new RuntimeSqlException(e);
             }
         }
     }
 
     public void closeConnection() {
-        if (Objects.nonNull(connection)) {
-            try {
+        try {
+            if (Objects.nonNull(connection) && connection.getAutoCommit()) {
                 connection.close();
-            } catch (SQLException e) {
-                LOGGER.error("Can't close connection", e);
-                throw new RuntimeSqlException(e);
             }
+        } catch (SQLException e) {
+            LOGGER.error("Can't close Connection", e);
+            throw new RuntimeSqlException(e);
         }
     }
 }

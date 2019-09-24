@@ -7,7 +7,7 @@ import ua.com.expo.exception_draft.RuntimeSqlException;
 import ua.com.expo.persistence.connection.ConnectionWrapper;
 import ua.com.expo.persistence.dao.ITicketDao;
 import ua.com.expo.persistence.dao.mapper.Mapper;
-import ua.com.expo.transaction_draft.TransactionUtil;
+import ua.com.expo.transaction.TransactionUtil;
 import ua.com.expo.util.resource.ConfigurationManager;
 import ua.com.expo.util.time.TimeConverter;
 

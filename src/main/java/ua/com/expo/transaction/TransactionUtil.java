@@ -1,4 +1,4 @@
-package ua.com.expo.transaction_draft;
+package ua.com.expo.transaction;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +14,7 @@ public class TransactionUtil {
 
     /**
      * ThreadLocal is conveniently used to provide each thread with its own instance of a database connection.
+     * Each thread that accesses one (via its get or set method) has its own, independently initialized copy of the variable
      * Because the specification does not explicitly say that classes that implement the Connection interface must be thread safe,
      * it is reasonable to isolate each instance of the connection in each thread.
      */
@@ -54,13 +55,13 @@ public class TransactionUtil {
         ConnectionWrapper cw = threadLocalConnection.get();
         LOGGER.info("Transaction finished");
         if (Objects.isNull(cw)) {
-            throw new RuntimeSqlException();
+            throw new RuntimeSqlException("Connection is null");
         }
         try {
             cw.getConnection().close();
 
         } catch (SQLException e) {
-            throw new RuntimeSqlException();
+            throw new RuntimeSqlException(e);
         }
         threadLocalConnection.set(null);
     }
@@ -73,9 +74,9 @@ public class TransactionUtil {
         }
         try {
             cw.getConnection().rollback();
-
+            LOGGER.info("rollback() succeeded");
         } catch (SQLException e) {
-            throw new RuntimeSqlException();
+            throw new RuntimeSqlException(e);
         }
     }
 
@@ -83,12 +84,13 @@ public class TransactionUtil {
         ConnectionWrapper cw = threadLocalConnection.get();
         LOGGER.info("Transaction succeeded: commit() invocation");
         if (Objects.isNull(cw)) {
-            throw new RuntimeSqlException();
+            throw new RuntimeSqlException("Connection is null");
         }
         try {
             cw.getConnection().commit();
+            LOGGER.info("commit() succeeded");
         } catch (SQLException e) {
-            throw new RuntimeSqlException();
+            throw new RuntimeSqlException(e);
         }
     }
 
@@ -96,7 +98,7 @@ public class TransactionUtil {
         ConnectionWrapper cw = threadLocalConnection.get();
         LOGGER.info("Connection successfully received from ThreadLocal<ConnectionWrapper>");
         if (Objects.nonNull(cw)) {
-            throw new RuntimeSqlException();
+            return cw;
         }
         try {
             Connection connection = connectionPool.getConnection();

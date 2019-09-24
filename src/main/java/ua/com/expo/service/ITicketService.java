@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ITicketService {
 
-    Ticket purchaseTicket(Long userId, Long expoId, Long ticketsAmount) throws NoSuchAlgorithmException, SQLException, ClassNotFoundException, InvalidKeySpecException, IOException;
+    boolean purchaseTicket(Long userId, Long expoId, Long ticketsAmount) throws NoSuchAlgorithmException, SQLException, ClassNotFoundException, InvalidKeySpecException, IOException;
 
     Long sumPurchasedTicketsByExpoId(Long expoId) throws SQLException, IOException, ClassNotFoundException;
 

@@ -8,7 +8,6 @@
               username="root"
               password="root"
               driverClassName="com.mysql.cj.jdbc.Driver"
-              defaultTransactionIsolation="SERIALIZABLE"
               url="jdbc:mysql://localhost:3306/expo_schema?useSSL=false"
     />
 </Context>

@@ -17,6 +17,9 @@ import ua.com.expo.persistence.dao.IPaymentDao;
 import ua.com.expo.persistence.dao.ITicketDao;
 import ua.com.expo.persistence.dao.IUserDao;
 import ua.com.expo.service.ITicketService;
+import ua.com.expo.service.utils.TransactionExecutable;
+import ua.com.expo.service.utils.TransactionExecutor;
+import ua.com.expo.transaction.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -29,6 +32,7 @@ public class TicketService implements ITicketService {
     private static final Logger LOGGER = LogManager.getLogger(TicketService.class.getName());
     private static AbstractDaoFactory factory = MySqlDaoFactory.getInstance();
     private static ModelMapper modelMapper = new ModelMapper();
+    private final TransactionExecutor<Payment> transactionExecutor = new TransactionExecutor<>();
     private ITicketDao ticketDao;
     private IPaymentDao paymentDao;
     private IExpoDao expoDao;
@@ -37,27 +41,37 @@ public class TicketService implements ITicketService {
 
 
     @Override
-    public Ticket purchaseTicket(Long userId, Long expoId, Long ticketsAmount) {
+    @Transactional
+    public boolean purchaseTicket(Long userId, Long expoId, Long ticketsAmount) {
         expoDao = factory.getExpoDao();
+        paymentDao = factory.getPaymentDao();
+        userDao = factory.getUserDao();
+        ticketDao = factory.getTicketDao();
+
         Optional<Expo> expo = expoDao.findExpoById(expoId);
         Expo ex = expo.orElseThrow(() -> new RuntimeException("Can't find expo by id"));
-        //TODO
-        paymentDao = factory.getPaymentDao();
-        logic = new LogicImpl();
-        BigDecimal value = logic.totalValue(ex.getPrice(), ticketsAmount);
-        Payment payment = new Payment.Builder().value(value).build();
-        Long paymentId = paymentDao.savePaymentWithGeneratedKey(payment);
-        //TODO
-        payment.setId(paymentId);
-        userDao = factory.getUserDao();
         Optional<User> user = userDao.findUserById(userId);
         User us = user.orElseThrow(() -> new RuntimeException("Can't find user by id"));
-        ticketDao = factory.getTicketDao();
+
+        logic = new LogicImpl();
+        BigDecimal value = logic.totalValue(ex.getPrice(), ticketsAmount);
+
         Instant instant = Instant.now();
-        Ticket ticket = new Ticket.Builder().expo(ex).user(us).payment(payment).time(instant).amount(ticketsAmount).info(TicketInfo.INFO.toString()).build();
-        //TODO
-        ticketDao.save(ticket);
-        return ticket;
+
+        transactionExecutor.perform((new TransactionExecutable() {
+            @Override
+            public void execute() {
+                Payment payment = new Payment.Builder().value(value).build();
+                Long paymentId = paymentDao.savePaymentWithGeneratedKey(payment);
+                payment.setId(paymentId);
+                LOGGER.debug(payment + "Payment");
+                Ticket ticket = new Ticket.Builder().expo(ex).user(us).payment(payment).time(instant).amount(ticketsAmount).info(TicketInfo.INFO.toString()).build();
+                LOGGER.debug(ticket + "Ticket");
+                boolean result = ticketDao.save(ticket);
+                LOGGER.debug("RESULT :" + result);
+            }
+        }));
+        return true;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ua.com.expo.transaction_draft;
+package ua.com.expo.transaction;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
