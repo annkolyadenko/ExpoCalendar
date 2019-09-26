@@ -34,7 +34,8 @@ public class GetAllExpoByShowroomCommand implements Command {
             request.setAttribute("expos", expos);
             return ConfigurationManager.PATH_MANAGER.getProperty("path.page.expos");
         }
-        //STUB!!!
-        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.shitHappens");
+        request.setAttribute("isError", true);
+        request.setAttribute("errorMessage", "No expos found");
+        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.expos");
     }
 }

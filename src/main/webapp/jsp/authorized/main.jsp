@@ -18,6 +18,14 @@
 <div class="container" style="height: 100%">
     <br>
     <h1><fmt:message key="status.authorized" bundle="${rb}"/>!!!</h1>
+    <c:if test="${requestScope.isError}">
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <p style="color: red">${requestScope.errorMessage}</p>
+            </div>
+        </div>
+    </c:if>
+
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>

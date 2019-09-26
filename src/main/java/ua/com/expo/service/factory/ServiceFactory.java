@@ -2,39 +2,47 @@ package ua.com.expo.service.factory;
 
 import ua.com.expo.service.serviceImpl.*;
 
-/**
- * Static field Singleton for Service factory
- * Eager initialization
- * If the program will always need an instance, or if the cost of creating the instance is not too large
- * in terms of time/resources, the programmer can switch to eager initialization, which always creates an instance
- * when the class is loaded into the JVM.
- */
 public class ServiceFactory {
 
-    private static final UserService userService = new UserService();
-    private static final ThemeService themeService = new ThemeService();
-    private static final ExpoService expoService = new ExpoService();
-    private static final TicketService ticketService = new TicketService();
-    private static final ShowroomService showroomService = new ShowroomService();
+    private final UserService userService;
+    private final ThemeService themeService;
+    private final ExpoService expoService;
+    private final TicketService ticketService;
+    private final ShowroomService showroomService;
 
+    private ServiceFactory() {
+        this.userService = new UserService();
+        this.themeService = new ThemeService();
+        this.expoService = new ExpoService();
+        this.ticketService = new TicketService();
+        this.showroomService = new ShowroomService();
+    }
 
-    public static UserService getUserService() {
+    private static class ServiceFactoryHolder {
+        static ServiceFactory serviceFactory = new ServiceFactory();
+    }
+
+    public static ServiceFactory getInstance() {
+        return ServiceFactoryHolder.serviceFactory;
+    }
+
+    public UserService getUserService() {
         return userService;
     }
 
-    public static ThemeService getThemeService() {
+    public ThemeService getThemeService() {
         return themeService;
     }
 
-    public static ExpoService getExpoService() {
+    public ExpoService getExpoService() {
         return expoService;
     }
 
-    public static TicketService getTicketService() {
+    public TicketService getTicketService() {
         return ticketService;
     }
 
-    public static ShowroomService getShowroomService() {
+    public ShowroomService getShowroomService() {
         return showroomService;
     }
 }

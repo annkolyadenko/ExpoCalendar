@@ -10,12 +10,26 @@ import ua.com.expo.persistence.dao.daoImpl.*;
  */
 public class MySqlDaoFactory extends AbstractDaoFactory {
 
+    private final IRoleDao roleDao;
+    private final IUserDao userDao;
+    private final IThemeDao themeDao;
+    private final IExpoDao expoDao;
+    private final IShowroomDao showroomDao;
+    private final IPaymentDao paymentDao;
+    private final ITicketDao ticketDao;
+
     private MySqlDaoFactory() {
+        this.roleDao = new MySqlRoleDao();
+        this.userDao = new MySqlUserDao();
+        this.themeDao = new MySqlThemeDao();
+        this.expoDao = new MySqlExpoDao();
+        this.showroomDao = new MySqlShowroomDao();
+        this.paymentDao = new MySqlPaymentDao();
+        this.ticketDao = new MySqlTicketDao();
     }
 
     private static class MySqlDaoFactoryHolder {
-
-        public static MySqlDaoFactory mySqlFactory = new MySqlDaoFactory();
+        static MySqlDaoFactory mySqlFactory = new MySqlDaoFactory();
     }
 
     public static MySqlDaoFactory getInstance() {
@@ -24,36 +38,36 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
 
     @Override
     public IRoleDao getRoleDao() {
-        return new MySqlRoleDao();
+        return roleDao;
     }
 
     @Override
     public IUserDao getUserDao() {
-        return new MySqlUserDao();
+        return userDao;
     }
 
     @Override
     public IThemeDao getThemeDao() {
-        return new MySqlThemeDao();
+        return themeDao;
     }
 
     @Override
     public IExpoDao getExpoDao() {
-        return new MySqlExpoDao();
+        return expoDao;
     }
 
     @Override
     public IShowroomDao getShowroomDao() {
-        return new MySqlShowroomDao();
+        return showroomDao;
     }
 
     @Override
     public IPaymentDao getPaymentDao() {
-        return new MySqlPaymentDao();
+        return paymentDao;
     }
 
     @Override
     public ITicketDao getTicketDao() {
-        return new MySqlTicketDao();
+        return ticketDao;
     }
 }

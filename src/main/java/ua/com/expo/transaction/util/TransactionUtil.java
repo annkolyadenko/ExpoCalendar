@@ -28,7 +28,7 @@ public class TransactionUtil {
     }
 
     private static class Holder {
-        static final TransactionUtil INSTANCE = new TransactionUtil();
+        static TransactionUtil INSTANCE = new TransactionUtil();
     }
 
     public static TransactionUtil getInstance() {

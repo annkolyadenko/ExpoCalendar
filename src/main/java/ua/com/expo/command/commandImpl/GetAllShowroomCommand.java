@@ -34,7 +34,8 @@ public class GetAllShowroomCommand implements Command {
             request.setAttribute("showrooms", showrooms);
             return ConfigurationManager.PATH_MANAGER.getProperty("path.page.showrooms");
         }
-        //STUB!!!
-        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.shitHappens");
+        request.setAttribute("isError", true);
+        request.setAttribute("errorMessage", "No showrooms found");
+        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
     }
 }
