@@ -11,13 +11,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.com.expo.util.resource.ConfigurationManager;
 
-public class AuthorizationFilter implements Filter {
-    private static final Logger LOGGER = LogManager.getLogger(AuthorizationFilter.class.getName());
+public class AuthenticationFilter implements Filter {
+    private static final Logger LOGGER = LogManager.getLogger(AuthenticationFilter.class.getName());
     private ServletContext context;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        LOGGER.info("AuthorizationFilter successfully initialized");
+    public void init(FilterConfig filterConfig) {
+        LOGGER.info("AuthenticationFilter successfully initialized");
         context = filterConfig.getServletContext();
     }
 
@@ -35,6 +35,6 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void destroy() {
-        LOGGER.info("AuthorizationFilter successfully destroyed");
+        LOGGER.info("AuthenticationFilter successfully destroyed");
     }
 }

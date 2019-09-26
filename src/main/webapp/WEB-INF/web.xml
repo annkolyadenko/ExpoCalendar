@@ -50,11 +50,19 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter>
-        <filter-name>AuthorizationFilter</filter-name>
-        <filter-class>ua.com.expo.filter.AuthorizationFilter</filter-class>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>ua.com.expo.filter.AuthenticationFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>AuthorizationFilter</filter-name>
+        <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/jsp/authorized/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>AuthorisationFilter</filter-name>
+        <filter-class>ua.com.expo.filter.AuthorisationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorisationFilter</filter-name>
+        <url-pattern>/jsp/authorized/admin/*</url-pattern>
     </filter-mapping>
 </web-app>
