@@ -22,9 +22,10 @@ public class GetAllTicketsCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(GetAllTicketsCommand.class.getName());
     private TicketService ticketService;
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public GetAllTicketsCommand() {
-        this.ticketService = ServiceFactory.getTicketService();
+        this.ticketService = serviceFactory.getTicketService();
     }
 
     @Override

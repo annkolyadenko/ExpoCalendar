@@ -16,9 +16,10 @@ public class PurchaseTicketCommand implements Command {
 
     private TicketService ticketService;
     private static final Logger LOGGER = LogManager.getLogger(PurchaseTicketCommand.class.getName());
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public PurchaseTicketCommand() {
-        this.ticketService = ServiceFactory.getTicketService();
+        this.ticketService = serviceFactory.getTicketService();
     }
 
     @Override

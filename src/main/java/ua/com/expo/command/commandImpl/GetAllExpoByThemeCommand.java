@@ -19,9 +19,10 @@ public class GetAllExpoByThemeCommand implements Command {
     private ExpoService expoService;
     private static final Logger LOGGER = Logger.getLogger(GetAllThemesCommand.class.getName());
     private TimeConverter timeConverter = new TimeConverter();
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public GetAllExpoByThemeCommand() {
-        this.expoService = ServiceFactory.getExpoService();
+        this.expoService = serviceFactory.getExpoService();
     }
 
     @Override

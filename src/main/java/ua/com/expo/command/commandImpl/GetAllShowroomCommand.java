@@ -21,9 +21,10 @@ public class GetAllShowroomCommand implements Command {
 
     private ShowroomService showroomService;
     private static final Logger LOGGER = LogManager.getLogger(GetAllShowroomCommand.class.getName());
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public GetAllShowroomCommand() {
-        this.showroomService = ServiceFactory.getShowroomService();
+        this.showroomService = serviceFactory.getShowroomService();
     }
 
     @Override

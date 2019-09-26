@@ -21,9 +21,10 @@ public class GetAllExpoByShowroomCommand implements Command {
 
     private ExpoService expoService;
     private static final Logger LOGGER = Logger.getLogger(GetAllExpoByShowroomCommand.class.getName());
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public GetAllExpoByShowroomCommand() {
-        this.expoService = ServiceFactory.getExpoService();
+        this.expoService = serviceFactory.getExpoService();
     }
 
     @Override

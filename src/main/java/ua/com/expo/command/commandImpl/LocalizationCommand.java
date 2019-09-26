@@ -16,9 +16,10 @@ import ua.com.expo.service.serviceImpl.UserService;
 public class LocalizationCommand implements Command {
     private UserService userService;
     private static final Logger LOGGER = LogManager.getLogger(LocalizationCommand.class.getName());
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public LocalizationCommand() {
-        this.userService = ServiceFactory.getUserService();
+        this.userService = serviceFactory.getUserService();
     }
 
     @Override

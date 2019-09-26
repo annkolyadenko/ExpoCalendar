@@ -1,6 +1,7 @@
 package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
+import ua.com.expo.controller.context.Context;
 import ua.com.expo.entity.Showroom;
 import ua.com.expo.entity.Theme;
 import ua.com.expo.service.factory.ServiceFactory;
@@ -23,10 +24,11 @@ public class AddNewExpoCommand implements Command {
     private ThemeService themeService;
     private ShowroomService showroomService;
     private static final Logger LOGGER = LogManager.getLogger(AddNewExpoCommand.class.getName());
+    private ServiceFactory serviceFactory = Context.getInstance().getServiceFactory();
 
     public AddNewExpoCommand() {
-        this.themeService = ServiceFactory.getThemeService();
-        this.showroomService = ServiceFactory.getShowroomService();
+        this.themeService = serviceFactory.getThemeService();
+        this.showroomService = serviceFactory.getShowroomService();
     }
 
     @Override

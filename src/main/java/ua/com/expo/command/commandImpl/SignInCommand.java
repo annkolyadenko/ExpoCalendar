@@ -25,9 +25,10 @@ public class SignInCommand implements Command {
     private final IRequestParametersValidator requestParametersValidator;
     private final IPasswordHashingValidator passwordHashingValidator;
     private static final Logger LOGGER = LogManager.getLogger(SignInCommand.class.getName());
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public SignInCommand() {
-        this.userService = ServiceFactory.getUserService();
+        this.userService = serviceFactory.getUserService();
         this.requestParametersValidator = RequestParameterValidatorImpl.getInstance();
         this.passwordHashingValidator = PasswordHashingValidatorImpl.getInstance();
     }

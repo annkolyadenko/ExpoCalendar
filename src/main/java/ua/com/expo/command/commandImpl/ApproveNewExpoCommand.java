@@ -22,9 +22,10 @@ public class ApproveNewExpoCommand implements Command {
     private ExpoService expoService;
     private static final Logger LOGGER = LogManager.getLogger(ApproveNewExpoCommand.class.getName());
     TimeConverter timeConverter = new TimeConverter();
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public ApproveNewExpoCommand() {
-        this.expoService = ServiceFactory.getExpoService();
+        this.expoService = serviceFactory.getExpoService();
     }
 
     @Override

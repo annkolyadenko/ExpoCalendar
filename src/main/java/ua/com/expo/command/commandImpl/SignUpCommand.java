@@ -22,9 +22,10 @@ public class SignUpCommand implements Command {
     private final UserService userService;
     private final IRequestParametersValidator requestParametersValidator;
     private static final Logger LOGGER = LogManager.getLogger(SignUpCommand.class.getName());
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public SignUpCommand() {
-        this.userService = ServiceFactory.getUserService();
+        this.userService = serviceFactory.getUserService();
         this.requestParametersValidator = RequestParameterValidatorImpl.getInstance();
     }
 

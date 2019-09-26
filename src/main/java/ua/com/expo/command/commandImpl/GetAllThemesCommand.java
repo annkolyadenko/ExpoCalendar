@@ -20,9 +20,10 @@ public class GetAllThemesCommand implements Command {
 
     private ThemeService themeService;
     private static final Logger LOGGER = Logger.getLogger(GetAllThemesCommand.class.getName());
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public GetAllThemesCommand() {
-        this.themeService = ServiceFactory.getThemeService();
+        this.themeService = serviceFactory.getThemeService();
     }
 
     @Override

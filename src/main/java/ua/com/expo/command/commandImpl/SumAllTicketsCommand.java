@@ -20,9 +20,10 @@ public class SumAllTicketsCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(SumAllTicketsCommand.class.getName());
     private TicketService ticketService;
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public SumAllTicketsCommand() {
-        this.ticketService = ServiceFactory.getTicketService();
+        this.ticketService = serviceFactory.getTicketService();
     }
 
     @Override

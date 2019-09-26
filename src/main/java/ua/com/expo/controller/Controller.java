@@ -22,17 +22,13 @@ public class Controller extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        //TODO!!! how to put init parameters
         LOGGER.info("Servlet successfully initialized");
-        /*ConnectionPool.getInstance();*/
     }
 
-    //TO DO!!!
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = null;
         try {
-            String s = req.getParameter("command");
             path = handler(req, resp);
         } catch (SQLException | ClassNotFoundException | IOException | InvalidKeySpecException | NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -12,10 +12,6 @@ import ua.com.expo.util.resource.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -24,9 +20,10 @@ public class ApproveNewThemeCommand implements Command {
     private ThemeService themeService;
     private static final Logger LOGGER = LogManager.getLogger(ApproveNewThemeCommand.class.getName());
     private ILogic logic;
+    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     public ApproveNewThemeCommand() {
-        this.themeService = ServiceFactory.getThemeService();
+        this.themeService = serviceFactory.getThemeService();
         logic = new LogicImpl();
     }
 
