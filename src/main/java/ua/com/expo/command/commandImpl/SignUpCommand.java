@@ -1,8 +1,9 @@
 package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
-import ua.com.expo.entity.User;
-import ua.com.expo.service.factory.ServiceFactory;
+import ua.com.expo.controller.context.Context;
+import ua.com.expo.dto.UserDto;
+import ua.com.expo.exception_draft.RuntimeServiceException;
 import ua.com.expo.service.serviceImpl.UserService;
 import ua.com.expo.util.resource.ConfigurationManager;
 
@@ -19,32 +20,34 @@ import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
 
 public class SignUpCommand implements Command {
 
-    private final UserService userService;
-    private final IRequestParametersValidator requestParametersValidator;
     private static final Logger LOGGER = LogManager.getLogger(SignUpCommand.class.getName());
-    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private final UserService userService;
 
     public SignUpCommand() {
-        this.userService = serviceFactory.getUserService();
-        this.requestParametersValidator = RequestParameterValidatorImpl.getInstance();
+        this.userService = Context.getInstance().getServiceFactory().getUserService();
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        IRequestParametersValidator requestParametersValidator = RequestParameterValidatorImpl.getInstance();
         HttpSession session = request.getSession();
         String name = request.getParameter("userName");
         String email = request.getParameter("email");
         String language = (String) session.getAttribute("locale");
         LOGGER.debug("LOCALE :" + language);
         String password = request.getParameter("password");
-        if (requestParametersValidator.emailPasswordValidate(email, password)) {
-            User user = userService.findUserByEmail(email);
-            if (Objects.isNull(user)) {
-                user = userService.signUpUser(name, email, language, password);
-                if (Objects.nonNull(user)) {
-                    session.setAttribute("authorizedUser", user);
+        if (requestParametersValidator.emailPasswordValidate(email, password) & requestParametersValidator.isNotNull(name)) {
+            try {
+                UserDto userDto = userService.signUpUser(name, email, language, password);
+                if (Objects.nonNull(userDto)) {
+                    session.setAttribute("authorizedUser", userDto);
                     return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
                 }
+            } catch (RuntimeServiceException e) {
+                //TODO NEED TO SOLVE SEND-REDIRECT PROBLEM
+                LOGGER.debug("CAUGHT in SignUp Command" + e.getMessage());
+                request.setAttribute("isError", true);
+                request.setAttribute("errorMessage", e.getMessage());
             }
         }
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.index");

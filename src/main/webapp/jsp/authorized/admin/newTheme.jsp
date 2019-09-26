@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Hp
-  Date: 16.09.2019
-  Time: 21:49
+  Date: 17.09.2019
+  Time: 15:31
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -26,6 +26,20 @@
             </button>
         </label>
     </form>
+    <c:if test="${requestScope.isError}">
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <p style="color: red">${requestScope.errorMessage}</p>
+            </div>
+        </div>
+    </c:if>
+    <c:if test="${requestScope.status}">
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <p>${requestScope.status}</p>
+            </div>
+        </div>
+    </c:if>
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>

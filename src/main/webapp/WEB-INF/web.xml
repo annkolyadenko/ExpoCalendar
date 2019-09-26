@@ -7,6 +7,18 @@
     <listener>
         <listener-class>ua.com.expo.controller.context.ApplicationServletContextListener</listener-class>
     </listener>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/jsp/errors/403error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/errors/404error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsp/errors/500error.jsp</location>
+    </error-page>
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>ua.com.expo.controller.Controller</servlet-class>

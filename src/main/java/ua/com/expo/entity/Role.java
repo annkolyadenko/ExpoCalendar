@@ -71,10 +71,9 @@ public class Role extends Entity {
 
     @Override
     public String toString() {
-        return type;
-        /*StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         sb.append("type: " + type);
         sb.append(", id: " + this.getId());
-        return sb.toString();*/
+        return sb.toString();
     }
 }

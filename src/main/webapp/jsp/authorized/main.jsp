@@ -25,7 +25,13 @@
             </div>
         </div>
     </c:if>
-
+    <c:if test="${requestScope.emptyList}">
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <p>${requestScope.emptyList}</p>
+            </div>
+        </div>
+    </c:if>
 </div>
 </body>
 <c:import url="/jsp/components/footer.jsp"></c:import>

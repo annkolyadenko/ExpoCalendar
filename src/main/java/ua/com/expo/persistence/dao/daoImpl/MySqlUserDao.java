@@ -101,17 +101,20 @@ public class MySqlUserDao implements IUserDao {
     }
 
     @Override
-    public boolean updateLanguageByUserId(Long id, String language) {
+    public boolean saveLanguageByUserId(Long id, String language) {
         ConnectionWrapper con = null;
         PreparedStatement ps = null;
         boolean flag = false;
         try {
-            ps = con.createPreparedStatement(ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.updateLang"));
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.updateLang");
             con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
             ps.setString(1, language);
             ps.setLong(2, id);
+            LOGGER.debug("Prepared Statement check :" + ps);
             ps.executeUpdate();
             flag = true;
+            LOGGER.debug("DAO check :" + flag);
         } catch (SQLException e) {
             LOGGER.error(e);
             throw new RuntimeSqlException(e);

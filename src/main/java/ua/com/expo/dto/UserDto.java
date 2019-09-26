@@ -89,6 +89,17 @@ public class UserDto extends AbstractDto {
 
     @Override
     public String toString() {
+        return "UserDto{" +
+                "role=" + role +
+                ", id='" + this.getId() + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", language='" + language + '\'' +
+                '}';
+    }
+
+    /*@Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("User: " + name);
         sb.append(", id: " + this.getId());
@@ -96,5 +107,5 @@ public class UserDto extends AbstractDto {
         sb.append(", login: " + email);
         sb.append(", language: " + language);
         return sb.toString();
-    }
+    }*/
 }

@@ -16,6 +16,8 @@
 </head>
 <body>
 <div class="container" style="height: 100%">
+    <br>
+    <h1><fmt:message key="status.login" bundle="${rb}"/>!!!</h1>
     <c:if test="${requestScope.isError}">
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">

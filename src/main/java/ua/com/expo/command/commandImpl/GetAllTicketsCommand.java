@@ -1,44 +1,50 @@
 package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
+import ua.com.expo.controller.context.Context;
+import ua.com.expo.dto.UserDto;
 import ua.com.expo.entity.Ticket;
 import ua.com.expo.entity.User;
-import ua.com.expo.service.factory.ServiceFactory;
-import ua.com.expo.service.serviceImpl.TicketService;
+import ua.com.expo.service.serviceImpl.VisitorService;
 import ua.com.expo.util.resource.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class GetAllTicketsCommand implements Command {
 
     private static final Logger LOGGER = Logger.getLogger(GetAllTicketsCommand.class.getName());
-    private TicketService ticketService;
-    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private final VisitorService visitorService;
+
 
     public GetAllTicketsCommand() {
-        this.ticketService = serviceFactory.getTicketService();
+        this.visitorService = Context.getInstance().getServiceFactory().getVisitorService();
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        //TODO CHECK IF EXIST
-        User user = (User) session.getAttribute("authorizedUser");
-        Long userId = user.getId();
-        List<Ticket> tickets = ticketService.findAllTicketsByUserId(userId);
-        if (!tickets.isEmpty()) {
-            request.setAttribute("tickets", tickets);
-            return ConfigurationManager.PATH_MANAGER.getProperty("path.page.tickets");
+        UserDto userDto = (UserDto) session.getAttribute("authorizedUser");
+        if (Objects.nonNull(userDto)) {
+            Long userId = userDto.getId();
+            List<Ticket> tickets = visitorService.findAllTicketsByUserId(userId);
+            if (Objects.nonNull(tickets) && !tickets.isEmpty()) {
+                request.setAttribute("tickets", tickets);
+                return ConfigurationManager.PATH_MANAGER.getProperty("path.page.tickets");
+            }
+            request.setAttribute("emptyList", "No tickets found");
+            return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
         }
+        setErrorMessage(request);
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
+    }
+
+    private void setErrorMessage(HttpServletRequest request) {
+        request.setAttribute("isError", true);
+        request.setAttribute("errorMessage", "Internal error occurred. Unable to complete your request. Please, try again later");
     }
 }

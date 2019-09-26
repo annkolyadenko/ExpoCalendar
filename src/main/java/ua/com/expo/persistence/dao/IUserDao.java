@@ -10,7 +10,7 @@ public interface IUserDao {
 
     Long saveUserWithGeneratedKey(User user);
 
-    boolean updateLanguageByUserId(Long id, String language);
+    boolean saveLanguageByUserId(Long id, String language);
 
     boolean save(User user);
 

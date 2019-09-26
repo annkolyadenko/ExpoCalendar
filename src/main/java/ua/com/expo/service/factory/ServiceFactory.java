@@ -5,17 +5,14 @@ import ua.com.expo.service.serviceImpl.*;
 public class ServiceFactory {
 
     private final UserService userService;
-    private final ThemeService themeService;
-    private final ExpoService expoService;
-    private final TicketService ticketService;
-    private final ShowroomService showroomService;
+    private final VisitorService visitorService;
+    private final AdminService adminService;
+
 
     private ServiceFactory() {
         this.userService = new UserService();
-        this.themeService = new ThemeService();
-        this.expoService = new ExpoService();
-        this.ticketService = new TicketService();
-        this.showroomService = new ShowroomService();
+        this.visitorService = new VisitorService();
+        this.adminService = new AdminService();
     }
 
     private static class ServiceFactoryHolder {
@@ -30,19 +27,11 @@ public class ServiceFactory {
         return userService;
     }
 
-    public ThemeService getThemeService() {
-        return themeService;
+    public VisitorService getVisitorService() {
+        return visitorService;
     }
 
-    public ExpoService getExpoService() {
-        return expoService;
-    }
-
-    public TicketService getTicketService() {
-        return ticketService;
-    }
-
-    public ShowroomService getShowroomService() {
-        return showroomService;
+    public AdminService getAdminService() {
+        return adminService;
     }
 }

@@ -28,7 +28,7 @@
                        aria-haspopup="true" aria-expanded="false">
                         Sign in
                     </a>
-                    <form class="dropdown-menu p-1" action="controller" method="POST">
+                    <form class="dropdown-menu p-1" action="controller" method="GET">
                         <input type="hidden" name="command" value="LOGIN"/>
                         <div class="form-group">
                             <label for="loginFormEmail">Email address</label>
@@ -90,6 +90,9 @@
                     </div>
                 </li>
             </ul>
+            <li>
+                <a class="nav-link" href="#">Something else</a>
+            </li>
         </ctg:if-user>
         <ctg:if-user role="visitor">
             <ul class="navbar-nav mr-auto">

@@ -1,15 +1,15 @@
 package ua.com.expo.dto;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class RoleDto extends AbstractDto {
 
     private String type;
-    //to do!
-    private Collection<AbstractDto> list;
 
     public RoleDto() {
+    }
+
+    public RoleDto(Builder builder) {
+        super(builder.id);
+        this.type = builder.type;
     }
 
     public RoleDto(Long id, String type) {
@@ -25,32 +25,32 @@ public class RoleDto extends AbstractDto {
         this.type = type;
     }
 
-    public Collection<AbstractDto> getList() {
-        return list;
-    }
+    public static class Builder {
+        private Long id;
+        private String type;
 
-    public void setList(Collection<AbstractDto> list) {
-        this.list = list;
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder type(String type) {
+            this.type = type;
+            return this;
+        }
+
+        public RoleDto build() {
+            return new RoleDto(this);
+        }
     }
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        RoleDto roleDto = (RoleDto) super.clone();
-        roleDto.setList(cloneList(this.list));
-        return roleDto;
-    }
-
-    private static Collection<AbstractDto> cloneList(Collection<AbstractDto> list) throws CloneNotSupportedException {
-        Collection<AbstractDto> clone = new ArrayList<>(list.size());
-        for (AbstractDto item : list) clone.add((AbstractDto) item.clone());
-        return clone;
+        return super.clone();
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("type: " + type);
-        sb.append(", id: " + this.getId());
-        return sb.toString();
+        return type;
     }
 }

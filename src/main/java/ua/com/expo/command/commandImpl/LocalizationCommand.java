@@ -9,24 +9,23 @@ import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.com.expo.entity.User;
-import ua.com.expo.service.factory.ServiceFactory;
+import ua.com.expo.controller.context.Context;
+import ua.com.expo.dto.UserDto;
 import ua.com.expo.service.serviceImpl.UserService;
+import ua.com.expo.util.resource.ConfigurationManager;
 
 public class LocalizationCommand implements Command {
-    private UserService userService;
     private static final Logger LOGGER = LogManager.getLogger(LocalizationCommand.class.getName());
-    private ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private UserService userService;
 
     public LocalizationCommand() {
-        this.userService = serviceFactory.getUserService();
+        this.userService = Context.getInstance().getServiceFactory().getUserService();
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String ua = "uk_UA";
         String us = "en_US";
-        boolean result = false;
         HttpSession session = request.getSession();
         String language = request.getParameter("language");
         String path = request.getParameter("path");
@@ -35,13 +34,27 @@ public class LocalizationCommand implements Command {
             session.setAttribute("locale", us);
         } else if (language.equalsIgnoreCase("Ukrainian")) {
             session.setAttribute("locale", ua);
-            User user = (User) session.getAttribute("authorizedUser");
-            LOGGER.debug(user);
-            if (Objects.nonNull(user)) {
-                Long userId = user.getId();
-                result = userService.updateLang(userId, ua);
+        }
+        UserDto userDto = (UserDto) session.getAttribute("authorizedUser");
+        LOGGER.debug("USER DTO :" + userDto);
+        if (Objects.nonNull(userDto)) {
+            Long userId = userDto.getId();
+            String locale = (String) session.getAttribute("locale");
+            LOGGER.debug("LOCALE : " + locale);
+            boolean isSaved = userService.saveLang(userId, locale);
+            LOGGER.debug("IS SAVED : " + isSaved);
+            if (isSaved) {
+                return path;
+            } else {
+                setErrorMessage(request);
+                return ConfigurationManager.PATH_MANAGER.getProperty("path.page.main");
             }
         }
-        return path;
+        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.index");
+    }
+
+    private void setErrorMessage(HttpServletRequest request) {
+        request.setAttribute("isError", true);
+        request.setAttribute("errorMessage", "Internal error occurred. Language didn't changed. Please, try again later");
     }
 }
