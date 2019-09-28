@@ -1,5 +1,7 @@
 package ua.com.expo;
 
+import ua.com.expo.entity.Expo;
+import ua.com.expo.persistence.dao.daoImpl.MySqlTicketDao;
 import ua.com.expo.persistence.dao.daoImpl.MySqlUserDao;
 import ua.com.expo.util.time.Formatter;
 
@@ -11,6 +13,10 @@ import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -38,16 +44,43 @@ public class Main {
         ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
         Instant result = Instant.from(zonedDateTime);
         System.out.println(result);*/
-        String time = "2019-11-02T09:00";
-        LocalDateTime localDateTime = LocalDateTime.parse(time);
+        /*String time = "2019-11-02T09:00";*/
+
+        /*LocalDateTime localDateTime = LocalDateTime.parse(date);
         System.out.println(localDateTime);
-        Timestamp ts = Timestamp.valueOf(localDateTime);
+
+        LocalDateTime ldt = LocalDateTime.parse((date+" "+time),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        System.out.println(ldt);*/
+
+        String date = "2019-10-05";
+        String time = "12:00";
+
+        String dat = "2019-10-05T20:00";
+
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dat);
+        System.out.println(dateTime);
+        Timestamp ts = Timestamp.valueOf(dateTime);
         System.out.println(ts);
 
 
+       /* System.out.println(formattedDateTime+"FORMATTED");
+        LocalDateTime dateTime = LocalDateTime.parse(dat, format);
+        System.out.println(dateTime);*/
 
+       Map <String, String> map = new HashMap<>();
+       map.put("A", null);
+       map.put("B", "BBB");
+       map.put("C", "CCC");
+       map.put("D", null);
 
-
+       Map <String, String> result = map.entrySet().stream().filter(entry -> entry.getValue()!=null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Set<Map.Entry<String, String>> set = result.entrySet();
+        for (Map.Entry<String, String> m : set) {
+            System.out.println("KEY: " + m.getKey() + " " + "VALUE: " + m.getValue());
+        }
 
     }
 }

@@ -11,5 +11,5 @@ import java.sql.SQLException;
  * ActionCommand interface
  */
 public interface Command {
-    String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ClassNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException;
+    String execute(HttpServletRequest request, HttpServletResponse response);
 }

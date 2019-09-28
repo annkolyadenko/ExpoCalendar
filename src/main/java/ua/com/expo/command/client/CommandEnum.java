@@ -16,6 +16,7 @@ public enum CommandEnum {
     GET_ALL_TICKETS_BY_USER_ID(new GetAllTicketsCommand()),
     GET_ALL_SHOWROOM(new GetAllShowroomCommand()),
     GET_ALL_EXPO_BY_SHOWROOM_ID(new GetAllExpoByShowroomCommand()),
+    GET_STATS_BY_EXPO(new GetStatsByExpoCommand()),
     LOCALIZATION(new LocalizationCommand()),
     LOGIN(new SignInCommand()),
     LOGOUT(new SignOutCommand()),

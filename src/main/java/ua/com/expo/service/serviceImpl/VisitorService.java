@@ -35,7 +35,7 @@ public class VisitorService {
     private final ILogic logic = new LogicImpl();
     //TODO
     private static ModelMapper modelMapper = new ModelMapper();
-    private static IConverter converter = new TimeConverter();
+    private static IConverter converter = TimeConverter.getInstance();
 
     public VisitorService() {
         AbstractDaoFactory daoFactory = Context.getInstance().getMySqlDaoFactory();

@@ -3,21 +3,21 @@ package ua.com.expo.util.validator.impl;
 import ua.com.expo.entity.User;
 import ua.com.expo.util.security.IPasswordHashing;
 import ua.com.expo.util.security.impl.PasswordHashingImpl;
-import ua.com.expo.util.validator.IPasswordHashingValidator;
+import ua.com.expo.util.validator.IPasswordValidator;
 
 import java.util.Arrays;
 
-public class PasswordHashingValidatorImpl implements IPasswordHashingValidator {
+public class PasswordValidator implements IPasswordValidator {
 
     private final IPasswordHashing hashing = PasswordHashingImpl.getInstance();
 
-    private PasswordHashingValidatorImpl() { }
+    private PasswordValidator() { }
 
     private static class Holder {
-        static final PasswordHashingValidatorImpl INSTANCE = new PasswordHashingValidatorImpl();
+        static final PasswordValidator INSTANCE = new PasswordValidator();
     }
 
-    public static PasswordHashingValidatorImpl getInstance() {
+    public static PasswordValidator getInstance() {
         return Holder.INSTANCE;
     }
 

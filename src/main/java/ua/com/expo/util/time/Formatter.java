@@ -19,8 +19,4 @@ public class Formatter {
     public static DateTimeFormatter getTimeFormatter() {
         return timeFormatter;
     }
-
-    public static void main(String[] args) {
-
-    }
 }

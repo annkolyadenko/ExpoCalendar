@@ -1,6 +1,6 @@
 package ua.com.expo.util.validator;
 
-public interface IRequestParametersValidator {
+public interface IRequestValidator {
 
     boolean emailPasswordValidate(String email, String password);
 
@@ -8,5 +8,12 @@ public interface IRequestParametersValidator {
 
     boolean isNotEmpty(String... strings);
 
-    boolean regexCheck(String item, String regex);
+    boolean regexValidate(String item, String regex);
+
+    boolean numberValidate(Long number);
+
+    boolean dateValidate();
+
+    boolean timeValidate();
+
 }

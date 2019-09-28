@@ -14,8 +14,8 @@ import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.com.expo.util.validator.IRequestParametersValidator;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.IRequestValidator;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 
 public class SignUpCommand implements Command {
@@ -29,7 +29,7 @@ public class SignUpCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator requestParametersValidator = RequestParameterValidatorImpl.getInstance();
+        IRequestValidator requestParametersValidator = RequestValidator.getInstance();
         HttpSession session = request.getSession();
         String name = request.getParameter("userName");
         String email = request.getParameter("email");

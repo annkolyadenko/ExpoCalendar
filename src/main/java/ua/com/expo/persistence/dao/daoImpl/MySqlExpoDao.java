@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 
 public class MySqlExpoDao implements IExpoDao {
 
-    private TimeConverter timeConverter = new TimeConverter();
+    private TimeConverter timeConverter = TimeConverter.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(MySqlExpoDao.class.getName());
     private static final TransactionUtil transactionUtil = TransactionUtil.getInstance();
 
@@ -58,6 +58,7 @@ public class MySqlExpoDao implements IExpoDao {
             ps.setLong(1, expo.getShowroom().getId());
             ps.setLong(2, expo.getTheme().getId());
             ps.setTimestamp(3, timeConverter.convertToDatabase(expo.getDate()));
+            LOGGER.debug("TIMESTAMP CHECK :" + timeConverter.convertToDatabase(expo.getDate()));
             ps.setBigDecimal(4, expo.getPrice());
             ps.setString(5, expo.getInfo());
             ps.executeUpdate();
@@ -73,7 +74,7 @@ public class MySqlExpoDao implements IExpoDao {
     }
 
     @Override
-    public List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time) {
+    public List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp date) {
         ConnectionWrapper con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -83,7 +84,8 @@ public class MySqlExpoDao implements IExpoDao {
             con = transactionUtil.getConnection();
             ps = con.createPreparedStatement(sql);
             ps.setLong(1, id);
-            ps.setTimestamp(2, time);
+            ps.setTimestamp(2, date);
+            LOGGER.debug(ps + "PREPARED STATEMENT");
             rs = ps.executeQuery();
             while (rs.next()) {
                 expos.add((Expo) Mapper.EXPO.extractFromResultSet(rs));
@@ -124,7 +126,7 @@ public class MySqlExpoDao implements IExpoDao {
     }
 
     @Override
-    public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp time) {
+    public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp date) {
         ConnectionWrapper con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -134,7 +136,8 @@ public class MySqlExpoDao implements IExpoDao {
             con = transactionUtil.getConnection();
             ps = con.createPreparedStatement(sql);
             ps.setLong(1, id);
-            ps.setTimestamp(2, time);
+            ps.setTimestamp(2, date);
+            LOGGER.debug(ps + "PREPARED STATEMENT");
             rs = ps.executeQuery();
             while (rs.next()) {
                 expoList.add((Expo) Mapper.EXPO.extractFromResultSet(rs));

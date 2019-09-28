@@ -2,14 +2,15 @@ package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
+import ua.com.expo.entity.Expo;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
-import ua.com.expo.util.validator.IRequestParametersValidator;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.IRequestValidator;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class SumAllTicketsCommand implements Command {
@@ -23,12 +24,14 @@ public class SumAllTicketsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator validator = RequestParameterValidatorImpl.getInstance();
+        IRequestValidator validator = RequestValidator.getInstance();
         String idExpo = request.getParameter("expoId");
         if (validator.isNotNull(idExpo)) {
             Long expoId = Long.valueOf(idExpo);
             LOGGER.info("Expo id: " + expoId);
             Long amount = adminService.sumPurchasedTicketsByExpoId(expoId);
+            Map<Expo, Long> tickets = adminService.sumAllPurchasedTickets();
+
             if (Objects.nonNull(amount)) {
                 request.setAttribute("amount", amount);
                 return ConfigurationManager.PATH_MANAGER.getProperty("path.page.expos");

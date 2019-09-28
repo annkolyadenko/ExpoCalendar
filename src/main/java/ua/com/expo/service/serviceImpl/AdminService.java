@@ -21,12 +21,13 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class AdminService {
     private static final Logger LOGGER = LogManager.getLogger(AdminService.class.getName());
     private static ModelMapper modelMapper = new ModelMapper();
-    private static IConverter converter = new TimeConverter();
+    private static IConverter converter = TimeConverter.getInstance();
     private IExpoDao expoDao;
     private IShowroomDao showroomDao;
     private IThemeDao themeDao;
@@ -44,8 +45,8 @@ public class AdminService {
         return expoDao.findAllExpoByShowroomId(id);
     }
 
-    public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp time) {
-        return expoDao.findAllExpoByShowroomIdAndDate(id, time);
+    public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp date) {
+        return expoDao.findAllExpoByShowroomIdAndDate(id, date);
     }
 
     public boolean saveExpo(Long showroomId, Long themeId, String date, Long price, String info) {
@@ -73,5 +74,9 @@ public class AdminService {
 
     public Long sumPurchasedTicketsByExpoId(Long expoId) {
         return ticketDao.sumPurchasedTicketsByExpoId(expoId);
+    }
+
+    public Map<Expo, Long> sumAllPurchasedTickets() {
+        return ticketDao.sumAllPurchasedTickets();
     }
 }

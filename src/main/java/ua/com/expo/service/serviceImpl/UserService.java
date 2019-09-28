@@ -12,8 +12,8 @@ import ua.com.expo.exception_draft.RuntimeServiceException;
 import ua.com.expo.persistence.dao.IUserDao;
 import ua.com.expo.util.security.IPasswordHashing;
 import ua.com.expo.util.security.impl.PasswordHashingImpl;
-import ua.com.expo.util.validator.IPasswordHashingValidator;
-import ua.com.expo.util.validator.impl.PasswordHashingValidatorImpl;
+import ua.com.expo.util.validator.IPasswordValidator;
+import ua.com.expo.util.validator.impl.PasswordValidator;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public UserDto signInUser(String email, String password) {
-        IPasswordHashingValidator passwordHashingValidator = PasswordHashingValidatorImpl.getInstance();
+        IPasswordValidator passwordHashingValidator = PasswordValidator.getInstance();
         Optional<User> optionalUser = userDao.findUserByEmail(email);
         User user = optionalUser.orElseThrow(() -> new RuntimeServiceException("User with this email doesn't exist. Please, enter email again"));
         if (Objects.nonNull(user) && passwordHashingValidator.passwordValidate(password, user)) {

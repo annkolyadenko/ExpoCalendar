@@ -17,7 +17,6 @@ public class AuthorisationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         LOGGER.info("AuthorisationFilter successfully initialized");
-
     }
 
     @Override
@@ -29,13 +28,12 @@ public class AuthorisationFilter implements Filter {
         if (userDto.getRole().toString().equals(RoleEnum.ADMINISTRATOR.toString())) {
             filterChain.doFilter(request, response);
         }
-        LOGGER.warn("Accessing the page or resource is absolutely forbidden for security reason. Login :" + userDto.getEmail());
+        LOGGER.warn("Accessing the page or resource is absolutely forbidden for security reason. User login :" + userDto.getEmail());
         response.setStatus(403);
     }
 
     @Override
     public void destroy() {
         LOGGER.info("AuthorisationFilter successfully destroyed");
-
     }
 }

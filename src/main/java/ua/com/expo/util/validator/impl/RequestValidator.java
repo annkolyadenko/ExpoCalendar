@@ -1,26 +1,26 @@
 package ua.com.expo.util.validator.impl;
 
 import ua.com.expo.file.Regex;
-import ua.com.expo.util.validator.IRequestParametersValidator;
+import ua.com.expo.util.validator.IRequestValidator;
 
 import java.util.Objects;
 
-public class RequestParameterValidatorImpl implements IRequestParametersValidator {
+public class RequestValidator implements IRequestValidator {
 
-    private RequestParameterValidatorImpl() {
+    private RequestValidator() {
     }
 
     private static class Holder {
-        static final RequestParameterValidatorImpl INSTANCE = new RequestParameterValidatorImpl();
+        static final RequestValidator INSTANCE = new RequestValidator();
     }
 
-    public static RequestParameterValidatorImpl getInstance() {
+    public static RequestValidator getInstance() {
         return Holder.INSTANCE;
     }
 
     @Override
     public boolean emailPasswordValidate(String email, String password) {
-        return (isNotNull(email, password) && isNotEmpty(email, password) && regexCheck(email, Regex.EMAIL_REGEX) && regexCheck(password, Regex.PASSWORD_REGEX));
+        return (isNotNull(email, password) && isNotEmpty(email, password) && regexValidate(email, Regex.EMAIL_REGEX) && regexValidate(password, Regex.PASSWORD_REGEX));
     }
 
     @Override
@@ -44,10 +44,25 @@ public class RequestParameterValidatorImpl implements IRequestParametersValidato
     }
 
     @Override
-    public boolean regexCheck(String item, String regex) {
+    public boolean regexValidate(String item, String regex) {
         if (Objects.isNull(item)) {
             return false;
         }
         return item.matches(regex);
+    }
+
+    @Override
+    public boolean numberValidate(Long number) {
+        return false;
+    }
+
+    @Override
+    public boolean dateValidate() {
+        return false;
+    }
+
+    @Override
+    public boolean timeValidate() {
+        return false;
     }
 }

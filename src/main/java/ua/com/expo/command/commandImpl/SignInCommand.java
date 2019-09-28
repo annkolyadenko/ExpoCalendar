@@ -6,7 +6,7 @@ import ua.com.expo.dto.UserDto;
 import ua.com.expo.exception_draft.RuntimeServiceException;
 import ua.com.expo.service.serviceImpl.UserService;
 import ua.com.expo.util.resource.ConfigurationManager;
-import ua.com.expo.util.validator.IRequestParametersValidator;
+import ua.com.expo.util.validator.IRequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 
 public class SignInCommand implements Command {
@@ -27,7 +27,7 @@ public class SignInCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator validator = RequestParameterValidatorImpl.getInstance();
+        IRequestValidator validator = RequestValidator.getInstance();
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");

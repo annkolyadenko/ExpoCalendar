@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.com.expo.util.validator.IRequestParametersValidator;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.IRequestValidator;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 import java.util.Objects;
 
@@ -28,7 +28,7 @@ public class PurchaseTicketCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator validator = RequestParameterValidatorImpl.getInstance();
+        IRequestValidator validator = RequestValidator.getInstance();
         LOGGER.info("PurchaseTicketCommand started execute");
         HttpSession session = request.getSession();
         UserDto userDto = (UserDto) session.getAttribute("authorizedUser");

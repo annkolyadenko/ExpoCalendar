@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
 import ua.com.expo.entity.Showroom;
-import ua.com.expo.service.factory.ServiceFactory;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
 

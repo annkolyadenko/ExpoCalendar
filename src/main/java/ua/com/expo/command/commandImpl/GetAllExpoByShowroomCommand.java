@@ -5,8 +5,8 @@ import ua.com.expo.controller.context.Context;
 import ua.com.expo.entity.Expo;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
-import ua.com.expo.util.validator.IRequestParametersValidator;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.IRequestValidator;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +25,7 @@ public class GetAllExpoByShowroomCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator validator = RequestParameterValidatorImpl.getInstance();
+        IRequestValidator validator = RequestValidator.getInstance();
         String idShowroom = request.getParameter("showroomId");
         if (validator.isNotNull(idShowroom) && validator.isNotEmpty(idShowroom)) {
             Long showroomId = Long.valueOf(idShowroom);

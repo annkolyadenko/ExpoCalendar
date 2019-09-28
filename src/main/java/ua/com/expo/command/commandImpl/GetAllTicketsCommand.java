@@ -4,7 +4,6 @@ import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
 import ua.com.expo.dto.UserDto;
 import ua.com.expo.entity.Ticket;
-import ua.com.expo.entity.User;
 import ua.com.expo.service.serviceImpl.VisitorService;
 import ua.com.expo.util.resource.ConfigurationManager;
 

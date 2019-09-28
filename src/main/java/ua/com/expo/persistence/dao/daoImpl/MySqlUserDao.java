@@ -52,7 +52,8 @@ public class MySqlUserDao implements IUserDao {
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.create");
             con = transactionUtil.getConnection();
             ps = con.createPreparedStatement(sql);
-            ps.setLong(1, 2);
+            //TODO
+            ps.setLong(1, 1);
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getLanguage());

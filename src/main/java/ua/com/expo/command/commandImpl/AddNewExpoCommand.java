@@ -10,6 +10,8 @@ import ua.com.expo.util.resource.ConfigurationManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +32,10 @@ public class AddNewExpoCommand implements Command {
         if (list != null && !list.isEmpty() && showrooms != null && !showrooms.isEmpty()) {
             request.setAttribute("showrooms", showrooms);
             request.setAttribute("themes", list);
-            request.setAttribute("today", LocalDate.now());
+            //TODO SEPARATE METHOD
+            LocalDateTime dateTime = LocalDateTime.now();
+            String today = dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            request.setAttribute("today", today.substring(0, 16));
         }
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.addExpo");
     }

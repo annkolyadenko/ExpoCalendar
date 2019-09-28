@@ -32,16 +32,13 @@
                     <option value="${theme.id}">${theme.name}</option>
                 </c:forEach>
             </select>
-            <%--<label for="date">Select your date</label>--%>
             <input class="form-control" type="datetime-local" id="date" name="chosenDate" value=""
                    min="${today}">
             <br>
-            <%--<label>--%>
             <input class="form-control" type="text" placeholder="Enter price" name="price" value="">
             <br>
             <input class="form-control" type="text" placeholder="Enter info" name="info" value="">
             <br>
-            <%--</label>--%>
             <input type="hidden" name="command" value="APPROVE_NEW_EXPO">
             <button type="submit" class="btn btn-dark">Submit</button>
         </label>

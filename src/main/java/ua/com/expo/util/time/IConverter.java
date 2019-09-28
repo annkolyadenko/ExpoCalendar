@@ -14,8 +14,6 @@ import java.time.LocalDateTime;
  * they represent the number of nanoseconds since the Java epoch.
  */
 
-//TODO!!! All static utils rewrite!!!
-
 public interface IConverter <Instant, TimeStamp> {
 
     TimeStamp convertToDatabase(Instant instant);

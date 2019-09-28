@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface IExpoDao {
 
-    List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp time);
+    List<Expo> findAllExpoByThemeIdAndDate(Long id, Timestamp date);
 
     List<Expo> findAllExpoByShowroomId(Long id);
 
-    List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp time);
+    List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp date);
 
     boolean save(Expo expo);
 

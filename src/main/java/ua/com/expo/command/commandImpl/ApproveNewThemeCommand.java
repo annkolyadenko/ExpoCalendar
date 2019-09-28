@@ -9,8 +9,8 @@ import ua.com.expo.logic.ILogic;
 import ua.com.expo.logic.LogicImpl;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
-import ua.com.expo.util.validator.IRequestParametersValidator;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.IRequestValidator;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ public class ApproveNewThemeCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator validator = RequestParameterValidatorImpl.getInstance();
+        IRequestValidator validator = RequestValidator.getInstance();
         ILogic logic = new LogicImpl();
         String theme = request.getParameter("theme");
         if (validator.isNotNull(theme) && validator.isNotEmpty(theme)) {

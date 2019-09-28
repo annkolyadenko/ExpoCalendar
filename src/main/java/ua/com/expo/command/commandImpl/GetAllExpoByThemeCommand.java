@@ -1,25 +1,25 @@
 package ua.com.expo.command.commandImpl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
 import ua.com.expo.entity.Expo;
-import ua.com.expo.service.factory.ServiceFactory;
 import ua.com.expo.service.serviceImpl.VisitorService;
 import ua.com.expo.util.resource.ConfigurationManager;
 import ua.com.expo.util.time.TimeConverter;
-import ua.com.expo.util.validator.IRequestParametersValidator;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.IRequestValidator;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class GetAllExpoByThemeCommand implements Command {
-    private static final Logger LOGGER = Logger.getLogger(GetAllThemesCommand.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(GetAllExpoByThemeCommand.class.getName());
     private final VisitorService visitorService;
-    private TimeConverter timeConverter = new TimeConverter();
+    private TimeConverter timeConverter = TimeConverter.getInstance();
 
     public GetAllExpoByThemeCommand() {
         this.visitorService = Context.getInstance().getServiceFactory().getVisitorService();
@@ -27,9 +27,10 @@ public class GetAllExpoByThemeCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator validator = RequestParameterValidatorImpl.getInstance();
+        IRequestValidator validator = RequestValidator.getInstance();
         String idTheme = request.getParameter("themeId");
         String chosenDate = request.getParameter("chosenDate");
+        LOGGER.debug("CHOSEN_DATE" + chosenDate);
         if (validator.isNotNull(idTheme, chosenDate) && validator.isNotEmpty(idTheme, chosenDate)) {
             Long themeId = Long.parseLong(idTheme);
             List<Expo> list = visitorService.findAllExpoByThemeIdAndDate(themeId, timeConverter.convertStringDateToDatabase(chosenDate));

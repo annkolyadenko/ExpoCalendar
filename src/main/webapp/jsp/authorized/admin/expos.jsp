@@ -27,8 +27,6 @@
                 <th scope="col">Date</th>
                 <th scope="col">Expo info</th>
                 <th scope="col">Ticket price</th>
-                <th scope="col">Stats</th>
-                <th scope="col">Total amount</th>
             </tr>
             </thead>
             <tbody>
@@ -39,28 +37,6 @@
                     <td>${expo.date}</td>
                     <td>${expo.info}</td>
                     <td>${expo.price}</td>
-                    <td>
-                        <c:if test="${requestScope.amount!=null}">
-                            <h4>Total amount: ${requestScope.amount}</h4>
-                        </c:if>
-                        <c:if test="${requestScope.isError}">
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                    <p style="color: red">${requestScope.errorMessage}</p>
-                                </div>
-                            </div>
-                        </c:if>
-                    </td>
-
-                    <td>
-                        <form action="${pageContext.request.contextPath}/controller" method="GET" name="expoId">
-                            <input type="hidden" name="expoId" value="${expo.id}">
-                            <input type="hidden" name="command" value="SUM_ALL_TICKETS_BY_EXPO_ID">
-                            <button class="btn btn-dark" type="submit">
-                                Check
-                            </button>
-                        </form>
-                    </td>
                 </tr>
             </c:forEach>
             </tbody>

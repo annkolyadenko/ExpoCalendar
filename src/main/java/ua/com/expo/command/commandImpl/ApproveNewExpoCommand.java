@@ -8,8 +8,8 @@ import ua.com.expo.entity.Expo;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
 import ua.com.expo.util.time.TimeConverter;
-import ua.com.expo.util.validator.IRequestParametersValidator;
-import ua.com.expo.util.validator.impl.RequestParameterValidatorImpl;
+import ua.com.expo.util.validator.IRequestValidator;
+import ua.com.expo.util.validator.impl.RequestValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,12 +26,13 @@ public class ApproveNewExpoCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestParametersValidator validator = RequestParameterValidatorImpl.getInstance();
-        TimeConverter timeConverter = new TimeConverter();
+        IRequestValidator validator = RequestValidator.getInstance();
+        TimeConverter timeConverter = TimeConverter.getInstance();
         //TODO VARARGS
         String idShowroom = request.getParameter("showroomId");
         String idTheme = request.getParameter("themeId");
         String chosenDate = request.getParameter("chosenDate");
+        LOGGER.debug(chosenDate);
         String expoPrice = request.getParameter("price");
         String info = request.getParameter("info");
         if (validator.isNotNull(idShowroom, idTheme, chosenDate, expoPrice, info) && validator.isNotEmpty(idShowroom, idTheme, chosenDate, expoPrice, info)) {
@@ -39,6 +40,8 @@ public class ApproveNewExpoCommand implements Command {
             Long themeId = Long.valueOf(idTheme);
             Long price = Long.valueOf(expoPrice);
             List<Expo> expos = adminService.findAllExpoByShowroomIdAndDate(showroomId, timeConverter.convertStringDateTimeToDatabase(chosenDate));
+            LOGGER.debug(timeConverter.convertStringDateTimeToDatabase(chosenDate));
+            LOGGER.debug(expos);
             if (expos.isEmpty()) {
                 boolean isSaved = adminService.saveExpo(showroomId, themeId, chosenDate, price, info);
                 if (isSaved) {

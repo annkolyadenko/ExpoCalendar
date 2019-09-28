@@ -128,6 +128,6 @@ public enum Mapper implements EntityMapper<Entity> {
     };
 
     private static final Logger LOGGER = LogManager.getLogger(Mapper.class.getName());
-    private static final TimeConverter timeConverter = new TimeConverter();
+    private static final TimeConverter timeConverter = TimeConverter.getInstance();
 
 }
