@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.com.expo.entity.*;
 import ua.com.expo.exception_draft.RuntimeSqlException;
-import ua.com.expo.persistence.connection.ConnectionPoolManager;
 import ua.com.expo.persistence.connection.ConnectionWrapper;
 import ua.com.expo.persistence.dao.ITicketDao;
 import ua.com.expo.persistence.dao.mapper.Mapper;
@@ -12,8 +11,6 @@ import ua.com.expo.transaction.util.TransactionUtil;
 import ua.com.expo.util.resource.ConfigurationManager;
 import ua.com.expo.util.time.TimeConverter;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -9,6 +9,7 @@ import ua.com.expo.util.resource.ConfigurationManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class GetStatsByExpoCommand implements Command {
@@ -21,8 +22,8 @@ public class GetStatsByExpoCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        Map<Expo, Long> tickets = adminService.sumAllPurchasedTickets();
-        request.setAttribute("tickets", tickets);
+        Map<Expo, Long> statistic = adminService.sumAllPurchasedTickets();
+        request.setAttribute("statistic", statistic);
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.stats");
      }
 }

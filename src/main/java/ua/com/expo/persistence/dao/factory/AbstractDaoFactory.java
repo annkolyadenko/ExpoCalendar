@@ -5,8 +5,6 @@ import ua.com.expo.persistence.dao.*;
 
 public abstract class AbstractDaoFactory {
 
-    public abstract IRoleDao getRoleDao();
-
     public abstract IUserDao getUserDao();
 
     public abstract IThemeDao getThemeDao();

@@ -10,7 +10,6 @@ import ua.com.expo.persistence.dao.daoImpl.*;
  */
 public class MySqlDaoFactory extends AbstractDaoFactory {
 
-    private final IRoleDao roleDao;
     private final IUserDao userDao;
     private final IThemeDao themeDao;
     private final IExpoDao expoDao;
@@ -19,7 +18,6 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
     private final ITicketDao ticketDao;
 
     private MySqlDaoFactory() {
-        this.roleDao = new MySqlRoleDao();
         this.userDao = new MySqlUserDao();
         this.themeDao = new MySqlThemeDao();
         this.expoDao = new MySqlExpoDao();
@@ -34,11 +32,6 @@ public class MySqlDaoFactory extends AbstractDaoFactory {
 
     public static MySqlDaoFactory getInstance() {
         return MySqlDaoFactoryHolder.mySqlFactory;
-    }
-
-    @Override
-    public IRoleDao getRoleDao() {
-        return roleDao;
     }
 
     @Override

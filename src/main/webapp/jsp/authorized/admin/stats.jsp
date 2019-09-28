@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Hp
-  Date: 16.09.2019
-  Time: 21:48
+  Date: 17.09.2019
+  Time: 15:31
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,15 +10,15 @@
 <%@ include file="/jsp/components/i18n.jsp" %>
 <html>
 <head>
-    <title>Expos</title>
+    <title>Theme Approved</title>
     <c:import url="/jsp/components/dependencies.jsp"></c:import>
     <c:import url="/jsp/components/navbar.jsp"></c:import>
 </head>
 <body>
 <div class="container" style="height: 100%">
-    <h1><fmt:message key="status.expo" bundle="${rb}"/></h1>
+    <h1><fmt:message key="status.stats" bundle="${rb}"/></h1>
     <br>
-    <c:if test="${requestScope.expos!=null}">
+    <c:if test="${requestScope.statistic!=null}">
         <table class="table table-sm table-hover table-bordered text-center">
             <thead>
             <tr>
@@ -27,28 +27,22 @@
                 <th scope="col">Date</th>
                 <th scope="col">Expo info</th>
                 <th scope="col">Ticket price</th>
+                <th scope="col">Ticket amount</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="expo" items="${expos}" varStatus="loop">
+            <c:forEach var="stats" items="${statistic}" varStatus="loop">
                 <tr>
-                    <td>${expo.showroom.name}</td>
-                    <td>${expo.theme}</td>
-                    <td>${expo.date}</td>
-                    <td>${expo.info}</td>
-                    <td>${expo.price}</td>
+                    <td>${stats.key.showroom.name}</td>
+                    <td>${stats.key.theme}</td>
+                    <td>${stats.key.date}</td>
+                    <td>${stats.key.info}</td>
+                    <td>${stats.key.price}</td>
+                    <td>${stats.value}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-    </c:if>
-
-    <c:if test="${requestScope.isError}">
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <p style="color: red">${requestScope.errorMessage}</p>
-            </div>
-        </div>
     </c:if>
 </div>
 </body>

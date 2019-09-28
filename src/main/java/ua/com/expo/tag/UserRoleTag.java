@@ -1,10 +1,8 @@
 package ua.com.expo.tag;
 
 import ua.com.expo.dto.UserDto;
-import ua.com.expo.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.util.Objects;
 
@@ -26,7 +24,7 @@ public class UserRoleTag extends TagSupport {
                 return EVAL_BODY_INCLUDE;
             }
         } else {
-            if (((UserDto) getRequest().getSession().getAttribute("authorizedUser")).getRole().toString().equalsIgnoreCase(role)) {
+            if (((UserDto) getRequest().getSession().getAttribute("authorizedUser")).getRole().equalsIgnoreCase(role)) {
                 return EVAL_BODY_INCLUDE;
             }
         }

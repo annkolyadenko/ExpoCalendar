@@ -140,7 +140,7 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_SHOWROOM" />">Statistics</a>
+                    <a class="nav-link" href="<c:url value="/controller?command=GET_STATS_BY_EXPO" />">Statistics</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
@@ -149,8 +149,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
                         <a class="dropdown-item" href="<c:url value="/controller?command=GET_ALL_THEMES" />">Themes</a>
-                        <a class="dropdown-item" href="<c:url value="/controller?command=ADD_NEW_THEME" />">New theme</a>
-                        <a class="dropdown-item" href="<c:url value="/controller?command=GET_STATS_BY_EXPO" />">Expo</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=ADD_NEW_THEME" />">New
+                            theme</a>
+                        <a class="dropdown-item" href="<c:url value="/controller?command=GET_ALL_SHOWROOM" />">Expo</a>
                         <a class="dropdown-item" href="<c:url value="/controller?command=ADD_NEW_EXPO" />">New expo</a>
                     </div>
                 </li>

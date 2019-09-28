@@ -2,7 +2,7 @@ package ua.com.expo.dto;
 
 public class UserDto extends AbstractDto {
 
-    private RoleDto role;
+    private String role;
     private String name;
     private String email;
     private String language;
@@ -18,11 +18,11 @@ public class UserDto extends AbstractDto {
         this.language = builder.language;
     }
 
-    public RoleDto getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(RoleDto role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -52,7 +52,7 @@ public class UserDto extends AbstractDto {
 
     public static class Builder {
         private Long id;
-        private RoleDto role;
+        private String role;
         private String name;
         private String email;
         private String language;
@@ -62,7 +62,7 @@ public class UserDto extends AbstractDto {
             return this;
         }
 
-        public Builder role(RoleDto role) {
+        public Builder role(String role) {
             this.role = role;
             return this;
         }

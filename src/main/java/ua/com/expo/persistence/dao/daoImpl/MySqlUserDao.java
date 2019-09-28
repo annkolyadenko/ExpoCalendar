@@ -1,6 +1,7 @@
 package ua.com.expo.persistence.dao.daoImpl;
 
 import ua.com.expo.entity.User;
+import ua.com.expo.entity.enums.RoleEnum;
 import ua.com.expo.exception_draft.RuntimeSqlException;
 import ua.com.expo.persistence.connection.ConnectionWrapper;
 import ua.com.expo.persistence.dao.IUserDao;
@@ -53,7 +54,7 @@ public class MySqlUserDao implements IUserDao {
             con = transactionUtil.getConnection();
             ps = con.createPreparedStatement(sql);
             //TODO
-            ps.setLong(1, 1);
+            ps.setString(1, RoleEnum.VISITOR.toString());
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getLanguage());
@@ -81,7 +82,7 @@ public class MySqlUserDao implements IUserDao {
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("user.create");
             con = transactionUtil.getConnection();
             ps = con.createPreparedStatementWithGeneratedKey(sql);
-            ps.setLong(1, 2);
+            ps.setString(1, RoleEnum.VISITOR.toString());
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getLanguage());
@@ -112,10 +113,8 @@ public class MySqlUserDao implements IUserDao {
             ps = con.createPreparedStatement(sql);
             ps.setString(1, language);
             ps.setLong(2, id);
-            LOGGER.debug("Prepared Statement check :" + ps);
             ps.executeUpdate();
             flag = true;
-            LOGGER.debug("DAO check :" + flag);
         } catch (SQLException e) {
             LOGGER.error(e);
             throw new RuntimeSqlException(e);

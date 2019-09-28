@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import ua.com.expo.controller.context.Context;
 import ua.com.expo.dto.UserDto;
-import ua.com.expo.entity.Role;
 import ua.com.expo.entity.User;
 import ua.com.expo.entity.enums.RoleEnum;
 import ua.com.expo.exception_draft.RuntimeServiceException;
@@ -48,10 +47,9 @@ public class UserService {
         } else {
             IPasswordHashing hashing = PasswordHashingImpl.getInstance();
 
-            Role role = new Role.Builder().id(RoleEnum.VISITOR.getId()).role(RoleEnum.VISITOR.toString()).build();
             byte[] salt = hashing.saltGenerator();
             byte[] pass = hashing.hashGenerator(password, salt);
-            user = new User.Builder().role(role).name(name).email(email).language(language).password(pass).salt(salt).build();
+            user = new User.Builder().role(RoleEnum.VISITOR.toString()).name(name).email(email).language(language).password(pass).salt(salt).build();
             Long id = userDao.saveUserWithGeneratedKey(user);
             if (Objects.nonNull(id)) {
                 user.setId(id);

@@ -70,18 +70,6 @@ public class Main {
         LocalDateTime dateTime = LocalDateTime.parse(dat, format);
         System.out.println(dateTime);*/
 
-       Map <String, String> map = new HashMap<>();
-       map.put("A", null);
-       map.put("B", "BBB");
-       map.put("C", "CCC");
-       map.put("D", null);
-
-       Map <String, String> result = map.entrySet().stream().filter(entry -> entry.getValue()!=null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-        Set<Map.Entry<String, String>> set = result.entrySet();
-        for (Map.Entry<String, String> m : set) {
-            System.out.println("KEY: " + m.getKey() + " " + "VALUE: " + m.getValue());
-        }
-
     }
 }
 

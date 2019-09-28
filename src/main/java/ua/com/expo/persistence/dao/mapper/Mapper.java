@@ -19,7 +19,7 @@ public enum Mapper implements EntityMapper<Entity> {
             try {
                 return new User.Builder()
                         .id(rs.getLong("user_id"))
-                        .role((Role) ROLE.extractFromResultSet(rs))
+                        .role(rs.getString("user_role"))
                         .name(rs.getString("user_name"))
                         .email(rs.getString("user_email"))
                         .language(rs.getString("user_lang"))
@@ -105,20 +105,6 @@ public enum Mapper implements EntityMapper<Entity> {
                         .time(timeConverter.convertToEntity(rs.getTimestamp("ticket_date_time")))
                         .amount(rs.getLong("ticket_amount"))
                         .info(rs.getString("ticket_info"))
-                        .build();
-            } catch (SQLException e) {
-                LOGGER.error(e);
-                throw new RuntimeSqlException(e);
-            }
-        }
-    },
-    ROLE {
-        @Override
-        public Role extractFromResultSet(ResultSet rs) {
-            try {
-                return new Role.Builder()
-                        .id(rs.getLong("role_id"))
-                        .role(rs.getString("role_name"))
                         .build();
             } catch (SQLException e) {
                 LOGGER.error(e);

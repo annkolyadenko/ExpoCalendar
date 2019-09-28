@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class User extends Entity {
 
-    private Role role;
+    private String role;
     private String name;
     private String email;
     private String language;
@@ -14,7 +14,7 @@ public class User extends Entity {
     public User() {
     }
 
-    public User(Long id, Role role, String name, String email, String language, byte[] password, byte[] salt) {
+    public User(Long id, String role, String name, String email, String language, byte[] password, byte[] salt) {
         super(id);
         this.role = role;
         this.name = name;
@@ -34,11 +34,11 @@ public class User extends Entity {
         this.salt = builder.salt;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -84,7 +84,7 @@ public class User extends Entity {
 
     public static class Builder {
         private Long id;
-        private Role role;
+        private String role;
         private String name;
         private String email;
         private String language;
@@ -96,7 +96,7 @@ public class User extends Entity {
             return this;
         }
 
-        public Builder role(Role role) {
+        public Builder role(String role) {
             this.role = role;
             return this;
         }
