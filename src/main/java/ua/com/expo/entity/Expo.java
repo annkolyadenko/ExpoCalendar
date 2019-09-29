@@ -9,8 +9,6 @@ public class Expo extends Entity {
     private Showroom showroom;
     private Theme theme;
     private Instant date;
-    //TO DO!
-    /*this.expoTicketPrice.setScale(3, RoundingMode.HALF_UP);*/
     private BigDecimal price;
     private String info;
 

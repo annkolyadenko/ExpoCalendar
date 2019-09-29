@@ -2,7 +2,6 @@ package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
-import ua.com.expo.entity.Expo;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
 import ua.com.expo.util.validator.IRequestValidator;
@@ -30,8 +29,6 @@ public class SumAllTicketsCommand implements Command {
             Long expoId = Long.valueOf(idExpo);
             LOGGER.info("Expo id: " + expoId);
             Long amount = adminService.sumPurchasedTicketsByExpoId(expoId);
-            Map<Expo, Long> tickets = adminService.sumAllPurchasedTickets();
-
             if (Objects.nonNull(amount)) {
                 request.setAttribute("amount", amount);
                 return ConfigurationManager.PATH_MANAGER.getProperty("path.page.expos");

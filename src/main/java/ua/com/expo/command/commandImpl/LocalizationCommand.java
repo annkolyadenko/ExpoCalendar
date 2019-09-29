@@ -36,13 +36,10 @@ public class LocalizationCommand implements Command {
             session.setAttribute("locale", ua);
         }
         UserDto userDto = (UserDto) session.getAttribute("authorizedUser");
-        LOGGER.debug("USER DTO :" + userDto);
         if (Objects.nonNull(userDto)) {
             Long userId = userDto.getId();
             String locale = (String) session.getAttribute("locale");
-            LOGGER.debug("LOCALE : " + locale);
             boolean isSaved = userService.saveLang(userId, locale);
-            LOGGER.debug("IS SAVED : " + isSaved);
             if (isSaved) {
                 return path;
             } else {

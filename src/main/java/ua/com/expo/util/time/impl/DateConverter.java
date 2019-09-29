@@ -1,25 +1,20 @@
-package ua.com.expo.util.time;
+package ua.com.expo.util.time.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import ua.com.expo.util.time.IDateConverter;
 
 import java.sql.Timestamp;
 import java.time.*;
 
+public class DateConverter implements IDateConverter<Instant, Timestamp> {
 
-public class TimeConverter implements IConverter<Instant, Timestamp> {
-
-    private static final ZoneId zone = ZoneId.of("Europe/Kiev");
-    private static final Logger LOGGER = LogManager.getLogger(TimeConverter.class.getName());
-
-    private TimeConverter() {
+    private DateConverter() {
     }
 
     private static class Holder {
-        static final TimeConverter INSTANCE = new TimeConverter();
+        static final DateConverter INSTANCE = new DateConverter();
     }
 
-    public static TimeConverter getInstance() {
+    public static DateConverter getInstance() {
         return Holder.INSTANCE;
     }
 
@@ -49,8 +44,13 @@ public class TimeConverter implements IConverter<Instant, Timestamp> {
         return localDateTime.atZone(zone).toInstant();
     }
 
-    public static void main(String[] args) {
+    @Override
+    public LocalDateTime convertInstantToLocalDateTime(Instant instant) {
+        return LocalDateTime.ofInstant(instant, zone);
+    }
 
+
+    public static void main(String[] args) {
         ZoneId zone = ZoneId.of("Europe/Kiev");
         Instant instant = Instant.now();
         System.out.println(instant);

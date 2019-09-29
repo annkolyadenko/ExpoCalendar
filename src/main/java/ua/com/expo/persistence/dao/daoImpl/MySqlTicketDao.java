@@ -9,7 +9,7 @@ import ua.com.expo.persistence.dao.ITicketDao;
 import ua.com.expo.persistence.dao.mapper.Mapper;
 import ua.com.expo.transaction.util.TransactionUtil;
 import ua.com.expo.util.resource.ConfigurationManager;
-import ua.com.expo.util.time.TimeConverter;
+import ua.com.expo.util.time.impl.DateConverter;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ public class MySqlTicketDao implements ITicketDao {
 
     private static final TransactionUtil transactionUtil = TransactionUtil.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(MySqlTicketDao.class.getName());
-    private TimeConverter timeConverter = TimeConverter.getInstance();
+    private DateConverter timeConverter = DateConverter.getInstance();
 
 
     public boolean save(Ticket ticket) {

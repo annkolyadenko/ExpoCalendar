@@ -2,6 +2,8 @@ package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
+import ua.com.expo.dto.ShowroomDto;
+import ua.com.expo.dto.ThemeDto;
 import ua.com.expo.entity.Showroom;
 import ua.com.expo.entity.Theme;
 import ua.com.expo.service.serviceImpl.AdminService;
@@ -9,7 +11,6 @@ import ua.com.expo.util.resource.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -27,8 +28,8 @@ public class AddNewExpoCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        List<Theme> list = adminService.findAllThemes();
-        List<Showroom> showrooms = adminService.findAllShowroom();
+        List<ThemeDto> list = adminService.findAllThemes();
+        List<ShowroomDto> showrooms = adminService.findAllShowroom();
         if (list != null && !list.isEmpty() && showrooms != null && !showrooms.isEmpty()) {
             request.setAttribute("showrooms", showrooms);
             request.setAttribute("themes", list);

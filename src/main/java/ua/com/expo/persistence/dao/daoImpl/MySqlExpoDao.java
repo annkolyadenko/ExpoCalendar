@@ -7,7 +7,7 @@ import ua.com.expo.persistence.dao.IExpoDao;
 import ua.com.expo.persistence.dao.mapper.Mapper;
 import ua.com.expo.transaction.util.TransactionUtil;
 import ua.com.expo.util.resource.ConfigurationManager;
-import ua.com.expo.util.time.TimeConverter;
+import ua.com.expo.util.time.impl.DateConverter;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 
 public class MySqlExpoDao implements IExpoDao {
 
-    private TimeConverter timeConverter = TimeConverter.getInstance();
+    private DateConverter timeConverter = DateConverter.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(MySqlExpoDao.class.getName());
     private static final TransactionUtil transactionUtil = TransactionUtil.getInstance();
 

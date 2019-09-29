@@ -29,14 +29,14 @@ public class SignUpCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        IRequestValidator requestParametersValidator = RequestValidator.getInstance();
+        IRequestValidator validator = RequestValidator.getInstance();
         HttpSession session = request.getSession();
         String name = request.getParameter("userName");
         String email = request.getParameter("email");
         String language = (String) session.getAttribute("locale");
         LOGGER.debug("LOCALE :" + language);
         String password = request.getParameter("password");
-        if (requestParametersValidator.emailPasswordValidate(email, password) & requestParametersValidator.isNotNull(name)) {
+        if (validator.emailValidate(email) && validator.passwordValidate(password) & validator.isNotNull(name)) {
             try {
                 UserDto userDto = userService.signUpUser(name, email, language, password);
                 if (Objects.nonNull(userDto)) {

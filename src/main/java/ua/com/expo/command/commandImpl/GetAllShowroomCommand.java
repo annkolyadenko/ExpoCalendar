@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
+import ua.com.expo.dto.ShowroomDto;
 import ua.com.expo.entity.Showroom;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
@@ -25,7 +26,7 @@ public class GetAllShowroomCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        List<Showroom> showrooms = adminService.findAllShowroom();
+        List<ShowroomDto> showrooms = adminService.findAllShowroom();
         if (Objects.nonNull(showrooms) && !showrooms.isEmpty()) {
             request.setAttribute("showrooms", showrooms);
             return ConfigurationManager.PATH_MANAGER.getProperty("path.page.showrooms");

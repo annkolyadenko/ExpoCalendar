@@ -2,7 +2,9 @@ package ua.com.expo.util.validator;
 
 public interface IRequestValidator {
 
-    boolean emailPasswordValidate(String email, String password);
+    boolean emailValidate(String email);
+
+    boolean passwordValidate(String password);
 
     boolean isNotNull(String... strings);
 
@@ -10,10 +12,10 @@ public interface IRequestValidator {
 
     boolean regexValidate(String item, String regex);
 
-    boolean numberValidate(Long number);
+    Long numberParser(String number);
 
-    boolean dateValidate();
+    boolean dateValidate(String date);
 
-    boolean timeValidate();
+    boolean dateTimeValidate(String dateTime);
 
 }

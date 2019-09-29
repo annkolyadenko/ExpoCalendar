@@ -2,6 +2,7 @@ package ua.com.expo.command.commandImpl;
 
 import ua.com.expo.command.Command;
 import ua.com.expo.controller.context.Context;
+import ua.com.expo.dto.ThemeDto;
 import ua.com.expo.entity.Theme;
 import ua.com.expo.service.serviceImpl.AdminService;
 import ua.com.expo.util.resource.ConfigurationManager;
@@ -25,7 +26,7 @@ public class GetAllThemesCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        List<Theme> list = adminService.findAllThemes();
+        List<ThemeDto> list = adminService.findAllThemes();
         if (Objects.nonNull(list) && !list.isEmpty()) {
             request.setAttribute("themes", list);
             request.setAttribute("today", LocalDate.now());

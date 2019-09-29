@@ -33,7 +33,7 @@
             <tbody>
             <c:forEach var="stats" items="${statistic}" varStatus="loop">
                 <tr>
-                    <td>${stats.key.showroom.name}</td>
+                    <td>${stats.key.showroom}</td>
                     <td>${stats.key.theme}</td>
                     <td>${stats.key.date}</td>
                     <td>${stats.key.info}</td>

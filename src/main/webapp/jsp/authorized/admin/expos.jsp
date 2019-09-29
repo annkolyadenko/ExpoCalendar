@@ -32,7 +32,7 @@
             <tbody>
             <c:forEach var="expo" items="${expos}" varStatus="loop">
                 <tr>
-                    <td>${expo.showroom.name}</td>
+                    <td>${expo.showroom}</td>
                     <td>${expo.theme}</td>
                     <td>${expo.date}</td>
                     <td>${expo.info}</td>

@@ -25,11 +25,12 @@ public class AuthorisationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
         UserDto userDto = (UserDto) session.getAttribute("authorizedUser");
-        if (userDto.getRole().toString().equals(RoleEnum.ADMINISTRATOR.toString())) {
+        if (userDto.getRole().equals(RoleEnum.ADMINISTRATOR.toString())) {
             filterChain.doFilter(request, response);
+        } else {
+            LOGGER.warn("Accessing the page or resource is absolutely forbidden for security reason. User login :" + userDto.getEmail());
+            response.setStatus(403);
         }
-        LOGGER.warn("Accessing the page or resource is absolutely forbidden for security reason. User login :" + userDto.getEmail());
-        response.setStatus(403);
     }
 
     @Override

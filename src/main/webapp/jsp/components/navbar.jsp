@@ -86,7 +86,7 @@
                         <a class="dropdown-item"
                            href="<c:url value="/controller?command=LOCALIZATION&language=English&path=${pageContext.request.servletPath}" />">Glory
                             to Ukraine</a>
-                        <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
+                        <a class="dropdown-item" href="<c:url value="/jsp/errors/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
                 <li>
@@ -122,7 +122,7 @@
                         <a class="dropdown-item"
                            href="<c:url value="/controller?command=LOCALIZATION&language=English&path=${pageContext.request.servletPath}" />">Glory
                             to Ukraine</a>
-                        <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
+                        <a class="dropdown-item" href="<c:url value="/jsp/errors/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -169,7 +169,7 @@
                         <a class="dropdown-item"
                            href="<c:url value="/controller?command=LOCALIZATION&language=English&path=${pageContext.request.servletPath}" />">Glory
                             to Ukraine</a>
-                        <a class="dropdown-item" href="<c:url value="/jsp/common/lang.jsp" />">Слава Украине</a>
+                        <a class="dropdown-item" href="<c:url value="/jsp/errors/lang.jsp" />">Слава Украине</a>
                     </div>
                 </li>
                 <li class="nav-item">

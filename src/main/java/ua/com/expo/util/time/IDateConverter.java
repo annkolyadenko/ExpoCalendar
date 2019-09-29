@@ -2,6 +2,7 @@ package ua.com.expo.util.time;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * The TIMESTAMP data type is used for values that contain both date and time parts. TIMESTAMP has a range
@@ -14,7 +15,9 @@ import java.time.LocalDateTime;
  * they represent the number of nanoseconds since the Java epoch.
  */
 
-public interface IConverter <Instant, TimeStamp> {
+public interface IDateConverter<Instant, TimeStamp> {
+
+    ZoneId zone = ZoneId.of("Europe/Kiev");
 
     TimeStamp convertToDatabase(Instant instant);
 
@@ -26,4 +29,5 @@ public interface IConverter <Instant, TimeStamp> {
 
     Instant convertLocalDateTimeToInstant(LocalDateTime localDateTime);
 
+    LocalDateTime convertInstantToLocalDateTime(Instant instant);
 }

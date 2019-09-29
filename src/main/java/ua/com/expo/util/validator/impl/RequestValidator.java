@@ -1,11 +1,18 @@
 package ua.com.expo.util.validator.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.com.expo.file.Regex;
 import ua.com.expo.util.validator.IRequestValidator;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 public class RequestValidator implements IRequestValidator {
+
+    private static final Logger LOGGER = LogManager.getLogger(RequestValidator.class.getName());
 
     private RequestValidator() {
     }
@@ -19,8 +26,13 @@ public class RequestValidator implements IRequestValidator {
     }
 
     @Override
-    public boolean emailPasswordValidate(String email, String password) {
-        return (isNotNull(email, password) && isNotEmpty(email, password) && regexValidate(email, Regex.EMAIL_REGEX) && regexValidate(password, Regex.PASSWORD_REGEX));
+    public boolean emailValidate(String email) {
+        return (isNotNull(email) && isNotEmpty(email) && regexValidate(email, Regex.EMAIL_REGEX));
+    }
+
+    @Override
+    public boolean passwordValidate(String password) {
+        return (isNotNull(password) && isNotEmpty(password) && regexValidate(password, Regex.PASSWORD_REGEX));
     }
 
     @Override
@@ -52,17 +64,36 @@ public class RequestValidator implements IRequestValidator {
     }
 
     @Override
-    public boolean numberValidate(Long number) {
-        return false;
+    public Long numberParser(String value) {
+        Long number = null;
+        try {
+            number = Long.valueOf(value);
+        } catch (NumberFormatException e) {
+            LOGGER.error(e);
+            throw new RuntimeException(e);
+        }
+        return number;
     }
 
     @Override
-    public boolean dateValidate() {
-        return false;
+    public boolean dateValidate(String date) {
+        try {
+            LocalDate dat = LocalDate.parse(date);
+            return true;
+        } catch (DateTimeParseException e) {
+            LOGGER.error(e);
+            return false;
+        }
     }
 
     @Override
-    public boolean timeValidate() {
-        return false;
+    public boolean dateTimeValidate(String dateTime) {
+        try {
+            LocalDateTime ldt = LocalDateTime.parse(dateTime);
+            return true;
+        } catch (DateTimeParseException e) {
+            LOGGER.error(e);
+            return false;
+        }
     }
 }

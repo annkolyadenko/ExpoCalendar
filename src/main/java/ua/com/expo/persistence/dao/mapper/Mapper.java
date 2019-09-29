@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.com.expo.util.time.TimeConverter;
+import ua.com.expo.util.time.impl.DateConverter;
 
 
 public enum Mapper implements EntityMapper<Entity> {
@@ -114,6 +114,6 @@ public enum Mapper implements EntityMapper<Entity> {
     };
 
     private static final Logger LOGGER = LogManager.getLogger(Mapper.class.getName());
-    private static final TimeConverter timeConverter = TimeConverter.getInstance();
+    private static final DateConverter timeConverter = DateConverter.getInstance();
 
 }

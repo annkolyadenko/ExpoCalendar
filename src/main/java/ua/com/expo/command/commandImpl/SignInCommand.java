@@ -31,7 +31,7 @@ public class SignInCommand implements Command {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        if (validator.emailPasswordValidate(email, password)) {
+        if (validator.emailValidate(email) && validator.passwordValidate(password)) {
             try {
                 UserDto userDto = userService.signInUser(email, password);
                 HttpSession session = request.getSession();

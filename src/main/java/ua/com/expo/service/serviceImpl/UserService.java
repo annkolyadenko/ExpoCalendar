@@ -33,8 +33,8 @@ public class UserService {
         Optional<User> optionalUser = userDao.findUserByEmail(email);
         User user = optionalUser.orElseThrow(() -> new RuntimeServiceException("User with this email doesn't exist. Please, enter email again"));
         if (Objects.nonNull(user) && passwordHashingValidator.passwordValidate(password, user)) {
-            LOGGER.debug("Mapper debug :" + convertToDto(user));
-            return convertToDto(user);
+            LOGGER.debug("Mapper debug :" + modelMapper.map(user, UserDto.class));
+            return modelMapper.map(user, UserDto.class);
         }
         throw new RuntimeServiceException("Password doesn't valid. Please, enter password again");
     }
@@ -57,20 +57,12 @@ public class UserService {
                 throw new RuntimeServiceException("Unfortunately, the internal error occurred during your SignUp action. Please, try again later");
             }
         }
-        LOGGER.debug("Mapper debug :" + convertToDto(user));
-        return convertToDto(user);
+        LOGGER.debug("Mapper debug :" + modelMapper.map(user, UserDto.class));
+        return modelMapper.map(user, UserDto.class);
     }
 
     public boolean saveLang(Long userId, String language) {
         LOGGER.debug("saveLang");
         return userDao.saveLanguageByUserId(userId, language);
-    }
-
-    private UserDto convertToDto(User user) {
-        return modelMapper.map(user, UserDto.class);
-    }
-
-    private User convertToEntity(UserDto userDto) {
-        return modelMapper.map(userDto, User.class);
     }
 }
