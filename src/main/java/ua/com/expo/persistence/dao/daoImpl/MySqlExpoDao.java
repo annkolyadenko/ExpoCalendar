@@ -126,6 +126,84 @@ public class MySqlExpoDao implements IExpoDao {
     }
 
     @Override
+    public List<Expo> findAllExpoByShowroomIdPageable(Long id, Integer offset, Integer limit) {
+        ConnectionWrapper con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Expo> expos = new ArrayList<>();
+        try {
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findAllByShowroomIdPageable");
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
+            ps.setLong(1, id);
+            ps.setInt(2, offset);
+            LOGGER.debug("OFFSET :" + offset);
+            ps.setInt(3, limit);
+            LOGGER.debug("LIMIT :" + limit);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                expos.add((Expo) Mapper.EXPO.extractFromResultSet(rs));
+            }
+            return expos;
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
+        } finally {
+            con.closePreparedStatement(ps);
+            con.closeConnection();
+        }
+    }
+
+    @Override
+    public Integer findNumberOfRows() {
+        ConnectionWrapper con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Integer result = null;
+        try {
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findNumberOfRows");
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
+        } finally {
+            con.closePreparedStatement(ps);
+            con.closeConnection();
+        }
+        return result;
+    }
+
+    @Override
+    public Integer findNumberOfRowsExposByShowroomId(Long id) {
+        ConnectionWrapper con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Integer result = null;
+        try {
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("expo.findNumberOfRowsExposByShowroomId");
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
+        } finally {
+            con.closePreparedStatement(ps);
+            con.closeConnection();
+        }
+        return result;
+    }
+
+    @Override
     public List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp date) {
         ConnectionWrapper con = null;
         PreparedStatement ps = null;

@@ -8,6 +8,7 @@ import ua.com.expo.dto.UserDto;
 import ua.com.expo.entity.User;
 import ua.com.expo.entity.enums.RoleEnum;
 import ua.com.expo.exception_draft.RuntimeServiceException;
+import ua.com.expo.persistence.dao.ITicketDao;
 import ua.com.expo.persistence.dao.IUserDao;
 import ua.com.expo.util.security.IPasswordHashing;
 import ua.com.expo.util.security.impl.PasswordHashingImpl;

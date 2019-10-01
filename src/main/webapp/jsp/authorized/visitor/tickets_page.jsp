@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Hp
   Date: 16.09.2019
-  Time: 21:48
+  Time: 20:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,22 +10,22 @@
 <%@ include file="/jsp/components/i18n.jsp" %>
 <html>
 <head>
-    <title>Expos</title>
+    <title>Tickets</title>
     <c:import url="/jsp/components/dependencies.jsp"></c:import>
     <c:import url="/jsp/components/navbar.jsp"></c:import>
 </head>
 <body>
 <div class="container" style="height: 100%">
-    <h1><fmt:message key="status.expo" bundle="${rb}"/></h1>
+    <h1><fmt:message key="status.pagination" bundle="${rb}"/></h1>
     <br>
-    <c:set var="tickets" value="${requestScope.expos}"/>
-    <c:if test="${empty expos}">
+    <c:set var="tickets" value="${requestScope.tickets}"/>
+    <c:if test="${empty tickets}">
         <form action="controller" method="GET">
-            <input type="hidden" name="command" value="GET_ALL_EXPO_BY_SHOWROOM_ID_PAGEABLE">
+            <input type="hidden" name="command" value="PAGINATION">
             <input type="hidden" name="currentPage" value="1">
             <div class="form-group">
                 <div class="container center_div">
-                    <label for="record">Select # of expos per page:</label>
+                    <label for="record">Select # of tickets per page:</label>
                     <div class="col-sm-4">
                         <select class="form-control" id="record" name="limit">
                             <option value="3" selected>3</option>
@@ -41,25 +41,26 @@
             </div>
         </form>
     </c:if>
-    <c:if test="${not empty expos}">
+    <c:if test="${not empty tickets}">
+        <h2>Tickets table</h2>
         <table class="table table-sm table-hover table-bordered text-center">
             <thead>
             <tr>
-                <th scope="col">Showroom</th>
-                <th scope="col">Theme</th>
+                <th scope="col">Ticket#</th>
+                <th scope="col">Info</th>
+                <th scope="col">Price</th>
                 <th scope="col">Date</th>
-                <th scope="col">Expo info</th>
-                <th scope="col">Ticket price</th>
+                <th scope="col">Tickets amount</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="expo" items="${expos}" varStatus="loop">
+            <c:forEach var="ticket" items="${tickets}" varStatus="loop">
                 <tr>
-                    <td>${expo.showroom}</td>
-                    <td>${expo.theme}</td>
-                    <td>${expo.date}</td>
-                    <td>${expo.info}</td>
-                    <td>${expo.price}</td>
+                    <td>${ticket.id}</td>
+                    <td>${ticket.expo}</td>
+                    <td>${ticket.payment}</td>
+                    <td>${ticket.date}</td>
+                    <td>${ticket.amount}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -68,7 +69,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${requestScope.currentPage != 1}">
                     <form action="controller" method="GET">
-                        <input type="hidden" name="command" value="GET_ALL_EXPO_BY_SHOWROOM_ID_PAGEABLE"/>
+                        <input type="hidden" name="command" value="PAGINATION"/>
                         <input type="hidden" name="limit" value="${requestScope.limit}"/>
                         <input type="hidden" name="currentPage" value="${requestScope.currentPage-1}"/>
                         <button type="submit" class="btn btn-dark">Previous</button>
@@ -83,7 +84,7 @@
                         </c:when>
                         <c:otherwise>
                             <form action="controller" method="GET" class="page-item">
-                                <input type="hidden" name="command" value="GET_ALL_EXPO_BY_SHOWROOM_ID_PAGEABLE"/>
+                                <input type="hidden" name="command" value="PAGINATION"/>
                                 <input type="hidden" name="limit" value="${requestScope.limit}"/>
                                 <input type="hidden" name="currentPage" value="${i}"/>
                                 <button type="submit" class="btn btn-dark">${i}</button>
@@ -93,7 +94,7 @@
                 </c:forEach>
                 <c:if test="${requestScope.currentPage lt requestScope.numberOfPages}">
                     <form action="controller" method="GET">
-                        <input type="hidden" name="command" value="GET_ALL_EXPO_BY_SHOWROOM_ID_PAGEABLE"/>
+                        <input type="hidden" name="command" value="PAGINATION"/>
                         <input type="hidden" name="limit" value="${requestScope.limit}"/>
                         <input type="hidden" name="currentPage" value="${requestScope.currentPage+1}"/>
                         <button type="submit" class="btn btn-dark">Next</button>
@@ -101,37 +102,6 @@
                 </c:if>
             </ul>
         </nav>
-    </c:if>
-    <%--<c:if test="${requestScope.expos!=null}">
-        <table class="table table-sm table-hover table-bordered text-center">
-            <thead>
-            <tr>
-                <th scope="col">Showroom</th>
-                <th scope="col">Theme</th>
-                <th scope="col">Date</th>
-                <th scope="col">Expo info</th>
-                <th scope="col">Ticket price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="expo" items="${expos}" varStatus="loop">
-                <tr>
-                    <td>${expo.showroom}</td>
-                    <td>${expo.theme}</td>
-                    <td>${expo.date}</td>
-                    <td>${expo.info}</td>
-                    <td>${expo.price}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </c:if>--%>
-    <c:if test="${requestScope.isError}">
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <p style="color: red">${requestScope.errorMessage}</p>
-            </div>
-        </div>
     </c:if>
 </div>
 </body>

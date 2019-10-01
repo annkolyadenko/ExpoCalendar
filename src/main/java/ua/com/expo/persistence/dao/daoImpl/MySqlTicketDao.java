@@ -14,10 +14,7 @@ import ua.com.expo.util.time.impl.DateConverter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MySqlTicketDao implements ITicketDao {
 
@@ -33,11 +30,12 @@ public class MySqlTicketDao implements ITicketDao {
         try {
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.create");
             con = transactionUtil.getConnection();
+            LOGGER.debug("save(Ticket ticket)" + con);
             ps = con.createPreparedStatement(sql);
             ps.setLong(1, ticket.getExpo().getId());
             ps.setLong(2, ticket.getUser().getId());
             ps.setLong(3, ticket.getPayment().getId());
-            ps.setTimestamp(4, timeConverter.convertToDatabase(ticket.getTime()));
+            ps.setTimestamp(4, timeConverter.convertToDatabase(ticket.getDate()));
             ps.setLong(5, ticket.getAmount());
             ps.setString(6, ticket.getInfo());
             ps.executeUpdate();
@@ -60,7 +58,7 @@ public class MySqlTicketDao implements ITicketDao {
         ResultSet rs = null;
         Long result = null;
         try {
-            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.sumPurchasedTicketsByExpoId");
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.sumPurchasedByExpoId");
             con = transactionUtil.getConnection();
             ps = con.createPreparedStatement(sql);
             ps.setLong(1, id);
@@ -85,10 +83,10 @@ public class MySqlTicketDao implements ITicketDao {
         Map<Expo, Long> tickets = new HashMap<>();
         try {
             con = transactionUtil.getConnection();
-            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.sumAllPurchasedTickets");
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.sumAllPurchased");
             ps = con.createPreparedStatement(sql);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 tickets.put((Expo) Mapper.EXPO.extractFromResultSet(rs), rs.getLong("ticket_sum"));
             }
         } catch (SQLException e) {
@@ -100,6 +98,89 @@ public class MySqlTicketDao implements ITicketDao {
         }
         return tickets;
     }
+
+    @Override
+    public LinkedHashMap<Expo, Long> sumAllPurchasedTicketsPageable(Integer offset, Integer limit) {
+        ConnectionWrapper con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        LinkedHashMap<Expo, Long> tickets = new LinkedHashMap<>();
+        try {
+            con = transactionUtil.getConnection();
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.sumAllPurchasedPageable");
+            ps = con.createPreparedStatement(sql);
+            ps.setInt(1, offset);
+            LOGGER.debug("OFFSET :" + offset);
+            ps.setInt(2, limit);
+            LOGGER.debug("LIMIT :" + limit);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                tickets.put((Expo) Mapper.EXPO.extractFromResultSet(rs), rs.getLong("ticket_sum"));
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
+        } finally {
+            con.closePreparedStatement(ps);
+            con.closeConnection();
+        }
+        return tickets;
+    }
+
+    @Override
+    public Integer findNumberOfRowsByUserId(Long id) {
+        ConnectionWrapper con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Integer result = null;
+        try {
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.findNumberOfRowsByUserId");
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
+        } finally {
+            con.closePreparedStatement(ps);
+            con.closeConnection();
+        }
+        return result;
+    }
+
+    @Override
+    public List<Ticket> findAllTicketsByUserIdPageable(Long id, Integer offset, Integer limit) {
+        ConnectionWrapper con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Ticket> ticketList = new ArrayList<>();
+        try {
+            String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("ticket.findAllByUserIdPageable");
+            con = transactionUtil.getConnection();
+            ps = con.createPreparedStatement(sql);
+            ps.setLong(1, id);
+            ps.setInt(2, offset);
+            LOGGER.debug("OFFSET :" + offset);
+            ps.setInt(3, limit);
+            LOGGER.debug("LIMIT :" + limit);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ticketList.add((Ticket) Mapper.TICKET.extractFromResultSet(rs));
+            }
+            return ticketList;
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new RuntimeSqlException(e);
+        } finally {
+            con.closePreparedStatement(ps);
+            con.closeConnection();
+        }
+    }
+
 
     @Override
     public List<Ticket> findAllTicketsByUserId(Long id) {

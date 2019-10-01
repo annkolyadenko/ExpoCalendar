@@ -24,9 +24,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class AdminService {
     private static final Logger LOGGER = LogManager.getLogger(AdminService.class.getName());
@@ -46,32 +46,42 @@ public class AdminService {
     }
 
     public List<ExpoDto> findAllExpoByShowroomId(Long id) {
-        return modelMapper.map(expoDao.findAllExpoByShowroomId(id), new TypeToken<List<ExpoDto>>() {
+        List<Expo> expos = expoDao.findAllExpoByShowroomId(id);
+        return modelMapper.map(expos, new TypeToken<List<ExpoDto>>() {
+        }.getType());
+    }
+
+    public List<ExpoDto> findAllExpoByShowroomIdPageable(Long id, Integer limit, Integer currentPage) {
+        int offset = currentPage * limit - limit;
+        List<Expo> expos = expoDao.findAllExpoByShowroomIdPageable(id, offset, limit);
+        return modelMapper.map(expos, new TypeToken<List<ExpoDto>>() {
         }.getType());
     }
 
     public List<ExpoDto> findAllExpoByShowroomIdAndDate(Long id, Timestamp date) {
-        return modelMapper.map(expoDao.findAllExpoByShowroomIdAndDate(id, date), new TypeToken<List<ExpoDto>>() {
+        List<Expo> expos = expoDao.findAllExpoByShowroomIdAndDate(id, date);
+        return modelMapper.map(expos, new TypeToken<List<ExpoDto>>() {
         }.getType());
     }
 
     public boolean saveExpo(Long showroomId, Long themeId, String date, Long price, String info) {
-        Optional<Showroom> showroom = showroomDao.findShowroomById(showroomId);
-        Showroom show = showroom.orElseThrow(() -> new RuntimeException("Can't find showroom by id"));
-        Optional<Theme> theme = themeDao.findThemeById(themeId);
-        Theme the = theme.orElseThrow(() -> new RuntimeException("Can't find theme by id"));
+        Showroom show = showroomDao.findShowroomById(showroomId).orElseThrow(() -> new RuntimeException("Can't find showroom by id"));
+        Theme the = themeDao.findThemeById(themeId).orElseThrow(() -> new RuntimeException("Can't find theme by id"));
         Expo expo = new Expo.Builder().showroom(show).theme(the).date((Instant) converter.convertLocalDateTimeToInstant(LocalDateTime.parse(date))).price(new BigDecimal(price)).info(info).build();
         LOGGER.debug(expo);
         return expoDao.save(expo);
     }
 
     public List<ShowroomDto> findAllShowroom() {
-        return modelMapper.map(showroomDao.findAll(), new TypeToken<List<ShowroomDto>>() {
+        List<Showroom> showrooms = showroomDao.findAll();
+        return modelMapper.map(showrooms, new TypeToken<List<ShowroomDto>>() {
         }.getType());
     }
 
+
     public List<ThemeDto> findAllThemes() {
-        return modelMapper.map(themeDao.findAll(), new TypeToken<List<ShowroomDto>>() {
+        List<Theme> themes = themeDao.findAll();
+        return modelMapper.map(themes, new TypeToken<List<ShowroomDto>>() {
         }.getType());
     }
 
@@ -95,6 +105,23 @@ public class AdminService {
         return map;
     }
 
+    public LinkedHashMap<ExpoDto, Long> sumAllPurchasedTicketsPageable(Integer limit, Integer currentPage) {
+        int offset = currentPage * limit - limit;
+        LinkedHashMap<Expo, Long> mapping = ticketDao.sumAllPurchasedTicketsPageable(offset, limit);
+        LOGGER.debug(mapping);
+        LinkedHashMap<ExpoDto, Long> map = convertMapToDto(mapping);
+        LOGGER.debug(map);
+        return map;
+    }
+
+    public Integer findNumberOfRowsExpos() {
+        return expoDao.findNumberOfRows();
+    }
+
+    public Integer findNumberOfRowsExposByShowroomId(Long id) {
+        return expoDao.findNumberOfRowsExposByShowroomId(id);
+    }
+
     private boolean exist(String theme, List<Theme> themes) {
         for (Theme th : themes) {
             if (th.getName().equals(theme))
@@ -103,9 +130,9 @@ public class AdminService {
         return false;
     }
 
-    private Map<ExpoDto, Long> convertMapToDto(Map<Expo, Long> map) {
-        Map<ExpoDto, Long> result = new HashMap<>();
-        map.forEach((k, v) -> result.put(modelMapper.map(k, ExpoDto.class), v));
-        return result;
+    private LinkedHashMap<ExpoDto, Long> convertMapToDto(Map<Expo, Long> map) {
+        LinkedHashMap<ExpoDto, Long> expos = new LinkedHashMap<>();
+        map.forEach((k, v) -> expos.put(modelMapper.map(k, ExpoDto.class), v));
+        return expos;
     }
 }

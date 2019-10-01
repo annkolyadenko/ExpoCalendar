@@ -26,7 +26,7 @@
                         <option value="${showroom.id}">${showroom.name}</option>
                     </c:forEach>
                 </select>
-                <input type="hidden" name="command" value="GET_ALL_EXPO_BY_SHOWROOM_ID">
+                <input type="hidden" name="command" value="GO_TO_GET_ALL_EXPO">
                 <button type="submit" class="btn btn-dark">Submit
                 </button>
             </label>

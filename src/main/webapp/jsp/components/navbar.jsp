@@ -69,9 +69,6 @@
                         <button type="submit" class="btn btn-dark">Sign up</button>
                     </form>
                 </li>
-                <li>
-                    <a class="nav-link" href="#">Something else</a>
-                </li>
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item dropdown">
@@ -105,7 +102,7 @@
                     <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_THEMES" />">Calendar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/controller?command=GET_ALL_TICKETS_BY_USER_ID" />">My
+                    <a class="nav-link" href="<c:url value="/controller?command=GO_TO_GET_ALL_TICKETS" />">My
                         tickets</a>
                 </li>
             </ul>
@@ -140,7 +137,7 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/controller?command=GET_STATS_BY_EXPO" />">Statistics</a>
+                    <a class="nav-link" href="<c:url value="/controller?command=GO_TO_STATS_COMMAND" />">Statistics</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"

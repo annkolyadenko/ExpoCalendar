@@ -102,7 +102,7 @@ public enum Mapper implements EntityMapper<Entity> {
                         .expo((Expo) EXPO.extractFromResultSet(rs))
                         .user((User) USER.extractFromResultSet(rs))
                         .payment((Payment) PAYMENT.extractFromResultSet(rs))
-                        .time(timeConverter.convertToEntity(rs.getTimestamp("ticket_date_time")))
+                        .date(timeConverter.convertToEntity(rs.getTimestamp("ticket_date_time")))
                         .amount(rs.getLong("ticket_amount"))
                         .info(rs.getString("ticket_info"))
                         .build();

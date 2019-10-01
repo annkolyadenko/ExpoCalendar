@@ -3,50 +3,53 @@ package ua.com.expo.dto;
 import ua.com.expo.entity.Expo;
 import ua.com.expo.entity.Payment;
 import ua.com.expo.entity.User;
+import ua.com.expo.util.time.impl.DateConverter;
+import ua.com.expo.util.time.impl.DateFormatter;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.Instant;
 
-public class TicketDto extends AbstractDto{
-    private Expo expo;
-    private User user;
-    private Payment payment;
-    private LocalDateTime date;
+public class TicketDto extends AbstractDto {
+    private String expo;
+    private String user;
+    private BigDecimal payment;
+    private String date;
     private Long amount;
     private String info;
 
     public TicketDto() {
     }
 
-    public Expo getExpo() {
+    public String getExpo() {
         return expo;
     }
 
     public void setExpo(Expo expo) {
-        this.expo = expo;
+        this.expo = expo.getInfo();
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.user = user.getName();
     }
 
-    public Payment getPayment() {
+    public BigDecimal getPayment() {
         return payment;
     }
 
     public void setPayment(Payment payment) {
-        this.payment = payment;
+        this.payment = payment.getValue();
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDate(Instant instant) {
+        date = DateFormatter.getInstance().format(DateConverter.getInstance().convertInstantToLocalDateTime(instant));
     }
 
     public Long getAmount() {

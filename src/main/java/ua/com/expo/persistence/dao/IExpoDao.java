@@ -12,6 +12,12 @@ public interface IExpoDao {
 
     List<Expo> findAllExpoByShowroomId(Long id);
 
+    List<Expo> findAllExpoByShowroomIdPageable(Long id, Integer offset, Integer limit);
+
+    Integer findNumberOfRows();
+
+    Integer findNumberOfRowsExposByShowroomId(Long id);
+
     List<Expo> findAllExpoByShowroomIdAndDate(Long id, Timestamp date);
 
     boolean save(Expo expo);

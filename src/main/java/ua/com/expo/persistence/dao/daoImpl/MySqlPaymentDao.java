@@ -25,6 +25,7 @@ public class MySqlPaymentDao implements IPaymentDao {
         try {
             String sql = ConfigurationManager.SQL_QUERY_MANAGER.getProperty("payment.findById");
             con = transactionUtil.getConnection();
+            LOGGER.debug("findPaymentById(Long id)"+con);
             ps = con.createPreparedStatement(sql);
             ps.setLong(1, id);
             rs = ps.executeQuery();

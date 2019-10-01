@@ -7,19 +7,19 @@ public class Ticket extends Entity {
     private Expo expo;
     private User user;
     private Payment payment;
-    private Instant time;
+    private Instant date;
     private Long amount;
     private String info;
 
     public Ticket() {
     }
 
-    public Ticket(Long id, Expo expo, User user, Payment payment, Instant time, Long amount, String info) {
+    public Ticket(Long id, Expo expo, User user, Payment payment, Instant date, Long amount, String info) {
         super(id);
         this.expo = expo;
         this.user = user;
         this.payment = payment;
-        this.time = time;
+        this.date = date;
         this.amount = amount;
         this.info = info;
     }
@@ -48,12 +48,12 @@ public class Ticket extends Entity {
         this.payment = payment;
     }
 
-    public Instant getTime() {
-        return time;
+    public Instant getDate() {
+        return date;
     }
 
-    public void setTime(Instant time) {
-        this.time = time;
+    public void setTime(Instant date) {
+        this.date = date;
     }
 
     public Long getAmount() {
@@ -77,7 +77,7 @@ public class Ticket extends Entity {
         this.expo = builder.expo;
         this.user = builder.user;
         this.payment = builder.payment;
-        this.time = builder.time;
+        this.date = builder.date;
         this.amount = builder.amount;
         this.info = builder.info;
     }
@@ -87,7 +87,7 @@ public class Ticket extends Entity {
         private Expo expo;
         private User user;
         private Payment payment;
-        private Instant time;
+        private Instant date;
         private Long amount;
         private String info;
 
@@ -112,8 +112,8 @@ public class Ticket extends Entity {
             return this;
         }
 
-        public Builder time(Instant time) {
-            this.time = time;
+        public Builder date(Instant date) {
+            this.date = date;
             return this;
         }
 
@@ -142,7 +142,7 @@ public class Ticket extends Entity {
         if (!Objects.equals(expo, ticket.expo)) return false;
         if (!Objects.equals(user, ticket.user)) return false;
         if (!Objects.equals(payment, ticket.payment)) return false;
-        if (!Objects.equals(time, ticket.time)) return false;
+        if (!Objects.equals(date, ticket.date)) return false;
         if (!Objects.equals(amount, ticket.amount)) return false;
         return Objects.equals(info, ticket.info);
     }
@@ -153,7 +153,7 @@ public class Ticket extends Entity {
         result = 31 * result + (expo != null ? expo.hashCode() : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (payment != null ? payment.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (info != null ? info.hashCode() : 0);
         return result;
@@ -166,7 +166,7 @@ public class Ticket extends Entity {
                 "expo=" + expo +
                 ", user=" + user +
                 ", payment=" + payment +
-                ", time=" + time +
+                ", time=" + date +
                 ", amount=" + amount +
                 ", info='" + info + '\'' +
                 '}';
