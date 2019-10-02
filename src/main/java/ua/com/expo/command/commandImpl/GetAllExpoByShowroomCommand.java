@@ -31,7 +31,7 @@ public class GetAllExpoByShowroomCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         IRequestValidator validator = RequestValidator.getInstance();
         HttpSession session = request.getSession();
-        String idShowroom = (String)session.getAttribute("showroomId");
+        String idShowroom = (String) session.getAttribute("showroomId");
         String limitParameter = request.getParameter("limit");
         String currPage = request.getParameter("currentPage");
         Integer limit = Integer.parseInt(limitParameter);

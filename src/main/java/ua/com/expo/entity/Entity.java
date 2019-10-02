@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public abstract class Entity implements Serializable, Cloneable {
 
-    private Long id;
+    private static final long serialVersionUID = 1L;
+
+    protected Long id;
 
     public Entity() {
     }

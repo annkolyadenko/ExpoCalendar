@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public abstract class AbstractDto implements Serializable, Cloneable {
 
+    private static final long serialVersionUID = 1L;
+
     private Long id;
 
     public AbstractDto() {

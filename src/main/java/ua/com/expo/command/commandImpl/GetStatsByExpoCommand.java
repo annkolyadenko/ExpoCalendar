@@ -24,9 +24,6 @@ public class GetStatsByExpoCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        /*Map<ExpoDto, Long> statistic = adminService.sumAllPurchasedTickets();
-        request.setAttribute("statistic", statistic);
-        return ConfigurationManager.PATH_MANAGER.getProperty("path.page.stats");*/
         String limitParameter = request.getParameter("limit");
         String currPage = request.getParameter("currentPage");
         Integer limit = Integer.parseInt(limitParameter);
