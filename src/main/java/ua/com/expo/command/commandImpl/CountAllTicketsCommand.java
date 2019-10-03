@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.logging.Logger;
 
-public class SumAllTicketsCommand implements Command {
+public class CountAllTicketsCommand implements Command {
 
-    private static final Logger LOGGER = Logger.getLogger(SumAllTicketsCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CountAllTicketsCommand.class.getName());
     private final AdminService adminService;
 
-    public SumAllTicketsCommand() {
+    public CountAllTicketsCommand() {
         this.adminService = Context.getInstance().getServiceFactory().getAdminService();
     }
 

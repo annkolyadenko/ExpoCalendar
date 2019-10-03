@@ -26,7 +26,7 @@ public enum CommandEnum {
     PURCHASE_TICKET(new PurchaseTicketCommand()),
     RETURN_TO_HOMEPAGE(new ReturnToHomePageCommand()),
     REGISTRATION(new SignUpCommand()),
-    SUM_ALL_TICKETS_BY_EXPO_ID(new SumAllTicketsCommand());
+    SUM_ALL_TICKETS_BY_EXPO_ID(new CountAllTicketsCommand());
 
     private Command command;
 
