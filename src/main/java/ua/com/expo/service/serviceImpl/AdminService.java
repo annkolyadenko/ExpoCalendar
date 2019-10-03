@@ -93,21 +93,21 @@ public class AdminService {
         return false;
     }
 
-    public Long sumPurchasedTicketsByExpoId(Long expoId) {
-        return ticketDao.sumPurchasedTicketsByExpoId(expoId);
+    public Long countPurchasedTicketsByExpoId(Long expoId) {
+        return ticketDao.countPurchasedTicketsByExpoId(expoId);
     }
 
-    public Map<ExpoDto, Long> sumAllPurchasedTickets() {
-        Map<Expo, Long> mapping = ticketDao.sumAllPurchasedTickets();
+    public Map<ExpoDto, Long> countAllPurchasedTickets() {
+        Map<Expo, Long> mapping = ticketDao.countAllPurchasedTickets();
         LOGGER.debug(mapping);
         Map<ExpoDto, Long> map = convertMapToDto(mapping);
         LOGGER.debug(map);
         return map;
     }
 
-    public LinkedHashMap<ExpoDto, Long> sumAllPurchasedTicketsPageable(Integer limit, Integer currentPage) {
+    public LinkedHashMap<ExpoDto, Long> countAllPurchasedTicketsPageable(Integer limit, Integer currentPage) {
         int offset = currentPage * limit - limit;
-        LinkedHashMap<Expo, Long> mapping = ticketDao.sumAllPurchasedTicketsPageable(offset, limit);
+        LinkedHashMap<Expo, Long> mapping = ticketDao.countAllPurchasedTicketsPageable(offset, limit);
         LOGGER.debug(mapping);
         LinkedHashMap<ExpoDto, Long> map = convertMapToDto(mapping);
         LOGGER.debug(map);

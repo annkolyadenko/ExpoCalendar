@@ -11,15 +11,15 @@ import java.util.Map;
 
 public interface ITicketDao {
 
-    Long sumPurchasedTicketsByExpoId(Long id);
+    Long countPurchasedTicketsByExpoId(Long id);
 
     List<Ticket> findAllTicketsByUserId(Long id);
 
     boolean save(Ticket ticket);
 
-    Map<Expo, Long> sumAllPurchasedTickets();
+    Map<Expo, Long> countAllPurchasedTickets();
 
-    LinkedHashMap<Expo, Long> sumAllPurchasedTicketsPageable(Integer offset, Integer limit);
+    LinkedHashMap<Expo, Long> countAllPurchasedTicketsPageable(Integer offset, Integer limit);
 
     Integer findNumberOfRowsByUserId(Long id);
 

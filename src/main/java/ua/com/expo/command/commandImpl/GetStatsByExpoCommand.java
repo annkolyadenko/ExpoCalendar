@@ -31,7 +31,7 @@ public class GetStatsByExpoCommand implements Command {
         Integer rows = adminService.findNumberOfRowsExpos();
         LOGGER.debug(rows + "ROWS");
         PaginationUtil.getInstance().doPagination(limit, currentPage, rows, request);
-        LinkedHashMap<ExpoDto, Long> statistic = adminService.sumAllPurchasedTicketsPageable(limit, currentPage);
+        LinkedHashMap<ExpoDto, Long> statistic = adminService.countAllPurchasedTicketsPageable(limit, currentPage);
         request.setAttribute("statistic", statistic);
         return ConfigurationManager.PATH_MANAGER.getProperty("path.page.stats");
     }

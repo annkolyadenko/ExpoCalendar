@@ -28,7 +28,7 @@ public class SumAllTicketsCommand implements Command {
         if (validator.isNotNull(idExpo)) {
             Long expoId = Long.valueOf(idExpo);
             LOGGER.info("Expo id: " + expoId);
-            Long amount = adminService.sumPurchasedTicketsByExpoId(expoId);
+            Long amount = adminService.countPurchasedTicketsByExpoId(expoId);
             if (Objects.nonNull(amount)) {
                 request.setAttribute("amount", amount);
                 return ConfigurationManager.PATH_MANAGER.getProperty("path.page.expos");

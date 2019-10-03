@@ -52,7 +52,7 @@ public class MySqlTicketDao implements ITicketDao {
 
 
     @Override
-    public Long sumPurchasedTicketsByExpoId(Long id) {
+    public Long countPurchasedTicketsByExpoId(Long id) {
         ConnectionWrapper con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -76,7 +76,7 @@ public class MySqlTicketDao implements ITicketDao {
         return result;
     }
 
-    public Map<Expo, Long> sumAllPurchasedTickets() {
+    public Map<Expo, Long> countAllPurchasedTickets() {
         ConnectionWrapper con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -100,7 +100,7 @@ public class MySqlTicketDao implements ITicketDao {
     }
 
     @Override
-    public LinkedHashMap<Expo, Long> sumAllPurchasedTicketsPageable(Integer offset, Integer limit) {
+    public LinkedHashMap<Expo, Long> countAllPurchasedTicketsPageable(Integer offset, Integer limit) {
         ConnectionWrapper con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
